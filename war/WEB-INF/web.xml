@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5"
+>
+   <mime-mapping>
+      <extension>webapp</extension>
+      <mime-type>application/x-web-app-manifest+json</mime-type>
+   </mime-mapping>
+   <servlet>
+      <servlet-name>Encode</servlet-name>
+      <servlet-class>com.jaxo.googapp.baas.HttpEncodeServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>Encode</servlet-name>
+      <url-pattern>/encode</url-pattern>
+   </servlet-mapping>
+
+   <servlet>
+      <servlet-name>DecodeFile</servlet-name>
+      <servlet-class>com.jaxo.googapp.baas.HttpDecodeFileServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>DecodeFile</servlet-name>
+      <url-pattern>/decodeFile</url-pattern>
+   </servlet-mapping>
+
+   <servlet>
+      <servlet-name>DecodeUrl</servlet-name>
+      <servlet-class>com.jaxo.googapp.baas.HttpDecodeUrlServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>DecodeUrl</servlet-name>
+      <url-pattern>/decodeUrl</url-pattern>
+   </servlet-mapping>
+
+   <!--
+      "Catch all mail" servlet.
+      No way to do differently: bug in GAE wrt url-pattern syntax.
+   -->
+   <servlet>
+      <servlet-name>AnyMail</servlet-name>
+      <servlet-class>com.jaxo.googapp.baas.MailServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>AnyMail</servlet-name>
+      <url-pattern>/_ah/mail/*</url-pattern>
+   </servlet-mapping>
+
+   <!-- DEBUG BEGIN -->
+   <servlet>
+      <servlet-name>TestImage</servlet-name>
+      <servlet-class>com.jaxo.googapp.baas.TestImageServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>TestImage</servlet-name>
+      <url-pattern>/testImage</url-pattern>
+   </servlet-mapping>
+   <!-- DEBUG END -->
+
+   <security-constraint>
+      <web-resource-collection>
+         <url-pattern>/_ah/mail/*</url-pattern>
+      </web-resource-collection>
+      <auth-constraint>
+         <role-name>*</role-name>
+      </auth-constraint>
+   </security-constraint>
+
+   <welcome-file-list>
+      <welcome-file>index.html</welcome-file>
+   </welcome-file-list>
+</web-app>

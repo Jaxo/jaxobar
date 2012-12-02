@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<META charset="utf-8">
+<META name="viewport" content="width=device-width">
+<LINK rel="stylesheet" type="text/css" href="style/ground.css"/>
+<SCRIPT type="text/javascript" src="js/ground.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="js/blabzilla.js"></SCRIPT>
+<TITLE>BlabZilla</title>
+</HEAD>
+<BODY>
+   <HEADER>
+     <BUTTON id="btnMain"><SPAN class="icon icon-back">Back</SPAN></BUTTON>
+     <MENU type="toolbar">
+        <BUTTON id=install-btn>Install</BUTTON>
+        <BUTTON id="btnDecode">Reveal</BUTTON>
+     </MENU>
+     <H1>BlabZilla</H1>
+   </HEADER>
+   <SECTION>
+      <DIV class="body" style="z-index:-1">
+         <IMG alt="Bar Image" id="barImage" src="images/unknown.png"/>
+      </DIV>
+      <DIV class="body" style="opacity:0.9">
+         <DIV class="textEntry">
+            <FORM name = "encodeForm">
+            <INPUT type="hidden" name="TYP" value="1"/>
+            <INPUT type="hidden" name="SIZ" value="M"/>
+            <TEXTAREA
+               id="textContents"
+               name = "KEY"
+               placeholder="Enter your blab&hellip;"
+            ></TEXTAREA>
+            <DIV id="charCounter">140</DIV>
+         </DIV>
+      </DIV>
+      <!--
+      <DIV id="glasspane">
+        <DIV id="title">Glass Pane Title</DIV>
+        <DIV id="msg">Message in the glass pane (for notifications, etc)</DIV>
+      </DIV>
+      <DIV id="progresspane">
+        <DIV id=progress></DIV>
+        [!-- <PROGRESS></PROGRESS> --]
+      </DIV>
+      -->
+   </SECTION>
+   <FOOTER>
+      <TABLE><TR>
+      <TD><BUTTON id="btnF0"><SPAN class="icon icon-diskbd">Menu</SPAN></BUTTON></TD>
+      <TD><BUTTON id="btnF3"><SPAN class="icon icon-menu">Menu</SPAN></BUTTON></TD>
+      </TR></TABLE>
+   </FOOTER>
+   <SCRIPT>
+   if (!document.getElementById("install-btn")) {
+      document.addEventListener("DOMContentLoaded", setInstallButton);
+   }else {
+      setInstallButton();
+   }
+   setInterval("encodeIfNeeded()", 60);
+   </SCRIPT>
+</BODY>
+</HTML>

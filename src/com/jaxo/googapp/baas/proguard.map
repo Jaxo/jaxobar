@@ -1,0 +1,1696 @@
+com.jaxo.googapp.baas.Bar -> com.jaxo.googapp.baas.Bar:
+    com.jaxo.midp.extbarcode.Bar m_bar -> a
+    com.jaxo.midp.extbarcode.BarFactory m_bs$36d53029 -> b
+    byte[] m_contents -> c
+    java.lang.String m_infos -> d
+    int m_type -> e
+    byte[] getImageBytes(int,boolean) -> getImageBytes
+    byte[] getDataContents() -> getDataContents
+    int getType() -> getType
+    java.lang.String infos() -> infos
+    java.lang.String toHtml(com.jaxo.image.RasterImage) -> toHtml
+com.jaxo.googapp.baas.Bar$LuminousImage -> com.jaxo.googapp.baas.Bar$a:
+    int m_width -> a
+    int m_height -> b
+    byte[] m_luminances -> c
+    void addMargin(int) -> a
+    byte[] getLuminances(byte[],int,int,int,int,int,int) -> a
+    int getWidth() -> a
+    int getHeight() -> b
+    java.lang.String toHtml() -> c
+com.jaxo.image.RasterImage -> com.jaxo.image.RasterImage:
+    int getWidth() -> getWidth
+    int getHeight() -> getHeight
+    byte[] getLuminances() -> getLuminances
+    void fillRGB24Buffer(java.nio.ByteBuffer,int) -> fillRGB24Buffer
+com.jaxo.image.RasterImage$Factory -> com.jaxo.image.RasterImage$Factory:
+    com.jaxo.image.RasterImage makePngRaster(java.io.InputStream) -> makePngRaster
+    com.jaxo.image.RasterImage makeTiffRaster(byte[]) -> makeTiffRaster
+    com.jaxo.image.RasterImage makeTiffRaster(java.lang.String) -> makeTiffRaster
+    com.jaxo.image.RasterImage makeWebPRaster(java.nio.ByteBuffer) -> makeWebPRaster
+com.jaxo.image.RasterImage$Factory$FromPng -> com.jaxo.image.RasterImage$Factory$a:
+com.jaxo.image.RasterImage$Factory$FromTiff -> com.jaxo.image.RasterImage$Factory$b:
+com.jaxo.image.RasterImage$Factory$FromWebP -> com.jaxo.image.RasterImage$Factory$c:
+com.jaxo.image.png.RasterImage -> a:
+    byte[] SIGNATURE -> a
+    java.io.InputStream m_input -> b
+    java.util.zip.CRC32 m_crc -> c
+    byte[] m_buffer -> d
+    int m_chunkLength -> e
+    int m_chunkType -> f
+    int m_chunkRemaining -> g
+    int m_width -> h
+    int m_height -> i
+    int m_bitDepth -> j
+    int m_colorType -> k
+    int m_bytesPerPixel -> l
+    int m_rowLength -> m
+    boolean m_isInterlaced -> n
+    byte[] m_palette -> o
+    byte[] m_paletteA -> p
+    byte[] m_transpPixel -> q
+    int getWidth() -> getWidth
+    int getHeight() -> getHeight
+    byte[] getLuminances() -> getLuminances
+    void fillRGB24Buffer(java.nio.ByteBuffer,int) -> fillRGB24Buffer
+    java.lang.String toString() -> toString
+    void fillPixelBuffer(java.nio.ByteBuffer,int,int) -> a
+    void fillPixelBufferPart(com.jaxo.image.png.RasterImage$PixelBuffer,int,java.util.zip.Inflater,byte[],byte[]) -> a
+    void readIDAT(java.util.zip.Inflater,byte[]) -> a
+    int readChunk(byte[],int,int) -> a
+    void openChunk() -> a
+    void closeChunk() -> b
+    void unfilter(byte[],byte[]) -> a
+    void readFully(byte[],int,int) -> b
+    int intAt(byte[],int) -> a
+    boolean checkSignature(byte[]) -> a
+    void getLuminancesFromG8(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> a
+    void getBGRfromGA88(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> b
+    void getLuminancesFromGA88(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> c
+    void getLuminancesFromRGB888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> d
+    void getRGBfromRGB888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> e
+    void getBGRfromRGB888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> f
+    void getABGRfromRGB888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> g
+    void getRGBAfromRGB888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> h
+    void getLuminancesFromRGBA8888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> i
+    void getABGRfromRGBA8888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> j
+    void getRGBAfromRGBA8888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> k
+    void getRGBfromRGBA8888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> l
+    void getBGRfromRGBA8888(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> m
+    void getLuminancesFromPAL(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> n
+    void getABGRfromPAL(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> o
+    void getRGBAfromPAL(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> p
+    void getRGBfromPAL(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> q
+    void getBGRfromPAL(com.jaxo.image.png.RasterImage$PixelBuffer,byte[]) -> r
+com.jaxo.image.png.RasterImage$PixelBuffer -> a$a:
+    java.nio.ByteBuffer m_bytes -> a
+    int m_stride -> b
+    int m_ofs -> c
+    int m_y -> d
+    void nextRow() -> a
+    void putPixel(byte) -> a
+    void putPixel(byte,byte,byte) -> a
+    void putPixel(byte,byte,byte,byte) -> a
+com.jaxo.image.png.RasterImage$PixelBufferInterlaced -> a$b:
+    int[] X_START -> e
+    int[] X_INCRT -> f
+    int[] Y_START -> g
+    int[] Y_INCRT -> h
+    int m_x -> i
+    int m_xIncrt -> j
+    int m_yIncrt -> k
+    int m_pass -> l
+    void nextRow() -> a
+    void putPixel(byte) -> a
+    void putPixel(byte,byte,byte) -> a
+    void putPixel(byte,byte,byte,byte) -> a
+com.jaxo.image.tiff.RasterImage -> b:
+    com.jaxo.image.tiff.misc.PixelImage m_img -> a
+    int getWidth() -> getWidth
+    int getHeight() -> getHeight
+    byte[] getLuminances() -> getLuminances
+    void fillRGB24Buffer(java.nio.ByteBuffer,int) -> fillRGB24Buffer
+    java.lang.String toString() -> toString
+com.jaxo.image.tiff.TIFFCodec -> c:
+    int byteOrder -> a
+    int nextIfdOffset -> b
+    java.util.Hashtable decoders -> c
+    int adjustInt(int,int) -> a
+    com.jaxo.image.tiff.TIFFDecoder createDecoder$508babe9(com.jaxo.image.tiff.TIFFCodec,com.jaxo.image.tiff.misc.ImageConverter,int) -> a
+    int getByteOrder() -> a
+    void load$3cdfcdba(com.jaxo.image.tiff.misc.ImageConverter) -> a
+    void process() -> b
+    com.jaxo.image.tiff.misc.ImageConverter readImageFileDirectory$7657fa92() -> o
+    int readInt() -> p
+    short readShort() -> q
+    java.lang.String readString(int) -> b
+    com.jaxo.image.vp8.LoopFilter readTag$3bccd934() -> r
+    void registerDecoder(java.lang.Class) -> a
+    void setByteOrder(int) -> c
+    void skipImageFileDirectories(int) -> d
+com.jaxo.image.tiff.TIFFDecoder -> d:
+    com.jaxo.image.tiff.TIFFCodec codec -> a
+    com.jaxo.image.tiff.misc.ImageConverter ifd$48154cef -> b
+    int currentRow -> c
+    int leftColumn -> d
+    int rightColumn -> e
+    int topRow -> f
+    int bottomRow -> g
+    byte[] rowBuffer -> h
+    int bufferIndex -> i
+    int tileIndex -> j
+    int processedTileRows -> k
+    int totalTileRows -> l
+    void decode() -> a
+    int getBytesPerRow() -> b
+    java.lang.Integer[] getCompressionTypes() -> c
+    com.jaxo.image.tiff.misc.ImageConverter getImageFileDirectory$7657fa92() -> d
+    com.jaxo.image.tiff.misc.RandomAccess getInput() -> e
+    int getTileIndex() -> f
+    int getY1() -> g
+    int getY2() -> h
+    void initialize() -> i
+    void putBytes(byte[],int,int) -> a
+    void setCodec(com.jaxo.image.tiff.TIFFCodec) -> a
+    void setImageFileDirectory$3cdfcdba(com.jaxo.image.tiff.misc.ImageConverter) -> a
+    void setTileIndex(int) -> a
+com.jaxo.image.tiff.TIFFDecoderCCITT -> e:
+    byte[] REVERSED_BITS -> a
+    int[][] BLACK_CODES_PER_BITSIZE -> b
+    int[][] BLACK_VALS_PER_BITSIZE -> c
+    int[][] WHITE_CODES_PER_BITSIZE -> d
+    int[][] WHITE_VALS_PER_BITSIZE -> e
+    void decode() -> a
+    java.lang.Integer[] getCompressionTypes() -> c
+com.jaxo.image.tiff.TIFFDecoderCCITT$Reader -> e$a:
+    com.jaxo.image.tiff.misc.RandomAccess m_in -> a
+    int m_curr -> b
+    int m_bitCount -> c
+    boolean m_isNetworkBitOrder -> d
+    boolean m_is2D -> e
+    int read() -> c
+    int readBits(int) -> a
+    int readBit() -> a
+    int readRunLength(boolean) -> a
+    boolean nextLine() -> b
+com.jaxo.image.tiff.TIFFDecoderCCITT$UncompressedReader -> e$b:
+    com.jaxo.image.tiff.TIFFDecoderCCITT$Reader m_in -> b
+    int m_count -> c
+    boolean m_isEom -> d
+    boolean m_isWhite -> a
+    int readRunLength() -> a
+com.jaxo.image.tiff.TIFFDecoderCCITT$Writer -> e$c:
+    byte[] m_row -> a
+    com.jaxo.image.tiff.TIFFDecoderCCITT this$0 -> b
+    void write(boolean,int,int) -> a
+    void flush() -> a
+com.jaxo.image.tiff.TIFFDecoderDeflated -> f:
+    java.io.DataInput in -> a
+    int compressedSize -> b
+    void decode() -> a
+    java.lang.Integer[] getCompressionTypes() -> c
+    void initialize() -> i
+com.jaxo.image.tiff.TIFFDecoderLZW -> g:
+    void decode() -> a
+    java.lang.Integer[] getCompressionTypes() -> c
+com.jaxo.image.tiff.TIFFDecoderLZW$InputStream -> g$a:
+    java.io.DataInput m_in -> a
+    int m_count -> b
+    byte[] m_buf -> c
+    int m_pos -> d
+    int m_posMax -> e
+    int read() -> read
+com.jaxo.image.tiff.TIFFDecoderLZW$LZW$Reader -> h:
+    com.jaxo.image.tiff.TIFFDecoderLZW$InputStream m_in -> a
+    int m_buffer -> b
+    int m_count -> c
+    int read(int) -> a
+com.jaxo.image.tiff.TIFFDecoderLZW$LZW$Writer -> i:
+    int[] m_keys -> a
+    int m_pos -> b
+    com.jaxo.image.tiff.TIFFDecoderLZW$OutputStream m_out -> c
+    void clear() -> a
+    int write(int) -> a
+    void write(int,int) -> a
+    int getCodeLength() -> b
+    void close() -> c
+com.jaxo.image.tiff.TIFFDecoderLZW$OutputStream -> g$b:
+    com.jaxo.image.tiff.TIFFDecoder m_out -> a
+    byte[] m_buf -> b
+    int m_count -> c
+    int m_pos -> d
+    int m_posMax -> e
+    boolean m_isHorizontalPredict -> f
+    int m_bytesPerPixel -> g
+    void write(int) -> write
+    void flush() -> flush
+    void close() -> close
+com.jaxo.image.tiff.TIFFDecoderLogLuv -> j:
+    java.io.DataInput in -> a
+    int compressedSize -> b
+    int tileWidth -> c
+    boolean isRLE -> d
+    void decode() -> a
+    java.lang.Integer[] getCompressionTypes() -> c
+    void initialize() -> i
+com.jaxo.image.tiff.TIFFDecoderPackbits -> k:
+    void decode() -> a
+    java.lang.Integer[] getCompressionTypes() -> c
+com.jaxo.image.tiff.TIFFDecoderUncompressed -> l:
+    void decode() -> a
+    java.lang.Integer[] getCompressionTypes() -> c
+com.jaxo.image.tiff.misc.BilevelImage -> m:
+    void getPackedBytes(int,int,int,byte[],int,int) -> a
+    void putPackedBytes(int,int,int,byte[],int,int) -> b
+com.jaxo.image.tiff.misc.ByteArrayRandomAccess -> n:
+    byte[] m_inBuf -> a
+    int m_inPos -> b
+    int m_inLen -> c
+    byte[] m_outBuf -> d
+    int m_outPos -> e
+    void seek(long) -> seek
+    long getFilePointer() -> getFilePointer
+    void close() -> close
+    int read() -> read
+    boolean readBoolean() -> readBoolean
+    byte readByte() -> readByte
+    char readChar() -> readChar
+    double readDouble() -> readDouble
+    float readFloat() -> readFloat
+    void readFully(byte[]) -> readFully
+    void readFully(byte[],int,int) -> readFully
+    int readInt() -> readInt
+    java.lang.String readLine() -> readLine
+    long readLong() -> readLong
+    short readShort() -> readShort
+    int readUnsignedByte() -> readUnsignedByte
+    int readUnsignedShort() -> readUnsignedShort
+    java.lang.String readUTF() -> readUTF
+    int skipBytes(int) -> skipBytes
+    void write(int) -> write
+    void write(byte[]) -> write
+    void write(byte[],int,int) -> write
+    void ensureCapacity(int) -> a
+    void writeBoolean(boolean) -> writeBoolean
+    void writeByte(int) -> writeByte
+    void writeShort(int) -> writeShort
+    void writeChar(int) -> writeChar
+    void writeInt(int) -> writeInt
+    void writeLong(long) -> writeLong
+    void writeFloat(float) -> writeFloat
+    void writeDouble(double) -> writeDouble
+    void writeBytes(java.lang.String) -> writeBytes
+    void writeChars(java.lang.String) -> writeChars
+    void writeUTF(java.lang.String) -> writeUTF
+com.jaxo.image.tiff.misc.ByteChannelImage -> o:
+    byte getByteSample(int,int,int) -> a
+    void putByteSample(int,int,int,byte) -> a
+    void putByteSamples(int,int,int,int,int,byte[],int) -> a
+com.jaxo.image.tiff.misc.CodecMode -> p:
+    com.jaxo.image.tiff.misc.CodecMode LOAD -> a
+    com.jaxo.image.tiff.misc.CodecMode SAVE -> b
+com.jaxo.image.tiff.misc.FileRandomAccess -> q:
+com.jaxo.image.tiff.misc.Gray16Image -> r:
+com.jaxo.image.tiff.misc.Gray8Image -> s:
+com.jaxo.image.tiff.misc.GrayImage -> t:
+    void putBlack(int,int) -> a
+    void putWhite(int,int) -> b
+com.jaxo.image.tiff.misc.ImageCodec -> u:
+    int boundsX1 -> a
+    int boundsY1 -> b
+    int boundsX2 -> c
+    int boundsY2 -> d
+    boolean boundsAvail -> e
+    int boundsWidth -> f
+    int boundsHeight -> g
+    com.jaxo.image.tiff.misc.PixelImage image -> h
+    com.jaxo.image.tiff.misc.CodecMode mode -> i
+    com.jaxo.image.tiff.misc.RandomAccess raf -> j
+    void close() -> c
+    int getBoundsX1() -> d
+    int getBoundsX2() -> e
+    int getBoundsY1() -> f
+    int getBoundsY2() -> g
+    int getBoundsHeight() -> h
+    int getBoundsWidth() -> i
+    com.jaxo.image.tiff.misc.PixelImage getImage() -> j
+    com.jaxo.image.tiff.misc.CodecMode getMode() -> k
+    com.jaxo.image.tiff.misc.RandomAccess getRandomAccessFile() -> l
+    boolean hasBounds() -> m
+    void initModeFromIOObjects() -> n
+    boolean isRowRequired(int) -> a
+    void setBounds(int,int,int,int) -> a
+    void setImage(com.jaxo.image.tiff.misc.PixelImage) -> a
+    void setRandomAccessFile(com.jaxo.image.tiff.misc.RandomAccess,com.jaxo.image.tiff.misc.CodecMode) -> a
+com.jaxo.image.tiff.misc.ImageConverter -> v:
+    int[] bitsPerSample -> a
+    int bitsPerPixel -> b
+    int compression -> c
+    java.lang.String dateTime -> d
+    int dpiX -> e
+    int dpiY -> f
+    int height -> g
+    int horizontalTiles -> h
+    int imageType -> i
+    int numStrips -> j
+    int numTiles -> k
+    com.jaxo.image.tiff.misc.Palette palette -> l
+    int planarConfiguration -> m
+    int photometricInterpretation -> n
+    int predictor -> o
+    int resolutionUnit -> p
+    double resolutionX -> q
+    double resolutionY -> r
+    int rowsPerStrip -> s
+    java.util.Vector stripByteCounts -> t
+    java.util.Vector stripOffsets -> u
+    int g3Options -> v
+    int fillOrder -> w
+    java.util.Vector tags -> x
+    java.util.Vector tileOffsets -> y
+    int tileWidth -> z
+    int tileHeight -> A
+    int verticalTiles -> B
+    int width -> C
+    byte[] getLuminances(com.jaxo.image.tiff.misc.PixelImage) -> a
+    void fillRGB24Buffer(com.jaxo.image.tiff.misc.PixelImage,java.nio.ByteBuffer,int) -> a
+    void append$4a15c17a(com.jaxo.image.vp8.LoopFilter) -> a
+    int computeNumBytes(int) -> a
+    int getBitsPerPixel() -> a
+    int getByteCount(int) -> b
+    int getBytesPerRow() -> b
+    int getCompression() -> c
+    java.lang.String getCompressionName(int) -> c
+    int getDpiX() -> d
+    int getDpiY() -> e
+    int getHeight() -> f
+    int getImageType() -> g
+    int getNumHorizontalTiles() -> h
+    int getNumTiles() -> i
+    int getNumVerticalTiles() -> j
+    com.jaxo.image.tiff.misc.Palette getPalette() -> k
+    int getPhotometricInterpretation() -> l
+    int getPredictor() -> m
+    int getG3Options() -> n
+    int getFillOrder() -> o
+    int getTileHeight() -> p
+    long getTileOffset(int) -> d
+    int getTileWidth() -> q
+    int getTileX1(int) -> e
+    int getTileX2(int) -> f
+    int getTileY1(int) -> g
+    int getTileY2(int) -> h
+    int getWidth() -> r
+    void initMembers() -> s
+    void initFromTags(boolean) -> a
+    boolean isStriped() -> t
+    void checkArray(byte[],int,int) -> a
+    void copyPackedBytes(byte[],int,int,byte[],int,int,int) -> a
+    void decodePacked4Bit(byte[],int,byte[],int,int) -> a
+    short getShortBE(byte[],int) -> a
+    short getShortLE(byte[],int) -> b
+    int convertToByte(int) -> n
+    void convertCMYK32InterleavedToRGB24Planar(byte[],int,byte[],int,byte[],int,byte[],int,int) -> a
+    int clamp(int) -> i
+    int clamp127(int) -> j
+    int clamp63(int) -> k
+    int clampAbs127(int) -> l
+    int clampAbs127to255(int) -> m
+com.jaxo.image.tiff.misc.LogLuvConversion -> w:
+    double[] USTART -> a
+    short[] NCUM -> b
+    double convertLogL16toY(int) -> a
+    byte convertDoubleToByte(double) -> a
+    void convertLogLuv24InterleavedtoRGB24Planar(byte[],byte[],byte[],byte[],int) -> a
+    void convertLogLuv32InterleavedtoRGB24Planar(byte[],byte[],byte[],byte[],int) -> b
+    void convertLogL16toGray8(byte[],byte[],int) -> a
+com.jaxo.image.tiff.misc.MemoryBilevelImage -> x:
+    int BYTES_PER_ROW -> a
+    byte[] data -> b
+    int HEIGHT -> c
+    int WIDTH -> d
+    void checkBitOffset(int) -> a
+    void checkPositionAndNumber(int,int,int,int) -> a
+    int getBitsPerPixel() -> a
+    int getHeight() -> b
+    java.lang.Class getImageType() -> c
+    int getNumChannels() -> d
+    void getPackedBytes(int,int,int,byte[],int,int) -> a
+    int getWidth() -> e
+    void putBlack(int,int) -> a
+    void putPackedBytes(int,int,int,byte[],int,int) -> b
+    void putWhite(int,int) -> b
+com.jaxo.image.tiff.misc.MemoryByteChannelImage -> y:
+    byte[][] data -> a
+    int numChannels -> b
+    int width -> c
+    int height -> d
+    int numPixels -> e
+    void checkPositionAndNumber(int,int,int,int,int) -> a
+    int getBitsPerPixel() -> a
+    byte getByteSample(int,int,int) -> a
+    int getHeight() -> b
+    int getNumChannels() -> d
+    int getWidth() -> e
+    void putByteSample(int,int,int,byte) -> a
+    void putByteSamples(int,int,int,int,int,byte[],int) -> a
+    void putSample(int,int,int) -> b
+com.jaxo.image.tiff.misc.MemoryGray16Image -> z:
+    java.lang.Class getImageType() -> c
+    void putBlack(int,int) -> a
+    void putWhite(int,int) -> b
+com.jaxo.image.tiff.misc.MemoryGray8Image -> A:
+    java.lang.Class getImageType() -> c
+    void putBlack(int,int) -> a
+    void putWhite(int,int) -> b
+com.jaxo.image.tiff.misc.MemoryPaletted8Image -> B:
+    com.jaxo.image.tiff.misc.Palette palette -> a
+    java.lang.Class getImageType() -> c
+    com.jaxo.image.tiff.misc.Palette getPalette() -> f
+com.jaxo.image.tiff.misc.MemoryRGB24Image -> C:
+    java.lang.Class getImageType() -> c
+com.jaxo.image.tiff.misc.MemoryRGB48Image -> D:
+    java.lang.Class getImageType() -> c
+com.jaxo.image.tiff.misc.MemoryRGBA32Image -> E:
+    java.lang.Class getImageType() -> c
+com.jaxo.image.tiff.misc.MemoryShortChannelImage -> F:
+    short[][] data -> a
+    int numChannels -> b
+    int width -> c
+    int height -> d
+    int numPixels -> e
+    void checkPositionAndNumber(int,int,int,int,int) -> a
+    int getBitsPerPixel() -> a
+    short getShortSample(int,int,int) -> a
+    int getHeight() -> b
+    int getNumChannels() -> d
+    int getWidth() -> e
+    void putShortSample(int,int,int,short) -> a
+    void putSample(int,int,int) -> b
+com.jaxo.image.tiff.misc.Operation -> G:
+    boolean abort -> a
+    java.util.Vector progressListeners -> b
+    void process() -> b
+    void setProgress(float) -> a
+com.jaxo.image.tiff.misc.Palette -> H:
+    int[][] data -> a
+    int numEntries -> b
+    int maxValue -> c
+    java.lang.Object clone() -> clone
+    int getNumEntries() -> a
+    int getSample(int,int) -> a
+    void putSample(int,int,int) -> a
+com.jaxo.image.tiff.misc.Paletted8Image -> I:
+com.jaxo.image.tiff.misc.PalettedImage -> J:
+    com.jaxo.image.tiff.misc.Palette getPalette() -> f
+com.jaxo.image.tiff.misc.PixelImage -> K:
+    int getBitsPerPixel() -> a
+    int getHeight() -> b
+    java.lang.Class getImageType() -> c
+    int getNumChannels() -> d
+    int getWidth() -> e
+com.jaxo.image.tiff.misc.RGB24Image -> L:
+com.jaxo.image.tiff.misc.RGB48Image -> M:
+com.jaxo.image.tiff.misc.RandomAccess -> N:
+    void seek(long) -> seek
+    long getFilePointer() -> getFilePointer
+    void close() -> close
+    int read() -> read
+com.jaxo.image.tiff.misc.ShortChannelImage -> O:
+    short getShortSample(int,int,int) -> a
+    void putShortSample(int,int,int,short) -> a
+com.jaxo.image.vp8.BoolDecoder -> P:
+    java.nio.ByteBuffer m_in -> a
+    int m_offset -> b
+    int m_range -> c
+    int m_value -> d
+    int m_bitCount -> e
+    int[] SHIFT_TABLE -> f
+    int readBool(int) -> a
+    int readBit() -> a
+    int readCountBits(int) -> b
+    int readDeltaQ() -> b
+    int readTree(int[],int[]) -> a
+    int readTreeSkip(int[],int[]) -> b
+com.jaxo.image.vp8.Constants -> Q:
+    int[] MB_SEGMENT_TREE -> a
+    int[] Y_MODE_PROBS -> b
+    int[] UV_MODE_PROBS -> c
+    int[][][] B_MODE_PROBS -> d
+    int[][][][] COEF_UPDATE_PROBS -> e
+    int[][][][] DEFAULT_COEF_PROBS -> f
+    int[] Y_MODE_TREE -> g
+    int[] UV_MODE_TREE -> h
+    int[] B_MODE_TREE -> i
+    int[][] UPDATE_MV_PROBS -> j
+    int[] COEF_TREE -> k
+    int[] PCAT1 -> l
+    int[] PCAT2 -> m
+    int[] PCAT3 -> n
+    int[] PCAT4 -> o
+    int[] PCAT5 -> p
+    int[] PCAT6 -> q
+    int[] COEF_BANDS -> r
+    int[] ZIGZAG -> s
+    int[] DC_QLOOKUP -> t
+    int[] AC_QLOOKUP -> u
+com.jaxo.image.vp8.LoopFilter -> R:
+    int id -> a
+    int type -> b
+    int count -> c
+    int offset -> d
+    java.util.Vector objects -> e
+    int abs(int) -> c
+    int common_adjust(boolean,com.jaxo.image.vp8.LoopFilter$Segment) -> a
+    boolean filter_yes(int,int,int,int,int,int,int,int,int,int) -> a
+    com.jaxo.image.vp8.LoopFilter$Segment getSegH(com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.SubBlock,int) -> a
+    com.jaxo.image.vp8.LoopFilter$Segment getSegV(com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.SubBlock,int) -> b
+    boolean isHighEdgeVariance(int,int,int,int,int) -> a
+    void filter(boolean,com.jaxo.image.vp8.MacroBlock[][],int,boolean) -> a
+    void MBfilter(int,int,int,com.jaxo.image.vp8.LoopFilter$Segment) -> a
+    void setSegH(com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.LoopFilter$Segment,int) -> a
+    void setSegV(com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.LoopFilter$Segment,int) -> b
+    void simple_segment(int,com.jaxo.image.vp8.LoopFilter$Segment) -> a
+    void subblock_filter(int,int,int,com.jaxo.image.vp8.LoopFilter$Segment) -> b
+    int getCount() -> a
+    int getElementAsInt(int) -> a
+    int getId() -> b
+    java.lang.Object getObject(int) -> b
+    int getOffset() -> c
+    java.lang.String getString() -> d
+    int getType() -> e
+    java.util.Vector getVector() -> f
+    boolean isInt() -> g
+    void setVector(java.util.Vector) -> a
+com.jaxo.image.vp8.LoopFilter$Segment -> R$a:
+    int p0 -> a
+    int p1 -> b
+    int p2 -> c
+    int p3 -> d
+    int q0 -> e
+    int q1 -> f
+    int q2 -> g
+    int q3 -> h
+com.jaxo.image.vp8.MacroBlock -> S:
+    int m_x -> v
+    int m_y -> w
+    int m_filterLevel -> x
+    int m_segmentId -> y
+    int m_skipCoef -> z
+    boolean m_isSkipInnerLoop -> A
+    int m_uvMode -> B
+    int m_yMode -> C
+    com.jaxo.image.vp8.SubBlock[][] m_uSubBlocks -> D
+    com.jaxo.image.vp8.SubBlock[][] m_vSubBlocks -> E
+    com.jaxo.image.vp8.SubBlock[][] m_ySubBlocks -> F
+    com.jaxo.image.vp8.SubBlock m_y2SubBlock -> G
+    void decodeMacroBlock(com.jaxo.image.vp8.BoolDecoder,int[][][][],com.jaxo.image.vp8.MacroBlock[][]) -> a
+    int decodePlaneTokens(int,com.jaxo.image.vp8.SubBlock$PLANE,com.jaxo.image.vp8.BoolDecoder,int[][][][],com.jaxo.image.vp8.MacroBlock[][],boolean) -> a
+    void dequantMacroBlock(com.jaxo.image.vp8.MacroBlock[][],com.jaxo.image.vp8.SegmentQuants) -> a
+    com.jaxo.image.vp8.SubBlock getBottomSubBlock(int,com.jaxo.image.vp8.SubBlock$PLANE) -> a
+    com.jaxo.image.vp8.SubBlock getRightSubBlock(int,com.jaxo.image.vp8.SubBlock$PLANE) -> b
+    com.jaxo.image.vp8.SubBlock getSubBlock(com.jaxo.image.vp8.SubBlock$PLANE,int,int) -> a
+    int getX(com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.SubBlock$PLANE) -> a
+    int getY(com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.SubBlock$PLANE) -> b
+    int getCoordinates(com.jaxo.image.vp8.SubBlock,com.jaxo.image.vp8.SubBlock$PLANE) -> c
+    void predictUV(com.jaxo.image.vp8.MacroBlock[][]) -> a
+    int getX() -> a
+    int getY() -> b
+    int getFilterLevel() -> c
+    int getYMode() -> d
+    com.jaxo.image.vp8.SubBlock getYSubBlock(int,int) -> a
+    boolean isSkip_inner_lf() -> e
+    void setFilterLevel(int) -> a
+    void setSegmentId(int) -> b
+    void setSkipCoeff(int) -> c
+    void setUvMode(int) -> d
+    void setYMode(int) -> e
+    java.lang.String toString() -> toString
+    int getSegmentId() -> f
+com.jaxo.image.vp8.MacroBlock$1 -> S$1:
+    int[] $SwitchMap$com$jaxo$image$vp8$SubBlock$PLANE -> a
+com.jaxo.image.vp8.RasterImage -> T:
+    java.nio.ByteBuffer m_in -> v
+    int[][][][] m_coefsProbs -> w
+    com.jaxo.image.vp8.MacroBlock[][] m_macroBlocks -> x
+    int m_version -> y
+    int m_part0Size -> z
+    int m_width -> A
+    int m_hScale -> B
+    int m_height -> C
+    int m_vScale -> D
+    int m_filterLevel -> E
+    int m_sharpness -> F
+    int m_nbPartitions -> G
+    int[] m_treeProbs -> H
+    int[] m_refDeltas -> I
+    int[] m_modeDeltas -> J
+    int[] m_yModeProbs -> K
+    int[] m_uvModeProbs -> L
+    int[][] m_mvProbs -> M
+    com.jaxo.image.vp8.BoolDecoder[] m_tokenBoolDecoders -> N
+    com.jaxo.image.vp8.SegmentQuants m_segmentQuants -> O
+    boolean m_isKeyFrame -> P
+    boolean m_isShown -> Q
+    boolean m_isSegEnabled -> R
+    boolean m_isUpdateMap -> S
+    boolean m_isUpdateData -> T
+    boolean m_isAbsoluteDelta -> U
+    boolean m_isSimpleFilter -> V
+    boolean m_isDeltaEnabled -> W
+    boolean m_isRefreshGF -> X
+    boolean m_isRefreshARF -> Y
+    boolean m_isSkipEnabled -> Z
+    int m_mbRows -> aa
+    int m_mbCols -> ab
+    byte[] getLuminances() -> getLuminances
+    void fillRGB24Buffer(java.nio.ByteBuffer,int) -> fillRGB24Buffer
+    int getWidth() -> getWidth
+    int getHeight() -> getHeight
+    java.lang.String toString() -> toString
+com.jaxo.image.vp8.SegmentQuants -> U:
+    int m_qIndex -> v
+    com.jaxo.image.vp8.SegmentQuants$SegmentQuant[] m_segQuants -> w
+    int getUvacAt(int) -> a
+    int getUvdcAt(int) -> b
+    int getY1acAt(int) -> c
+    int getY1dcAt(int) -> d
+    int getY2acAt(int) -> e
+    int getY2dcAt(int) -> f
+    int getFilterStrengthAt(int) -> g
+    void setQIndexAndFilter(com.jaxo.image.vp8.BoolDecoder) -> a
+    void parse(com.jaxo.image.vp8.BoolDecoder,boolean,boolean) -> a
+com.jaxo.image.vp8.SegmentQuants$SegmentQuant -> U$a:
+    int m_filterStrength -> a
+    int m_qIndex -> b
+    int m_uvac -> c
+    int m_uvdc -> d
+    int m_y1ac -> e
+    int m_y1dc -> f
+    int m_y2ac -> g
+    int m_y2dc -> h
+    void setVals(int,int,int,int,int) -> a
+    int access$000(com.jaxo.image.vp8.SegmentQuants$SegmentQuant) -> a
+    int access$100(com.jaxo.image.vp8.SegmentQuants$SegmentQuant) -> b
+    int access$200(com.jaxo.image.vp8.SegmentQuants$SegmentQuant) -> c
+    int access$300(com.jaxo.image.vp8.SegmentQuants$SegmentQuant) -> d
+    int access$400(com.jaxo.image.vp8.SegmentQuants$SegmentQuant) -> e
+    int access$500(com.jaxo.image.vp8.SegmentQuants$SegmentQuant) -> f
+    int access$600(com.jaxo.image.vp8.SegmentQuants$SegmentQuant) -> g
+    int access$802(com.jaxo.image.vp8.SegmentQuants$SegmentQuant,int) -> a
+    int access$602(com.jaxo.image.vp8.SegmentQuants$SegmentQuant,int) -> b
+    int access$812(com.jaxo.image.vp8.SegmentQuants$SegmentQuant,int) -> c
+com.jaxo.image.vp8.SubBlock -> V:
+    com.jaxo.image.vp8.MacroBlock m_macroBlock -> v
+    com.jaxo.image.vp8.SubBlock$PLANE m_plane -> w
+    com.jaxo.image.vp8.SubBlock m_above -> x
+    com.jaxo.image.vp8.SubBlock m_left -> y
+    int m_mode -> z
+    int[] m_tokens -> A
+    int[][] m_dest -> B
+    int[][] m_diff -> C
+    boolean m_isAllTokensZero -> D
+    int[][] m_predict -> E
+    int decodeSubBlock(com.jaxo.image.vp8.BoolDecoder,com.jaxo.image.vp8.SubBlock$PLANE,int[][][][],com.jaxo.image.vp8.MacroBlock[][],boolean) -> a
+    int DCTextra(com.jaxo.image.vp8.BoolDecoder,int[]) -> a
+    void dequantSubBlock(com.jaxo.image.vp8.SegmentQuants,java.lang.Integer) -> a
+    com.jaxo.image.vp8.SubBlock getLeftSubBlock(com.jaxo.image.vp8.MacroBlock[][],com.jaxo.image.vp8.SubBlock$PLANE) -> a
+    com.jaxo.image.vp8.SubBlock getAboveSubBlock(com.jaxo.image.vp8.MacroBlock[][],com.jaxo.image.vp8.SubBlock$PLANE) -> b
+    int[][] getMacroBlockPredict(int) -> a
+    int[][] getPredict(int,boolean) -> a
+    void predict(com.jaxo.image.vp8.MacroBlock[][]) -> a
+    int[] getAbovePredict(com.jaxo.image.vp8.MacroBlock[][]) -> b
+    int[] getLeftPredict(com.jaxo.image.vp8.MacroBlock[][]) -> c
+    int getAboveLeftPredict(com.jaxo.image.vp8.MacroBlock[][]) -> d
+    int[] getAboveRightPredict(com.jaxo.image.vp8.MacroBlock[][]) -> e
+    com.jaxo.image.vp8.SubBlock getAboveRightSubBlock(com.jaxo.image.vp8.MacroBlock[][],com.jaxo.image.vp8.SubBlock$PLANE) -> c
+    void reconstruct() -> a
+    int[][] getDest() -> b
+    int[][] getDiff() -> c
+    int getMode() -> d
+    int[] getTokens() -> e
+    void setDiff(int[][]) -> a
+    void setMode(int) -> b
+    void setPixel(int,int,int) -> a
+    void setPredict(int[][]) -> b
+    java.lang.String toString() -> toString
+com.jaxo.image.vp8.SubBlock$1 -> V$1:
+    int[] $SwitchMap$com$jaxo$image$vp8$SubBlock$PLANE -> a
+com.jaxo.image.vp8.SubBlock$PLANE -> V$a:
+    com.jaxo.image.vp8.SubBlock$PLANE U -> a
+    com.jaxo.image.vp8.SubBlock$PLANE V -> b
+    com.jaxo.image.vp8.SubBlock$PLANE Y1 -> c
+    com.jaxo.image.vp8.SubBlock$PLANE Y2 -> d
+    com.jaxo.image.vp8.SubBlock$PLANE[] $VALUES -> e
+    com.jaxo.image.vp8.SubBlock$PLANE[] values() -> a
+com.jaxo.midp.barcode.AztecCoder -> W:
+    int m_val -> a
+    char[] m_wd -> b
+    int m_wdIx -> c
+    int bitMaskMax -> d
+    int bitMask -> e
+    com.jaxo.midp.extbarcode.BarFactory encode$526acb0b(byte[],int,int,boolean) -> a
+    int translate(byte[],int,int) -> a
+    int parseInt(byte[],int,int) -> b
+    boolean isAztecUpper(byte) -> a
+    boolean nextBit() -> a
+com.jaxo.midp.barcode.AztecMatrix -> X:
+    int[] m_config -> b
+    int m_half -> c
+    int m_size -> d
+    boolean m_isCompact -> e
+    int m_mode -> f
+    int m_percentCheck -> g
+    int m_nbLayers -> h
+    int m_dataCount -> i
+    boolean m_isEciHandled -> a
+    int[][] m_normalConfigs -> j
+    int[][] m_compactConfigs -> k
+    void setMode(int) -> a
+    void setPercentCheck(int) -> b
+    void setNumberOfLayers(int) -> c
+    com.jaxo.midp.extbarcode.BarFactory setData$49c3d171(byte[]) -> a
+    int createDataMessage$d5e8670(char[],int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int getDataCount() -> a
+    int getTotalCount() -> b
+    int getLayersCount() -> c
+    int getCodewordBitsLen() -> d
+    int getNbModulesPerRow() -> e
+com.jaxo.midp.barcode.BarException -> Y:
+    java.lang.String badLengthMsg(int) -> a
+    java.lang.String invalidCharacterMsg(char) -> a
+com.jaxo.midp.barcode.BarImage -> Z:
+    byte[] getLuminances(byte[],int,int,int,int,int,int) -> a
+    int getWidth() -> a
+    int getHeight() -> b
+com.jaxo.midp.barcode.BitDropper -> aa:
+    void setDropLocation(int) -> a
+    boolean isReady() -> a
+com.jaxo.midp.barcode.BitMatrixStream -> ab:
+    int m_width -> a
+    int m_height -> b
+    boolean m_isScaledByTwo -> c
+    int getWidth() -> a
+    int getHeight() -> b
+    void scaleByTwo() -> c
+    boolean isBitOnAt(int,int) -> a
+    int[] measureLine(int,boolean) -> a
+    boolean isBitOnAt(int) -> a
+    void setBitOnAt(int) -> b
+com.jaxo.midp.barcode.C40orTextDecoder -> ac:
+    char[] tb -> a
+    char[] tb2 -> b
+    char[] tb3 -> c
+    int m_outPos -> d
+    int[] m_buf -> e
+    byte[] m_out -> f
+    int m_ixBeg -> g
+    int m_ixCur -> h
+    boolean m_isText -> i
+    void append(int,int) -> a
+    int flush() -> a
+    void makeRoom() -> b
+com.jaxo.midp.barcode.CodabarMatrix -> ad:
+    int[] charset -> a
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+    char xlateStartStop(char) -> a
+    void writeBits$549b8871(com.jaxo.midp.extbarcode.BarFactory,char) -> a
+com.jaxo.midp.barcode.Code11Matrix -> ae:
+    int[] charset -> a
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+    void writeBits$549b9ef7(com.jaxo.midp.extbarcode.BarFactory,int) -> a
+com.jaxo.midp.barcode.Code128Matrix -> af:
+    int[] charset -> a
+    int m_mode -> b
+    com.jaxo.midp.util.IntegerList m_code128Values -> c
+    boolean m_isOptimized -> d
+    int m_sum -> e
+    int m_pos -> f
+    com.jaxo.midp.extbarcode.BarFactory setData$f130e06(byte[],int) -> a
+    void writeAndCheck$549b9ef7(com.jaxo.midp.extbarcode.BarFactory,int) -> a
+    boolean isModeCBest(byte[],int) -> b
+    boolean isDigit(int) -> a
+com.jaxo.midp.barcode.Code25InterleavedMatrix -> ag:
+    byte[][] baseBars -> a
+    int m_checkSum -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+com.jaxo.midp.barcode.Code25Matrix -> ah:
+    int[] charset -> a
+    int m_checkSum -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+com.jaxo.midp.barcode.Code39Decoder -> ai:
+    short[] Code39Constants_START_WIDTHS -> a
+    short[] Code39Constants_STOP_WIDTHS -> b
+    int[] inversedCharset -> c
+    byte[] inversedBaseset -> d
+    int m_tetaIncrement -> e
+    int[] tangents -> f
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+    boolean decode(com.jaxo.midp.barcode.LineIterator,java.io.OutputStream) -> a
+    com.jaxo.midp.barcode.Segment getMasterSegment(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Segment) -> a
+    boolean isGuard(int[],int,short[],int,int) -> a
+    void swing(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+com.jaxo.midp.barcode.Code39Decoder$Candidates -> ai$a:
+    com.jaxo.midp.barcode.Code39Decoder$Candidates$Entry m_head -> a
+    com.jaxo.midp.barcode.Code39Decoder$Candidates$Entry add(byte[]) -> a
+    com.jaxo.midp.barcode.Code39Decoder$Candidates$Entry getBest() -> a
+com.jaxo.midp.barcode.Code39Decoder$Candidates$Entry -> ai$a$a:
+    com.jaxo.midp.barcode.Code39Decoder$Candidates$Entry m_next -> a
+    byte[] m_val -> b
+    int m_count -> c
+com.jaxo.midp.barcode.Code39ExtendedMatrix -> aj:
+    java.lang.String escapeSet -> c
+    byte[][] translationA -> a
+    byte[][] translationB -> b
+    byte[] translate(java.lang.String) -> a
+com.jaxo.midp.barcode.Code39Matrix -> ak:
+    int[] charset -> a
+    int m_checkSum -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$b114c18(java.lang.String,boolean) -> a
+    byte[] translate(java.lang.String) -> a
+    byte[] translate1(java.lang.String) -> c
+com.jaxo.midp.barcode.Code93ExtendedMatrix -> al:
+    byte[] shiftCodes -> a
+    byte[] translate(java.lang.String) -> a
+com.jaxo.midp.barcode.Code93Matrix -> am:
+    int[] charset -> a
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> b
+    byte[] translate(java.lang.String) -> a
+com.jaxo.midp.barcode.DataMatrixAutoFitter -> an:
+    int[][] latchCostsPerEnc -> a
+    int m_cost -> b
+    int[] m_counts -> c
+    int[] m_modes -> d
+    int m_current -> e
+    int best(int[],int) -> a
+    boolean next() -> a
+    int getMode() -> b
+    int getCount() -> c
+    int getCost() -> d
+    int getUpperCost(int,int) -> a
+    boolean isDigit(byte) -> a
+com.jaxo.midp.barcode.DataMatrixCoder -> ao:
+    int[] c40Values -> b
+    int m_mode -> c
+    int m_type -> d
+    int m_posOmittableLatch -> e
+    int m_configNo -> f
+    int m_padLen -> g
+    com.jaxo.midp.barcode.DataMatrixPattern m_pat -> a
+    void setType(int) -> a
+    void setEncodingMode(int) -> b
+    int getType() -> a
+    int getConfigNo() -> b
+    int getPadLen() -> c
+    byte[] encode(byte[]) -> a
+    int encodeAs(int,byte[],int,int,byte[],int) -> a
+    int encodeAsAscii(byte[],int,int,byte[],int) -> a
+    int encodeAsC40orText(byte[],int,int,byte[],int,boolean) -> a
+    boolean isDigit(byte) -> a
+com.jaxo.midp.barcode.DataMatrixDecoder -> ap:
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+    byte[] decode(boolean[][]) -> a
+    void onInfosFound(int,int,int,int) -> a
+    byte[] decode(byte[],int) -> a
+    int decodeAscii(byte[],int,int,byte[],int) -> a
+    int decodeC40orText(byte[],int,int,byte[],int,boolean) -> a
+com.jaxo.midp.barcode.DataMatrixGeometer -> aq:
+    int m_distance -> a
+    int m_tetaIncrement -> b
+    int m_divider -> c
+    char[] sinuses -> d
+    com.jaxo.midp.barcode.Quadrilater m_quadrilater -> e
+    int m_nbHMod -> f
+    int m_nbVMod -> g
+    com.jaxo.midp.barcode.BitMatrixStream m_bs -> h
+    int m_minSideLength -> i
+    void measure$1c6c71a5(com.jaxo.midp.barcode.BitMatrixStream,long,com.jaxo.image.tiff.misc.ByteChannelImage) -> a
+    boolean checkSegment(int,int,int,int,com.jaxo.midp.barcode.Point) -> a
+    boolean findQuietZone(com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    com.jaxo.midp.barcode.DataMatrixGeometer$Finder getFinder(com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> b
+    int getLadder(com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,int) -> a
+    boolean[][] makeMatrix() -> a
+com.jaxo.midp.barcode.DataMatrixGeometer$1 -> ar:
+    com.jaxo.midp.barcode.Point val$p1 -> a
+    boolean isBitOnAt(int,int) -> a
+com.jaxo.midp.barcode.DataMatrixGeometer$2 -> as:
+    com.jaxo.midp.barcode.Point val$p2 -> a
+    boolean isBitOnAt(int,int) -> a
+com.jaxo.midp.barcode.DataMatrixGeometer$Finder -> aq$a:
+    com.jaxo.midp.barcode.Point m_pX1 -> a
+    com.jaxo.midp.barcode.Point m_pX2 -> b
+    int m_thickness -> c
+com.jaxo.midp.barcode.DataMatrixMatrix -> at:
+    int m_nbModulesPerRow -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$49c3d171(byte[]) -> b
+    int getNbModulesPerRow() -> e
+com.jaxo.midp.barcode.DataMatrixPattern -> au:
+    int[][] m_squareDimensions -> i
+    int[][] m_rectangleDimensions -> j
+    int size -> k
+    int dataW -> a
+    int dataH -> b
+    int regionW -> c
+    int regionH -> d
+    int fullW -> e
+    int fullH -> l
+    int iMax -> m
+    int jMax -> n
+    int nbBlocks -> f
+    int nbChecks -> o
+    int nbDataPerBlock -> g
+    int nbChecksPerBlock -> h
+    boolean isPadded -> p
+    int wrIx -> q
+    int[] dimensions -> r
+    int getConfigNo(int,int) -> a
+    int getConfigCapacity(int,int) -> b
+    int getConfigCapacity(int) -> a
+    int getWidth(int) -> b
+    int getHeight(int) -> c
+    int getNbRegions(int) -> d
+    int getTotalLen(int) -> e
+    com.jaxo.midp.extbarcode.BarFactory getFrame$7e0ec6a8() -> a
+    int access$000(com.jaxo.midp.barcode.DataMatrixPattern) -> a
+com.jaxo.midp.barcode.DataMatrixPattern$Traveller -> au$a:
+    int x -> a
+    int y -> b
+    int x1 -> d
+    int y1 -> e
+    int bitNo -> f
+    int y0 -> g
+    int x0 -> h
+    int pos -> i
+    com.jaxo.midp.barcode.BitDropper dropper -> j
+    int state -> k
+    int m_wierd -> l
+    com.jaxo.midp.barcode.DataMatrixPattern this$0 -> c
+    boolean next() -> a
+    int access$102(com.jaxo.midp.barcode.DataMatrixPattern$Traveller,int) -> a
+    int access$202(com.jaxo.midp.barcode.DataMatrixPattern$Traveller,int) -> b
+    int access$206(com.jaxo.midp.barcode.DataMatrixPattern$Traveller) -> a
+    int access$112(com.jaxo.midp.barcode.DataMatrixPattern$Traveller,int) -> c
+    int access$212(com.jaxo.midp.barcode.DataMatrixPattern$Traveller,int) -> d
+    int access$220(com.jaxo.midp.barcode.DataMatrixPattern$Traveller,int) -> e
+    int access$106(com.jaxo.midp.barcode.DataMatrixPattern$Traveller) -> b
+com.jaxo.midp.barcode.DataMatrixPattern$Traveller$CornerBitDropper -> au$a$a:
+    int[] xs -> a
+    int[] ys -> b
+    com.jaxo.midp.barcode.DataMatrixPattern$Traveller this$1 -> c
+    void setDropLocation(int) -> a
+    boolean isReady() -> a
+com.jaxo.midp.barcode.DataMatrixPattern$Traveller$RegularBitDropper -> au$a$b:
+    int y0 -> a
+    int x0 -> b
+    com.jaxo.midp.barcode.DataMatrixPattern$Traveller this$1 -> c
+    void setDropLocation(int) -> a
+    boolean isReady() -> a
+com.jaxo.midp.barcode.Decoder -> av:
+    long m_timeout -> a
+    long m_startTime -> b
+    int m_millis -> c
+    void setTimeout(int) -> a
+    com.jaxo.midp.barcode.BitMatrixStream prolog(com.jaxo.midp.barcode.BarImage) -> b
+    long getTimeout() -> a
+com.jaxo.midp.barcode.Decoder2D -> aw:
+    byte[] decode(boolean[][]) -> a
+    byte[] decode(com.jaxo.midp.barcode.BarImage,com.jaxo.midp.barcode.Geometer2D) -> a
+com.jaxo.midp.barcode.EAN13Decoder -> ax:
+    com.jaxo.midp.barcode.EAN13Decoder$Specifs specs -> a
+com.jaxo.midp.barcode.EAN13Decoder$Specifs -> ax$a:
+com.jaxo.midp.barcode.EAN13Matrix -> ay:
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+com.jaxo.midp.barcode.EAN8Decoder -> az:
+    com.jaxo.midp.barcode.EAN8Decoder$Specifs specs -> a
+com.jaxo.midp.barcode.EAN8Decoder$Specifs -> az$a:
+com.jaxo.midp.barcode.EAN8Matrix -> aA:
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+com.jaxo.midp.barcode.EANDecoder -> aB:
+    com.jaxo.midp.barcode.EANDecoder$Specifs m_specs -> a
+    com.jaxo.midp.barcode.EANDecoder$Candidate m_firstCndi -> b
+    int m_totalWidths -> c
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+    com.jaxo.midp.barcode.EANDecoder$Candidate addCandidate(java.lang.String) -> a
+    com.jaxo.midp.barcode.EANDecoder$Candidate getBestCandidate() -> b
+com.jaxo.midp.barcode.EANDecoder$Candidate -> aB$a:
+    com.jaxo.midp.barcode.EANDecoder$Candidate m_next -> a
+    java.lang.String m_val -> b
+    int m_count -> c
+com.jaxo.midp.barcode.EANDecoder$Specifs -> aB$b:
+    int nbDigits -> a
+    int maxBars -> b
+    int maxModules -> c
+    int ofsMid -> d
+    boolean isSystemized -> e
+    boolean isSymmetric -> f
+com.jaxo.midp.barcode.EANMatrix -> aC:
+    int[][] barWidths -> a
+    int[] charsetA -> b
+    int[] charsetB -> c
+    int[][][] leftCharsetsPerSystem -> d
+    int[] leftCharsetsIds -> e
+    int[] rightCharsetsIds -> f
+    int[] rightCharset -> g
+    int m_checkSum -> h
+com.jaxo.midp.barcode.Geometer2D -> aD:
+    void measure$1c6c71a5(com.jaxo.midp.barcode.BitMatrixStream,long,com.jaxo.image.tiff.misc.ByteChannelImage) -> a
+    boolean[][] makeMatrix() -> a
+    void narrowTheGap(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    boolean findSide(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,boolean) -> a
+com.jaxo.midp.barcode.LineIterator -> aE:
+    boolean m_isInited -> b
+    com.jaxo.midp.barcode.LineIterator$PixelsGrabber m_grabber -> c
+    int m_x -> d
+    int m_y -> e
+    int m_xB -> f
+    int m_yB -> g
+    int m_xE -> h
+    int m_yE -> i
+    int m_dy -> j
+    int m_dx -> k
+    int m_stepx -> l
+    int m_stepy -> m
+    int m_fraction -> n
+    boolean m_isBounded -> a
+    com.jaxo.midp.barcode.LineIterator$PixelsGrabber dummyGrabber -> o
+    void setBounded(boolean) -> a
+    boolean nextPixel() -> a
+    boolean previousPixel() -> b
+    int toPixelChange(int) -> a
+    boolean getPixel() -> c
+    com.jaxo.midp.barcode.Point getPoint() -> d
+    com.jaxo.midp.barcode.Point getPoint(com.jaxo.midp.barcode.Point) -> a
+    int getIterations(com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    com.jaxo.midp.barcode.LineIterator$PixelsGrabber access$000(com.jaxo.midp.barcode.LineIterator) -> a
+    int access$100(com.jaxo.midp.barcode.LineIterator) -> b
+    int access$200(com.jaxo.midp.barcode.LineIterator) -> c
+    int access$300(com.jaxo.midp.barcode.LineIterator) -> d
+    int access$400(com.jaxo.midp.barcode.LineIterator) -> e
+com.jaxo.midp.barcode.LineIterator$DummyPixelsGrabber -> aE$a:
+    boolean isBitOnAt(int,int) -> a
+com.jaxo.midp.barcode.LineIterator$PixelsGrabber -> aE$b:
+    boolean isBitOnAt(int,int) -> a
+com.jaxo.midp.barcode.LineIterator$Symmetric -> aE$c:
+com.jaxo.midp.barcode.MicroQrPatterns -> aF:
+    int[] codesLenPerVersion -> a
+    int[] maskRegToMicro -> b
+    int[] maskMicroToReg -> c
+    int[] versionRanges -> d
+    char[][][] configsPerVersionLevel -> e
+    int[] verErrLevelsFromSymbolNo -> f
+    int sizeFromVersion(int) -> a
+    int getMaxVersion() -> a
+    int getTimingColNo() -> b
+    int[] getVersionRanges() -> c
+    char[] getConfig(int,int) -> a
+    int getCodesLen(int) -> b
+    int getPadsLen(int) -> c
+    void setFrame$30438fd(int,boolean,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int bits4Len(int,int) -> b
+    void setStructuredAppend$67a150c5(int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int computeVersionZ(int,int,int) -> a
+    int getHeaderLength(int,int) -> c
+    void setHeader$6554cda5(int,int,int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    void setInformation$6554cda5(int,int,int,com.jaxo.midp.extbarcode.BarFactory) -> b
+    com.jaxo.midp.barcode.QrPatternsBase$Information getInformation(boolean[][]) -> a
+    int getRealMaskNo(int) -> d
+    int getTerminatorMaxLen(int) -> e
+    int getModeLen(int) -> f
+    int getModeAndLength$549b9eea(com.jaxo.midp.extbarcode.BarFactory,int) -> a
+    int getBestMask(byte[][],com.jaxo.midp.barcode.QrPatternsBase$Traveller) -> a
+com.jaxo.midp.barcode.PDF417Coder -> aG:
+    com.jaxo.midp.barcode.PDF417Coder$Encoded encode(byte[],int,int,int) -> a
+    int translate(byte[],int,int) -> a
+    int encodeAsByte(byte[],int,int,short[],int) -> a
+    int encodeAsNumeric(byte[],int,int,short[],int) -> b
+com.jaxo.midp.barcode.PDF417Coder$Encoded -> aG$a:
+    short[] m_data -> a
+    short[] m_checks -> b
+    int m_dataLen -> c
+    int m_nbRows -> d
+    int m_padsLen -> e
+com.jaxo.midp.barcode.PDF417Constants -> aH:
+    short[] START_WIDTHS -> a
+    short[] STOP_WIDTHS -> b
+    byte[] XMIT_SIX_ZEROES -> c
+    byte[] XMIT_MACRO_INIT -> d
+    byte[] XMIT_MACRO_FILE -> e
+    byte[] XMIT_MACRO_OPTN -> f
+    byte[] XMIT_MACRO_TERM -> g
+    boolean[] IS_MIXED_AND_PUNCT -> h
+    short[][] SYMBOL_VALUES -> i
+    int[][][] SYMBOLS_BUCKETS -> j
+com.jaxo.midp.barcode.PDF417Decoder -> aI:
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+    byte[] decode(boolean[][]) -> a
+    void onInfosFound$6046c8d5(int,int,int,int,int) -> a
+    int decode(java.io.ByteArrayOutputStream,int[],int,int,boolean) -> a
+    int decodeAsText(int[],int,int,java.io.ByteArrayOutputStream) -> a
+    int decodeAsByte(boolean,int[],int,int,java.io.ByteArrayOutputStream) -> a
+    int decodeAsNumeric(int[],int,int,java.io.ByteArrayOutputStream) -> b
+    void writeSixDigitsEci(java.io.ByteArrayOutputStream,int) -> a
+    int access$100(int,int) -> a
+com.jaxo.midp.barcode.PDF417Decoder$CandidateList -> aI$a:
+    com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item m_root -> a
+    int best() -> a
+    void add(int) -> a
+com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item -> aI$a$a:
+    int m_val -> a
+    int m_count -> b
+    com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item m_next -> c
+    com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item access$200(com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item) -> a
+    int access$300(com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item) -> b
+    int access$400(com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item) -> c
+    int access$304(com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item) -> d
+    com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item access$202(com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item,com.jaxo.midp.barcode.PDF417Decoder$CandidateList$Item) -> a
+com.jaxo.midp.barcode.PDF417Decoder$Result -> aI$b:
+    int[] m_data -> a
+    int m_nbFixes -> b
+    int m_checksLen -> c
+    int m_nbCols -> d
+    int m_nbRows -> e
+    int m_level -> f
+    void setData(int[],int,int,int) -> a
+    void reportInfos(com.jaxo.midp.barcode.PDF417Decoder) -> a
+    int[] access$000(com.jaxo.midp.barcode.PDF417Decoder$Result) -> a
+com.jaxo.midp.barcode.PDF417Geometer -> aJ:
+    com.jaxo.midp.barcode.BitMatrixStream m_bs -> a
+    com.jaxo.midp.barcode.Quadrilater m_quadrilater -> b
+    int m_nbHMod -> c
+    int m_nbVMod -> d
+    void measure$1c6c71a5(com.jaxo.midp.barcode.BitMatrixStream,long,com.jaxo.image.tiff.misc.ByteChannelImage) -> a
+    void findSide(com.jaxo.midp.barcode.BitMatrixStream,boolean,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    boolean getFinders(com.jaxo.midp.barcode.BitMatrixStream,int,int,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    boolean isGuard(int[],int,short[],int,int) -> a
+    void setPoint(com.jaxo.midp.barcode.Point,int,int[],int) -> a
+    boolean[][] makeMatrix() -> a
+com.jaxo.midp.barcode.PDF417Matrix -> aK:
+    int m_nbCols -> k
+    int m_nbRows -> l
+    int m_level -> m
+    int m_mode -> n
+    int m_dataLen -> o
+    int m_padsLen -> p
+    int m_checksLen -> q
+    void setEncodingMode(int) -> a
+    void setNumberOfColumns(int) -> b
+    void setCorrectionLevel(int) -> c
+    com.jaxo.midp.extbarcode.BarFactory setData$49c3d171(byte[]) -> a
+    int getCorrectionLevel() -> a
+    int getNbModulesPerRow() -> e
+    int getEncodingMode() -> b
+    int getDataLen() -> c
+    int getPadsLen() -> d
+    int getChecksLen() -> f
+    int getNumberOfRows() -> g
+    int getNumberOfColumns() -> h
+com.jaxo.midp.barcode.Point -> aL:
+    int x -> a
+    int y -> b
+    void copyTo(com.jaxo.midp.barcode.Point) -> a
+    java.lang.String toString() -> toString
+com.jaxo.midp.barcode.PostNetMatrix -> aM:
+    int[] charset -> a
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+    void writeBits$549b9ef7(com.jaxo.midp.extbarcode.BarFactory,int) -> a
+com.jaxo.midp.barcode.QrAutoFitter -> aN:
+    int m_cost -> a
+    int m_versionZ -> b
+    int[] m_counts -> c
+    int[] m_modes -> d
+    int m_current -> e
+    int[] toQrCoderEncoding -> f
+    void buildCosts(byte[],int[],int[][],int[][]) -> a
+    void buildModes(int[],int[][],int[][],int) -> a
+    int best(int[],int[],int) -> a
+    boolean next() -> a
+    int getVersionZ() -> b
+    int getMode() -> c
+    int getCount() -> d
+    int getCost() -> e
+com.jaxo.midp.barcode.QrCoder -> aO:
+    int m_wantedVersionZ -> a
+    int m_versionZ -> b
+    int m_checkLevel -> c
+    int m_mode -> d
+    int m_mask -> e
+    com.jaxo.midp.barcode.QrPatternsBase m_patterns -> f
+    void setVersion(int) -> a
+    void setErrorCorrectionLevel(char) -> a
+    void setEncodingMode(int) -> b
+    int getVersion() -> a
+    char getErrorCorrectionLevel() -> b
+    int getCodesLen() -> c
+    int getDataLen() -> d
+    int getNbModulesPerRow() -> e
+    int getMask() -> f
+    void encodeAs$608dc754(int,byte[],int,int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    com.jaxo.midp.extbarcode.BarFactory setData$49c3d171(byte[]) -> a
+com.jaxo.midp.barcode.QrDecoder -> aP:
+com.jaxo.midp.barcode.QrDecoderBase -> aQ:
+    int m_version -> a
+    int m_errorLevel -> b
+    int m_maskNo -> c
+    com.jaxo.midp.barcode.QrPatternsBase m_patterns -> d
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+    byte[] decode(boolean[][]) -> a
+    void onInfosFound$3ba28b51(int,char,int) -> a
+    byte[] decodeAlphanumeric$62c7dc16(com.jaxo.midp.extbarcode.BarFactory,byte[]) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker -> aQ$a:
+    com.jaxo.midp.barcode.QrDecoderBase$Unmasker[] unmaskers -> a
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$1 -> aR:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$2 -> aS:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$3 -> aT:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$4 -> aU:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$5 -> aV:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$6 -> aW:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$7 -> aX:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrDecoderBase$Unmasker$8 -> aY:
+    int at(int,int) -> a
+com.jaxo.midp.barcode.QrGeometer -> aZ:
+    int m_nbHMod -> a
+    int m_nbVMod -> b
+    com.jaxo.midp.barcode.BitMatrixStream m_bs -> c
+    com.jaxo.image.tiff.misc.ByteChannelImage m_listener$51608dd8 -> d
+    com.jaxo.midp.barcode.Point m_trFinder -> e
+    com.jaxo.midp.barcode.Point m_tlFinder -> f
+    com.jaxo.midp.barcode.Point m_blFinder -> g
+    com.jaxo.midp.barcode.Point m_bl -> h
+    com.jaxo.midp.barcode.Point m_br -> i
+    com.jaxo.midp.barcode.Point m_tr -> j
+    com.jaxo.midp.barcode.Point m_tl -> k
+    int m_pixPrec -> l
+    void measure$1c6c71a5(com.jaxo.midp.barcode.BitMatrixStream,long,com.jaxo.image.tiff.misc.ByteChannelImage) -> a
+    com.jaxo.midp.barcode.Segment findSide(com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,boolean) -> a
+    com.jaxo.midp.barcode.Point getPerimetricPoint(com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    int getSizeFromLadder$43554285(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,int) -> a
+    int getSizeFromFinders(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    int getLength(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point,com.jaxo.midp.barcode.Point) -> a
+    java.util.Vector packSegments(java.util.Vector) -> a
+    int has11311Ratios(int[],int,int) -> a
+    boolean[][] makeMatrix() -> a
+com.jaxo.midp.barcode.QrMatrix -> ba:
+com.jaxo.midp.barcode.QrPatterns -> bb:
+    int[] infosPerVersion07to40 -> a
+    char[] codesLenPerVersion -> b
+    int[] padsLenPerVersion -> c
+    int[] versionRanges -> d
+    char[][][] configsPerVersionLevel -> e
+    short[][] gridsPerVersion -> f
+    int[] typeForLPerMask -> g
+    int[] typeForMPerMask -> h
+    int[] typeForQPerMask -> i
+    int[] typeForHPerMask -> j
+    byte[][] STATES1 -> k
+    byte[][] STATES2 -> l
+    int sizeFromVersion(int) -> a
+    int getMaxVersion() -> a
+    int getTimingColNo() -> b
+    int[] getVersionRanges() -> c
+    char[] getConfig(int,int) -> a
+    int getCodesLen(int) -> b
+    int getPadsLen(int) -> c
+    void setFrame$30438fd(int,boolean,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int bits4Len(int,int) -> b
+    void setStructuredAppend$67a150c5(int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int computeVersionZ(int,int,int) -> a
+    int getHeaderLength(int,int) -> c
+    void setHeader$6554cda5(int,int,int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    void setInformation$6554cda5(int,int,int,com.jaxo.midp.extbarcode.BarFactory) -> b
+    com.jaxo.midp.barcode.QrPatternsBase$Information getInformation(boolean[][]) -> a
+    int getRealMaskNo(int) -> d
+    int getTerminatorMaxLen(int) -> e
+    int getModeLen(int) -> f
+    int getModeAndLength$549b9eea(com.jaxo.midp.extbarcode.BarFactory,int) -> a
+    int getBestMask(byte[][],com.jaxo.midp.barcode.QrPatternsBase$Traveller) -> a
+com.jaxo.midp.barcode.QrPatternsBase -> bc:
+    int getMaxVersion() -> a
+    int getTimingColNo() -> b
+    int getRealMaskNo(int) -> d
+    int sizeFromVersion(int) -> a
+    void setFrame$30438fd(int,boolean,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int bits4Len(int,int) -> b
+    int getTerminatorMaxLen(int) -> e
+    int getModeLen(int) -> f
+    void setInformation$6554cda5(int,int,int,com.jaxo.midp.extbarcode.BarFactory) -> b
+    com.jaxo.midp.barcode.QrPatternsBase$Information getInformation(boolean[][]) -> a
+    int getModeAndLength$549b9eea(com.jaxo.midp.extbarcode.BarFactory,int) -> a
+    int getBestMask(byte[][],com.jaxo.midp.barcode.QrPatternsBase$Traveller) -> a
+    char[] getConfig(int,int) -> a
+    int getCodesLen(int) -> b
+    int getPadsLen(int) -> c
+    int computeVersionZ(int,int,int) -> a
+    int[] getVersionRanges() -> c
+    void setStructuredAppend$67a150c5(int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int getHeaderLength(int,int) -> c
+    void setHeader$6554cda5(int,int,int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int makeMatrix$33a0b1e6(byte[],int,int,com.jaxo.midp.extbarcode.BarFactory) -> a
+    int getMaskedBits(int,int) -> d
+com.jaxo.midp.barcode.QrPatternsBase$Information -> bc$a:
+    int m_errors -> a
+    int m_version -> b
+    int m_errorLevel -> c
+    int m_maskNo -> d
+com.jaxo.midp.barcode.QrPatternsBase$Traveller -> bc$b:
+    int x -> a
+    int y -> b
+    int bitsCount -> c
+    com.jaxo.midp.extbarcode.BarFactory m_bsHidden$36d53029 -> d
+    int m_size -> e
+    int m_x0 -> f
+    int m_y0 -> g
+    int m_ofs -> h
+    int m_yLast -> i
+    int m_xTiming -> j
+    boolean m_isUpwards -> k
+    boolean m_isEven -> l
+    boolean next() -> a
+    boolean isOutsideEncodingRegion(int) -> a
+    void nextModule() -> b
+com.jaxo.midp.barcode.Quadrilater -> bd:
+    int[] xs -> a
+    int[] ys -> b
+    java.lang.String toString() -> toString
+    boolean[][] makeMatrix(com.jaxo.midp.barcode.BitMatrixStream,com.jaxo.midp.barcode.Quadrilater,int,int,boolean) -> a
+    int[] access$000(com.jaxo.midp.barcode.Quadrilater) -> a
+    int[] access$100(com.jaxo.midp.barcode.Quadrilater) -> b
+com.jaxo.midp.barcode.Quadrilater$RectangleProjection -> bd$a:
+    long a -> a
+    long b -> b
+    long c -> c
+    long d -> d
+    long e -> e
+    long f -> f
+    long r -> g
+    long s -> h
+    long t -> i
+com.jaxo.midp.barcode.Segment -> be:
+    int x1 -> d
+    int y1 -> e
+    int x2 -> f
+    int y2 -> g
+    com.jaxo.midp.barcode.Point getIntersection(com.jaxo.midp.barcode.Segment) -> a
+    java.lang.String toString() -> toString
+com.jaxo.midp.barcode.UCC128Matrix -> bf:
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+com.jaxo.midp.barcode.UPCAMatrix -> bg:
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+com.jaxo.midp.barcode.UPCEMatrix -> bh:
+    int[][][] leftCharsetsPerCheckInSystem0 -> i
+    int[][][] leftCharsetsPerCheckInSystem1 -> j
+    com.jaxo.midp.extbarcode.BarFactory setData$728e5c8e(java.lang.String) -> a
+com.jaxo.midp.encoder.Base64 -> bi:
+    byte[] xlate -> a
+    byte[] encode(byte[]) -> a
+com.jaxo.midp.encoder.BoseChaudhuri -> bj:
+    int[] m_log -> a
+    int[] m_alog -> b
+    int decode(int[]) -> a
+com.jaxo.midp.encoder.PrimeReedSolomon -> bk:
+    int[] m_alog -> a
+    int[] m_log -> b
+    short[] encode(short[],int,int) -> a
+    int decode(int[],int,int[],int,int) -> a
+    int alog(int) -> a
+com.jaxo.midp.encoder.ReedSolomon -> bl:
+    int[] PRIME_POLYNOM -> a
+    int m_gFminus1 -> b
+    int[] m_log -> c
+    int[] m_alog -> d
+    int[] m_factors -> e
+    int m_fcr -> f
+    int m_prim -> g
+    int m_iprim -> h
+    void encode(byte[],int,int,byte[],int,int) -> a
+    void encode(char[],int) -> a
+    void encode(com.jaxo.midp.encoder.ReedSolomon$Settor,int,int,int,int) -> a
+    int decode(byte[],int,int,byte[],int,int,int[],int) -> a
+    int decode(com.jaxo.midp.encoder.ReedSolomon$Gettor,int,int,int[],int) -> a
+com.jaxo.midp.encoder.ReedSolomon$Gettor -> bl$a:
+    byte[] m_codes -> d
+    byte[] m_checks -> e
+    int m_codesOfs -> a
+    int m_codesLen -> b
+    int m_checksOfs -> c
+    int getDataAt(int) -> a
+    void xorDataAt(int,int) -> a
+    boolean hitMe(int) -> b
+com.jaxo.midp.encoder.ReedSolomon$Settor -> bl$b:
+    void shiftChecksLeft(int,int) -> a
+    void setChecksAt(int,int) -> b
+    void xorChecksAt(int,int) -> c
+    int xorChecksAndCodes(int,int) -> d
+    boolean hitMe(int) -> a
+com.jaxo.midp.encoder.ReedSolomon$Settor16 -> bl$c:
+    char[] m_codes -> a
+    char[] m_checks -> b
+    void setChecksAt(int,int) -> b
+    void xorChecksAt(int,int) -> c
+    int xorChecksAndCodes(int,int) -> d
+    void shiftChecksLeft(int,int) -> a
+    boolean hitMe(int) -> a
+com.jaxo.midp.encoder.ReedSolomon$Settor8 -> bl$d:
+    byte[] m_codes -> a
+    byte[] m_checks -> b
+    void setChecksAt(int,int) -> b
+    void xorChecksAt(int,int) -> c
+    int xorChecksAndCodes(int,int) -> d
+    void shiftChecksLeft(int,int) -> a
+    boolean hitMe(int) -> a
+com.jaxo.midp.extbarcode.AztecBar -> bm:
+    int m_confMode -> a
+    int m_percentCheck -> b
+    int m_nbLayers -> c
+    int m_dataCwCount -> d
+    int m_bitsLen -> e
+    int m_totalCwCount -> f
+    int m_dataLen -> g
+    com.jaxo.midp.extbarcode.Bar2D$Matrix makeMatrix() -> a
+    com.jaxo.midp.extbarcode.Bar2D$Decoder makeDecoder() -> b
+    java.lang.String infos() -> c
+    int access$002(com.jaxo.midp.extbarcode.AztecBar,int) -> a
+    int access$102(com.jaxo.midp.extbarcode.AztecBar,int) -> b
+    int access$202(com.jaxo.midp.extbarcode.AztecBar,int) -> c
+    int access$000(com.jaxo.midp.extbarcode.AztecBar) -> a
+    int access$200(com.jaxo.midp.extbarcode.AztecBar) -> b
+    int access$100(com.jaxo.midp.extbarcode.AztecBar) -> c
+    int access$302(com.jaxo.midp.extbarcode.AztecBar,int) -> d
+    int access$402(com.jaxo.midp.extbarcode.AztecBar,int) -> e
+    int access$502(com.jaxo.midp.extbarcode.AztecBar,int) -> f
+    int access$602(com.jaxo.midp.extbarcode.AztecBar,int) -> g
+com.jaxo.midp.extbarcode.AztecBar$MatrixImpl -> bm$a:
+    com.jaxo.midp.extbarcode.AztecBar this$0 -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Bar -> bn:
+    com.jaxo.midp.extbarcode.BarFactory setData$16717f99(byte[],java.lang.String) -> a
+    byte[] decodeImage(com.jaxo.midp.barcode.BarImage) -> a
+    int getNbModulesPerRow() -> d
+    int getNbModulesPerColumn() -> e
+    int getModuleHeight(int) -> a
+    java.lang.String infos() -> c
+com.jaxo.midp.extbarcode.Bar1D -> bo:
+    int m_modulesPerRow -> a
+    com.jaxo.midp.extbarcode.BarFactory setData$16717f99(byte[],java.lang.String) -> a
+    byte[] decodeImage(com.jaxo.midp.barcode.BarImage) -> a
+    int getNbModulesPerRow() -> d
+    int getNbModulesPerColumn() -> e
+    int getModuleHeight(int) -> a
+    java.lang.String infos() -> c
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Bar2D -> bp:
+    int m_nbModulesPerRow -> a
+    int m_nbModulesPerColumn -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$16717f99(byte[],java.lang.String) -> a
+    byte[] decodeImage(com.jaxo.midp.barcode.BarImage) -> a
+    int getNbModulesPerRow() -> d
+    int getNbModulesPerColumn() -> e
+    int getModuleHeight(int) -> a
+    java.lang.String infos() -> c
+    com.jaxo.midp.extbarcode.Bar2D$Matrix makeMatrix() -> a
+    com.jaxo.midp.extbarcode.Bar2D$Decoder makeDecoder() -> b
+com.jaxo.midp.extbarcode.Bar2D$Decoder -> bp$a:
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+com.jaxo.midp.extbarcode.Bar2D$Matrix -> bp$b:
+    com.jaxo.midp.extbarcode.BarFactory setData$4c71036a(byte[],java.lang.String[]) -> a
+    int getNbModulesPerRow() -> e
+com.jaxo.midp.extbarcode.BarFactory -> bq:
+    long[] bits -> a
+    int ofsStart -> b
+    int ofsEnd -> c
+    com.jaxo.midp.extbarcode.Bar makeBar(int) -> c
+    com.jaxo.midp.extbarcode.BmpImage makeImage$55533082(com.jaxo.midp.extbarcode.BarFactory,com.jaxo.midp.extbarcode.Bar,int,int,int) -> a
+    int length() -> d
+    void setLength(int) -> d
+    void ensureCapacity(int) -> e
+    void write(boolean) -> a
+    void write(int,int) -> b
+    void write(byte[],int,int) -> a
+    int read(int) -> f
+    void seekOrig() -> e
+    boolean isBitOnAt(int) -> a
+    void setBitOnAt(int) -> b
+    int lengthFor(int) -> g
+com.jaxo.midp.extbarcode.BmpImage -> br:
+    void draw$71c5a92c(int,int,int,int,com.jaxo.midp.extbarcode.BarFactory,int,int) -> a
+    byte[] getBytes() -> a
+com.jaxo.midp.extbarcode.BmpImage$BW -> br$a:
+    byte[] m_buffer -> a
+    int m_stride -> b
+    byte[] m_header -> c
+    void draw$71c5a92c(int,int,int,int,com.jaxo.midp.extbarcode.BarFactory,int,int) -> a
+    byte[] getBytes() -> a
+com.jaxo.midp.extbarcode.CodabarBar -> bs:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Code11Bar -> bt:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Code128Bar -> bu:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Code25Bar -> bv:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Code25InterleavedBar -> bw:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Code39Bar -> bx:
+    boolean m_isCheckSum -> b
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+    byte[] decodeImage(com.jaxo.midp.barcode.BarImage) -> a
+com.jaxo.midp.extbarcode.Code39ExtendedBar -> by:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Code93Bar -> bz:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.Code93ExtendedBar -> bA:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.DataMatrixCodeBar -> bB:
+    int m_mode -> a
+    int m_type -> b
+    int m_configNo -> c
+    int m_encodedDataLen -> d
+    int m_padLen -> e
+    int m_errors -> f
+    com.jaxo.midp.extbarcode.Bar2D$Matrix makeMatrix() -> a
+    com.jaxo.midp.extbarcode.Bar2D$Decoder makeDecoder() -> b
+    java.lang.String infos() -> c
+    int access$002(com.jaxo.midp.extbarcode.DataMatrixCodeBar,int) -> a
+    int access$102(com.jaxo.midp.extbarcode.DataMatrixCodeBar,int) -> b
+    int access$000(com.jaxo.midp.extbarcode.DataMatrixCodeBar) -> a
+    int access$100(com.jaxo.midp.extbarcode.DataMatrixCodeBar) -> b
+    int access$202(com.jaxo.midp.extbarcode.DataMatrixCodeBar,int) -> c
+    int access$302(com.jaxo.midp.extbarcode.DataMatrixCodeBar,int) -> d
+    int access$402(com.jaxo.midp.extbarcode.DataMatrixCodeBar,int) -> e
+    int access$502(com.jaxo.midp.extbarcode.DataMatrixCodeBar,int) -> f
+com.jaxo.midp.extbarcode.DataMatrixCodeBar$DecoderImpl -> bB$a:
+    com.jaxo.midp.extbarcode.DataMatrixCodeBar this$0 -> a
+    void onInfosFound(int,int,int,int) -> a
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+com.jaxo.midp.extbarcode.DataMatrixCodeBar$MatrixImpl -> bB$b:
+    com.jaxo.midp.extbarcode.DataMatrixCodeBar this$0 -> b
+    com.jaxo.midp.extbarcode.BarFactory setData$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.EAN13Bar -> bC:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+    byte[] decodeImage(com.jaxo.midp.barcode.BarImage) -> a
+com.jaxo.midp.extbarcode.EAN8Bar -> bD:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+    byte[] decodeImage(com.jaxo.midp.barcode.BarImage) -> a
+com.jaxo.midp.extbarcode.PDF417Bar -> bE:
+    int m_level -> a
+    int m_nbCols -> b
+    int m_mode -> c
+    int m_nbRows -> d
+    int m_dataLen -> e
+    int m_dataCwCount -> f
+    int m_padsLen -> g
+    int m_totalCwCount -> h
+    com.jaxo.midp.extbarcode.Bar2D$Matrix makeMatrix() -> a
+    com.jaxo.midp.extbarcode.Bar2D$Decoder makeDecoder() -> b
+    java.lang.String infos() -> c
+    int access$002(com.jaxo.midp.extbarcode.PDF417Bar,int) -> a
+    int access$102(com.jaxo.midp.extbarcode.PDF417Bar,int) -> b
+    int access$202(com.jaxo.midp.extbarcode.PDF417Bar,int) -> c
+    int access$000(com.jaxo.midp.extbarcode.PDF417Bar) -> a
+    int access$100(com.jaxo.midp.extbarcode.PDF417Bar) -> b
+    int access$200(com.jaxo.midp.extbarcode.PDF417Bar) -> c
+    int access$302(com.jaxo.midp.extbarcode.PDF417Bar,int) -> d
+    int access$402(com.jaxo.midp.extbarcode.PDF417Bar,int) -> e
+    int access$502(com.jaxo.midp.extbarcode.PDF417Bar,int) -> f
+    int access$400(com.jaxo.midp.extbarcode.PDF417Bar) -> d
+    int access$602(com.jaxo.midp.extbarcode.PDF417Bar,int) -> g
+    int access$500(com.jaxo.midp.extbarcode.PDF417Bar) -> e
+    int access$702(com.jaxo.midp.extbarcode.PDF417Bar,int) -> h
+com.jaxo.midp.extbarcode.PDF417Bar$DecoderImpl -> bE$a:
+    com.jaxo.midp.extbarcode.PDF417Bar this$0 -> k
+    void onInfosFound$6046c8d5(int,int,int,int,int) -> a
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+com.jaxo.midp.extbarcode.PDF417Bar$MatrixImpl -> bE$b:
+    com.jaxo.midp.extbarcode.PDF417Bar this$0 -> k
+    com.jaxo.midp.extbarcode.BarFactory setData$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.PostNetBar -> bF:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+    int getNbModulesPerRow() -> d
+    int getNbModulesPerColumn() -> e
+    int getModuleHeight(int) -> a
+com.jaxo.midp.extbarcode.QrCodeBar -> bG:
+    boolean m_isMicro -> a
+    int m_version -> b
+    char m_errLevel -> c
+    int m_mode -> d
+    int m_mask -> e
+    int m_totalCwCount -> f
+    int m_dataCwCount -> g
+    int m_dataLen -> h
+    com.jaxo.midp.extbarcode.Bar2D$Matrix makeMatrix() -> a
+    com.jaxo.midp.extbarcode.Bar2D$Decoder makeDecoder() -> b
+    java.lang.String infos() -> c
+    boolean access$000(com.jaxo.midp.extbarcode.QrCodeBar) -> a
+    int access$102(com.jaxo.midp.extbarcode.QrCodeBar,int) -> a
+    char access$202(com.jaxo.midp.extbarcode.QrCodeBar,char) -> a
+    int access$302(com.jaxo.midp.extbarcode.QrCodeBar,int) -> b
+    int access$100(com.jaxo.midp.extbarcode.QrCodeBar) -> b
+    int access$300(com.jaxo.midp.extbarcode.QrCodeBar) -> c
+    char access$200(com.jaxo.midp.extbarcode.QrCodeBar) -> d
+    int access$402(com.jaxo.midp.extbarcode.QrCodeBar,int) -> c
+    int access$502(com.jaxo.midp.extbarcode.QrCodeBar,int) -> d
+    int access$602(com.jaxo.midp.extbarcode.QrCodeBar,int) -> e
+    int access$702(com.jaxo.midp.extbarcode.QrCodeBar,int) -> f
+    boolean access$002(com.jaxo.midp.extbarcode.QrCodeBar,boolean) -> a
+com.jaxo.midp.extbarcode.QrCodeBar$DecoderImpl -> bG$a:
+    com.jaxo.midp.extbarcode.QrCodeBar this$0 -> a
+    void onInfosFound$3ba28b51(int,char,int) -> a
+    byte[] decode(com.jaxo.midp.barcode.BarImage) -> a
+com.jaxo.midp.extbarcode.QrCodeBar$MatrixImpl -> bG$b:
+    com.jaxo.midp.extbarcode.QrCodeBar this$0 -> a
+    com.jaxo.midp.extbarcode.BarFactory setData$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.UCC128Bar -> bH:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.UPCABar -> bI:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.extbarcode.UPCEBar -> bJ:
+    com.jaxo.midp.extbarcode.BarFactory setData1D$4c71036a(byte[],java.lang.String[]) -> a
+com.jaxo.midp.util.BigInt -> bK:
+    int signum -> a
+    int[] mag -> b
+    int digitsPerIntFor10 -> c
+    void destructiveMulAdd(int[],int,int) -> a
+    java.lang.String toString() -> toString
+    java.lang.String toString(int[]) -> a
+    com.jaxo.midp.util.BigInt[] divideAndRemainder(com.jaxo.midp.util.BigInt) -> a
+    int bitLen(int) -> a
+    void primitiveLeftShift(int[],int,int) -> b
+    int intValue() -> a
+    int parseInt(byte[],int,int) -> a
+com.jaxo.midp.util.BigInt$Mutable -> bK$a:
+    int[] value -> a
+    int intLen -> b
+    int offset -> c
+    void normalize() -> a
+    void divide(com.jaxo.midp.util.BigInt$Mutable,com.jaxo.midp.util.BigInt$Mutable,com.jaxo.midp.util.BigInt$Mutable) -> a
+    int compare(com.jaxo.midp.util.BigInt$Mutable) -> b
+    void leftShift(int) -> a
+    void primitiveRightShift(int) -> b
+    void primitiveLeftShift(int) -> c
+    void divideOneWord(int,com.jaxo.midp.util.BigInt$Mutable) -> a
+    void divWord(int[],long,int) -> a
+    int divadd(int[],int[],int) -> a
+    int mulsub(int[],int[],int,int,int) -> a
+    boolean unsignedLongCompare(long,long) -> a
+    void copyValue(com.jaxo.midp.util.BigInt$Mutable) -> a
+    void clear() -> b
+com.jaxo.midp.util.IntegerList -> bL:
+    int round -> a
+    int size -> b
+    int[] aValues -> c
+    int roundToIncr(int) -> c
+    int size() -> a
+    int[] toArray() -> b
+    int get(int) -> a
+    void set(int,int) -> a
+    void add(int) -> b
+    void clear() -> c
+    java.lang.String toString() -> toString

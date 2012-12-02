@@ -1,0 +1,228 @@
+<!-- $Id: build.xml,v 1.3 2012-04-13 08:24:10 pgr Exp $ -->
+
+<project name="BaaS" default="dist" basedir=".">
+   <description>Build Jaxo External JAR</description>
+
+   <!-- set global properties for this build -->
+   <property environment="env"/>
+   <property name="main.name" value="baas"/>
+   <property name="build.dir" location="${env.HOME}/build/${main.name}"/>
+   <property name="polish.home" location="${env.POLISH_HOME}"/>
+   <property name="javalib.dir" location="${env.JAXO_UTIL}/javalib"/>
+   <property name="proguard.dir" location="${env.ProgramFiles}/proguard4.7"/>
+
+   <taskdef
+       resource="proguard/ant/task.properties"
+       classpath="${proguard.dir}/lib/proguard.jar"
+   />
+
+   <target name="debug" description="Turn on the debug flag - must occur first">
+      <property name="debug" value="ON"/>
+   </target>
+
+   <target name="init">
+      <property name="buildNo" value=""/>
+      <property name="debug" value="OFF"/>
+      <property name="dist.dir" location="${env.HOME}/dist${buildNo}/${main.name}"/>
+      <mkdir dir="${build.dir}"/>
+      <mkdir dir="${dist.dir}"/>
+      <condition property="is.real.build">
+         <not><equals arg1="${buildNo}" arg2=""/></not>
+      </condition>
+   </target>
+
+   <target
+      name="compile"
+      depends="init"
+      description="Build all files in the build directory"
+   >
+      <javac
+         srcdir="${env.HOME}/com/jaxo"
+         destdir="${build.dir}"
+         encoding="iso8859-1"
+         debug="${debug}"
+         includes="common/Constants.java
+                   http/GenericHeader.java
+                   http/GenericHeaderFields.java
+                   http/GenericInputStream.java
+                   http/GenericOutputStream.java
+                   http/RequestHeader.java
+                   http/RequestHeaderFields.java
+                   http/RequestInputStream.java
+                   http/RequestOutputStream.java
+                   http/RequestSocketInputStream.java
+                   http/ResponseHeader.java
+                   http/ResponseHeaderFields.java
+                   http/ResponseInputStream.java
+                   http/ResponseOutputStream.java
+                   http/ResponseSocketOutputStream.java
+                   io/LogWriter.java
+                   io/NullOutputStream.java
+                   io/TempLogWriter.java
+                   midp/barcode/AztecCoder.java
+                   midp/barcode/AztecException.java
+                   midp/barcode/AztecMatrix.java
+                   midp/barcode/BarException.java
+                   midp/barcode/BarImage.java
+                   midp/barcode/BitMatrixStream.java
+                   midp/barcode/CodabarMatrix.java
+                   midp/barcode/Code11Matrix.java
+                   midp/barcode/Code128Matrix.java
+                   midp/barcode/Code25InterleavedMatrix.java
+                   midp/barcode/Code25Matrix.java
+                   midp/barcode/Code39Decoder.java
+                   midp/barcode/Code39ExtendedMatrix.java
+                   midp/barcode/Code39Matrix.java
+                   midp/barcode/Code93ExtendedMatrix.java
+                   midp/barcode/Code93Matrix.java
+                   midp/barcode/DataMatrixAutoFitter.java
+                   midp/barcode/DataMatrixCoder.java
+                   midp/barcode/DataMatrixDecoder.java
+                   midp/barcode/DataMatrixGeometer.java
+                   midp/barcode/DataMatrixMatrix.java
+                   midp/barcode/DataMatrixPattern.java
+                   midp/barcode/Decoder.java
+                   midp/barcode/Decoder2D.java
+                   midp/barcode/EAN13Decoder.java
+                   midp/barcode/EAN13Matrix.java
+                   midp/barcode/EAN8Decoder.java
+                   midp/barcode/EAN8Matrix.java
+                   midp/barcode/EANDecoder.java
+                   midp/barcode/EANException.java
+                   midp/barcode/EANMatrix.java
+                   midp/barcode/Geometer2D.java
+                   midp/barcode/ImageBinarizer.java
+                   midp/barcode/LineIterator.java
+                   midp/barcode/MicroQrMatrix.java
+                   midp/barcode/MicroQrPatterns.java
+                   midp/barcode/PDF417Coder.java
+                   midp/barcode/PDF417Constants.java
+                   midp/barcode/PDF417Decoder.java
+                   midp/barcode/PDF417Geometer.java
+                   midp/barcode/PDF417Matrix.java
+                   midp/barcode/Point.java
+                   midp/barcode/PostNetMatrix.java
+                   midp/barcode/QrAutoFitter.java
+                   midp/barcode/QrCoder.java
+                   midp/barcode/QrDecoder.java
+                   midp/barcode/QrDecoderBase.java
+                   midp/barcode/QrException.java
+                   midp/barcode/QrGeometer.java
+                   midp/barcode/QrMatrix.java
+                   midp/barcode/QrMatrixBase.java
+                   midp/barcode/QrPatterns.java
+                   midp/barcode/QrPatternsBase.java
+                   midp/barcode/Quadrilater.java
+                   midp/barcode/Segment.java
+                   midp/barcode/UCC128Exception.java
+                   midp/barcode/UCC128Matrix.java
+                   midp/barcode/UPCAMatrix.java
+                   midp/barcode/UPCEMatrix.java
+                   midp/encoder/Base64.java
+                   midp/encoder/BoseChaudhuri.java
+                   midp/encoder/PrimeReedSolomon.java
+                   midp/encoder/ReedSolomon.java
+                   midp/encoder/UrlQuery.java
+                   midp/io/BitStream.java
+                   midp/io/ByteArrayOutputStream.java
+                   midp/util/BigInt.java
+                   midp/util/IntegerList.java
+                   midp/util/Math.java
+                   socketlistener/Daemon.java
+                   socketlistener/Logger.java
+                   socketlistener/ServiceFactory.java
+                   util/CountDownLatch.java
+                   util/Messageable.java
+                   util/StreamCopier.java
+                   util/StringTokenizer.java
+                   util/TypedProperties.java
+                   util/Util.java"
+         classpath="${env.HOME}"
+      >
+         <compilerarg value="-Xlint:deprecation"/>
+      </javac>
+
+      <javac
+         srcdir="${env.HOME}/com/jaxo/image"
+         excludes="TestRaster.java"
+         destdir="${build.dir}"
+         encoding="iso8859-1"
+         debug="${debug}"
+         classpath="${env.HOME}"
+      >
+         <compilerarg value="-Xlint:deprecation"/>
+      </javac>
+
+
+      <javac
+         srcdir="${env.HOME}/com/jaxo/midp/extbarcode"
+         destdir="${build.dir}"
+         encoding="iso8859-1"
+         debug="${debug}"
+         classpath="${env.HOME}"
+      >
+         <compilerarg value="-Xlint:deprecation"/>
+      </javac>
+
+      <javac
+         srcdir="."
+         includes="Bar.java"
+         destdir="${build.dir}"
+         encoding="iso8859-1"
+         debug="${debug}"
+         classpath="${env.HOME}"
+      >
+         <compilerarg value="-Xlint:deprecation"/>
+      </javac>
+
+      <jar
+         jarfile="${build.dir}/${main.name}.jar"
+         basedir="${build.dir}"
+         excludes="**/*.jar"
+      >
+         <manifest>
+           <section name="common">
+             <attribute name="Implementation-Vendor" value="Jaxo"/>
+           </section>
+         </manifest>
+      </jar>
+   </target>
+
+   <target
+      name="build"
+      depends="compile"
+      description="compile, obfuscate and create the jar in the dist directory"
+   >
+      <proguard>
+         -libraryjars ${java.home}/lib/rt.jar
+         -injars      "${build.dir}/${main.name}.jar"
+         -outjars     "${dist.dir}/${main.name}.jar"
+         -keep class com.jaxo.googapp.${main.name}.Bar {
+            public *;
+         }
+         -keep interface com.jaxo.image.RasterImage {
+            public *;
+         }
+         -keep class com.jaxo.image.RasterImage$Factory {
+            public *;
+         }
+         -keepattributes InnerClasses
+         -repackageclasses
+         -printmapping proguard.map
+      </proguard>
+      <echo
+         message = "copy ${dist.dir}/${main.name}.jar ~/jaxoapps/baas/war/WEB-INF/lib/baas.jar"
+      />
+   </target>
+
+   <target
+      name="clean"
+      depends="init"
+      description="clean-up all built files."
+   >
+      <delete dir="${build.dir}" />
+      <delete dir="${dist.dir}" />
+   </target>
+
+</project>
+

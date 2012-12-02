@@ -1,0 +1,695 @@
+<!-- $Id: RestAPI.html,v 1.12 2012-01-31 11:09:58 pgr Exp $ -->
+<html>
+  <head>
+    <style type="text/css">
+       body {
+          margin: 5px;
+          font-family: Arial, Helvetica, sans-serif;
+          background:WHITE;
+       }
+       table.desc {
+          text-align:left;
+          font-size:11pt;
+          /* background-color:RED; */
+       }
+       table.desc tr {
+          vertical-align:top;
+       }
+       table.desc tr th {
+          padding-left:15px;
+          font-size:9pt;
+          font-weight: bold;
+       }
+       table.desc tr td.what {
+          font-size:12pt;
+          font-weight:bold;
+          /* background-color:YELLOW; */
+       }
+       table.desc tr td {
+          /* background-color:GREEN; */
+          padding:15px;
+       }
+       table.desc tr td dl dt {
+          margin-top:20px;
+          /* font-size:15pt; */
+          /* text-decoration:underline; */
+          background-color:PINK;
+       }
+       table.desc tr td dl dl dt {
+          margin-top:10px;
+          font-size:11pt;
+          text-decoration:none;
+          font-weight:bold;
+          background-color:transparent;
+       }
+       table.desc tr td dl dl dl dt {
+          margin-top:5px;
+          text-decoration:none;
+          font-weight:normal;
+          /* background-color:YELLOW; */
+       }
+       table.compact tr td {
+          padding:0px;
+          font-size:10pt;
+          /* background-color:GRAY; */
+          padding-right:15px;
+       }
+       .right {
+          float:right;
+          font-weight:bold;
+       }
+       .toggle {
+          font-weight:bold;
+          font-size:12pt;
+          background-position:8px;
+          background-repeat:no-repeat;
+          background-color:transparent;
+          border:none
+       }
+    </style>
+    <SCRIPT type='text/javascript'>
+        var downArrow = "<svg xmlns:svg='http://www.w3.org/2000/svg' width='12' height='20'><path d='m 2,9 0,9 L 9,13.5 2,9 z' style='fill:#000035;fill-opacity:1'/></svg>";
+        var rightArrow = "<svg xmlns:svg='http://www.w3.org/2000/svg' width='12' height='20'><path d='m 0,12 10,0 L 5,19 0,12 z' style='fill:#000035;fill-opacity:1'/></svg>"
+        var hidExpNo = 0;
+        function hideOrExpand(eltId) {
+           var elt = document.getElementById(eltId)
+           if (elt.style.display == "inline") {
+              elt.style.display = "none";
+           }else {
+              elt.style.display = "inline";
+           }
+        }
+        function toggleIt(eltId, arrowId) {
+           var arrow = document.getElementById(arrowId);
+           var elt = document.getElementById(eltId);
+           if (elt.style.display == "inline") {
+              elt.style.display = "none";
+              arrow.innerHTML = downArrow;
+           }else {
+              elt.style.display = "inline";
+              arrow.innerHTML = rightArrow;
+           }
+        }
+        function makeHideExpButton(title, eltId) {
+           var arrowId = "he" + hidExpNo++;
+           document.write(
+              "<BUTTON class='toggle' onclick=\"toggleIt('" +
+              eltId + "', '" + arrowId + "')\"><SPAN id='" +
+              arrowId + "'>" + rightArrow + "</SPAN>" + title + "</BUTTON>"
+           );
+        }
+    </SCRIPT>
+  </head>
+  <body>
+    <div style="height:45px;width:45px;position:relative;">
+       <svg>
+         <g transform="translate(-272.78572,-276.5664)">
+           <path
+              d="m 290.44438,311.17034 2.5313,0.0142 c 0,0 0.9696,-0.99377 1.74743,-2.6475 0.99896,-2.12387 1.10261,-4.06845 1.10261,-4.06845 l -0.0201,-14.24546 -3.11435,0 0,14.19233 c 0,0 0.0213,0.63282 -0.28441,1.90558 -0.35369,1.47234 -0.45768,1.68679 -0.95279,2.88682 -0.41952,1.01678 -0.73948,1.62116 -1.00968,1.96246 z"
+              style="fill:#065bab;fill-opacity:1;stroke:#065bab;stroke-width:0.07963631px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           <path
+              d="m 392.14287,256.82648 a 24.196428,20.357143 0 1 1 -48.39286,0 24.196428,20.357143 0 1 1 48.39286,0 z"
+              transform="matrix(0.07962226,0,0,0.08101673,264.99438,265.27766)"
+              style="fill:#065bab;fill-opacity:1;stroke:#065bab;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+           <path
+              d="m 602.14285,410.21933 a 232.85715,232.85715 0 1 1 -465.71429,0 232.85715,232.85715 0 1 1 465.71429,0 z"
+              transform="matrix(0.08617535,0,0,0.08621854,262.46239,262.70795)"
+              style="fill:none;stroke:#065bab;stroke-width:33.25996399;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         </g>
+       </svg>
+    </div>
+    <div
+       style="position:relative;top:-45px;left:50px;font-size:8pt;color:#065bab"
+    >
+    Jaxo Inc.<br>&copy;2011-2012
+    </div>
+    <div
+       style="position:relative;top:-70px;text-align:right;right:25px;font-size:28pt;color:#778"
+    >
+       <i>Genetick</i> Rest API
+       <div style="font-size:9pt">
+       <script>
+       var revision = "$Revision: 1.12 $";
+       var date = "$Date: 2012-01-31 11:09:58 $";
+       document.write(
+          revision.substring(1, revision.length-2) + ", as of " +
+          date.substring(7, date.length-2)
+       );
+       </script>
+       </div>
+    </div>
+    <div style="position:relative;float:right;right:30px">
+       <table>
+          <tr>
+          <td>HTTP server:</td>
+          <td bgcolor="yellow">jaxo-genetick.appspot.com</td>
+          </tr><tr>
+          <td>Mail server:</td>
+          <td bgcolor="yellow">xxxx@jaxo-genetick.appspotmail.com</td>
+          </tr>
+       </table>
+    </div>
+    <p>&nbsp;</P>
+    <table class=desc width="100%">
+      <tr><th>Resource&nbsp;URL</th><th>Description</th>
+      </tr><td class="what" width="1%" nowrap>
+         <script>makeHideExpButton("GET&nbsp;encode", "encodeDL");</script>
+      </td><td>
+         Returns a barcode image, which encodes data for a given symbology
+         <dl id="encodeDL" style="display:inline">
+            <dt>
+              <script>makeHideExpButton("Query Parameters", "encQueryDD");</script>
+            </dt>
+            <dd id="encQueryDD" style="display:inline">
+              <dl>
+                 <dt>KEY</dt>
+                 <dd>
+                 Data to be encoded
+                 <br/><i>Required</i>
+                 </dd>
+
+                 <dt>TYP</dt>
+                 <dd>
+                 Barcode symbology to use.&nbsp;
+                 <br/><i>Optional, default to <b>1</b> (Datamatrix)</i>
+                 <br/>&nbsp;
+                 <br/>One of:
+                 <table class="compact">
+                   <TR><TD class="right"> 1</TD><TD>Datamatrix</TD></TR>
+                   <TR><TD class="right"> 2</TD><TD>QrCode</TD></TR>
+                   <TR><TD class="right"> 3</TD><TD>PDF 417</TD></TR>
+                   <TR><TD class="right"> 4</TD><TD>Aztec</TD></TR>
+                   <TR><TD class="right"> 5</TD><TD>EAN 13</TD></TR>
+                   <TR><TD class="right"> 6</TD><TD>EAN 8</TD></TR>
+                   <TR><TD class="right"> 7</TD><TD>Code 11</TD></TR>
+                   <TR><TD class="right"> 8</TD><TD>Code 25</TD></TR>
+                   <TR><TD class="right"> 9</TD><TD>Code 25 Interleaved</TD></TR>
+                   <TR><TD class="right">10</TD><TD>Code 39</TD></TR>
+                   <TR><TD class="right">11</TD><TD>Code 39 Extended</TD></TR>
+                   <TR><TD class="right">12</TD><TD>Code 93</TD></TR>
+                   <TR><TD class="right">13</TD><TD>Code 93 Extended</TD></TR>
+                   <TR><TD class="right">14</TD><TD>Code 128</TD></TR>
+                   <TR><TD class="right">15</TD><TD>UCC 128</TD></TR>
+                   <TR><TD class="right">16</TD><TD>UPC-A</TD></TR>
+                   <TR><TD class="right">17</TD><TD>UPC-E</TD></TR>
+                   <TR><TD class="right">18</TD><TD>Codabar</TD></TR>
+                   <TR><TD class="right">19</TD><TD>PostNet</TD></TR>
+                   <TR><TD class="right">20</TD><TD>Micro QrCode</TD></TR>
+                 </table>
+                 </dd>
+
+                 <dt>SIZ</dt>
+                 <dd>
+                 Size of the barcode image.
+                 <br/><i>Optional, default to <b>M</b> (Medium size)</i>
+                 <br/>&nbsp;
+                 <div style="font-size:8pt;font-style:oblique;">
+                   <u>Note:</u>
+                   this parameter might be later enhanced for supporting
+                   size units, or to fit at best a given image size.
+                 </div>
+                 <br/>One of:
+                 <table class="compact">
+                   <TR><TD class="right">S</TD><TD>Small size</TD></TR>
+                   <TR><TD class="right">M</TD><TD>Medium size</TD></TR>
+                   <TR><TD class="right">L</TD><TD>Large size</TD></TR>
+                 </table>
+                 </dd>
+
+                 <dt>MOD</dt>
+                 <dd>
+                 This optional parameter groups attributes that are
+                 particular to the symbology used.&nbsp;
+                 It is intended for specific applications with restrictive
+                 contraints.&nbsp; The terminology used below conforms to the
+                 ISO documentation pertinent to each symbology.
+                 <br/><i>Optional, no default</i>
+                 <br/>&nbsp;
+                 <div style="font-size:8pt;font-style:oblique;">
+                   <u>Note:</u>
+                   indications for handling specific function characters
+                   (FNCx, Extended Channel Interpretations, ...)
+                   should be integrated here.
+                 </div>
+                 <p>
+                 The parameter value is made of semi-colon-separated fields.
+                 The position of each field (and its content) indicates
+                 its aim, according to the following tables.
+                 </p>
+                 <dl>
+                    <dt>Datamatrix</dt>
+                    <dd>
+                      <table class="compact" cellspacing="20px">
+                         <tr>
+                         <td>Encoding mode&nbsp;&nbsp;<br/>(pos #1)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>0</b></td><td>ASCII</td></tr>
+                            <tr><td><b>1</b></td><td>C40</td></tr>
+                            <tr><td><b>2</b></td><td>TEXT</td></tr>
+                            <tr><td><b>3</b></td><td>X12</td></tr>
+                            <tr><td><b>4</b></td><td>EDIFACT</td></tr>
+                            <tr><td><b>5</b></td><td>BASE256</td></tr>
+                            <tr><td><b>6</b></td><td>Automatic <i>[DEFAULT]</i></td></tr>
+                            </table>
+                         </td>
+                         </tr>
+                         <!-- <tr><td colspan=2><hr/></td></tr> -->
+                         <tr>
+                         <td>Type<br/>(pos #2)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>0</b></td><td>Square <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>1</b></td><td>Rectangle</td></tr>
+                            </table>
+                         </td>
+                         </tr>
+                      </table>
+                    </dd>
+                    <dt>QrCode</dt>
+                    <dd>
+                      <table class="compact" cellspacing="20px">
+                         <tr>
+                         <td>Encoding mode&nbsp;&nbsp;<br/>(pos #1)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>0</b></td><td>Automatic <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>1</b></td><td>Numeric</td></tr>
+                            <tr><td><b>2</b></td><td>Alphanumeric</td></tr>
+                            <tr><td><b>4</b></td><td>Byte</td></tr>
+                            <tr><td><b>8</b></td><td>Kanji</td></tr>
+                            </table>
+                         </td>
+                         </tr>
+                         <!-- <tr><td colspan=2><hr/></td></tr> -->
+                         <tr>
+                         <td>Error correction<br/>(pos #2)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>L</b></td><td>Level L (low, 7%)</td></tr>
+                            <tr><td><b>M</b></td><td>Level M (standard, 15%)</td></tr>
+                            <tr><td><b>Q</b></td><td>Level Q (quartile, 25%) <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>H</b></td><td>Level H (high, 30%)</td></tr>
+                            </table>
+                         </td>
+                         </tr>
+                      </table>
+                    </dd>
+                    <dt>PDF 417</dt>
+                    <dd>
+                      <table class="compact" cellspacing="20px">
+                         <tr>
+                         <td>Encoding mode&nbsp;&nbsp;<br/>(pos #1)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>0</b></td><td>Byte</td></tr>
+                            <tr><td><b>1</b></td><td>Text <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>2</b></td><td>Numeric</td></tr>
+                            </table>
+                         </td>
+                         </tr><tr>
+                         <td>Number of<br/>columns<br/>(pos #2)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>1</b></td><td>one column</td></tr>
+                            <tr><td><b>2</b></td><td>two columns <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>3</b></td><td>three columns</td></tr>
+                            <tr><td><b>4</b></td><td>four columns</td></tr>
+                            <tr><td><b>...</b></td><td>&nbsp;</td></tr>
+                            <tr><td><b>29</b></td><td>twenty-nine columns</td></tr>
+                            <tr><td><b>30</b></td><td>thirty columns</td></tr>
+                            </table>
+                         </td>
+                         </tr>
+                      </table>
+                    </dd>
+                    <dt>Aztec</dt>
+                    <dd>
+                      <table class="compact" cellspacing="20px">
+                         <tr>
+                         <td>Number of layers<br/>(pos #1)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>0</b></td><td>Automatic <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>1C</b></td><td>one layer in compact mode</td></tr>
+                            <tr><td><b>2C</b></td><td>two layer in compact mode</td></tr>
+                            <tr><td><b>3C</b></td><td>three layers in compact mode</td></tr>
+                            <tr><td><b>4C</b></td><td>four layers in compact mode</td></tr>
+                            <tr><td><b>1</b></td><td>one layer</td></tr>
+                            <tr><td><b>2</b></td><td>two layers</td></tr>
+                            <tr><td><b>3</b></td><td>three layers</td></tr>
+                            <tr><td colspan=2><b>...</b></td></tr>
+                            <tr><td><b>31</b></td><td>thirty-one layers</td></tr>
+                            <tr><td><b>32</b></td><td>thirty-two layers</td></tr>
+                            </table>
+                         </td>
+                         </tr><tr>
+                         <td>Minimal percent<br/>of error correction<br/>(pos #2)</td>
+                         <td>
+                            <table>
+                            <tr><td><b>1</b></td><td>one percent</td></tr>
+                            <tr><td><b>2</b></td><td>two percents</i></td></tr>
+                            <tr><td><b>3</b></td><td>three percents</td></tr>
+                            <tr><td><b>...</b></td><td>&nbsp;</td></tr>
+                            <tr><td><b>23</b></td><td>twenty-three percents <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>...</b></td><td>&nbsp;</td></tr>
+                            <tr><td><b>49</b></td><td>fourty-nine percents</td></tr>
+                            <tr><td><b>50</b></td><td>fifty percents</td></tr>
+                            </table>
+                         </td>
+                         </tr>
+                      </table>
+                    </dd>
+                    <dt>Code 128</dt>
+                    <dd>
+                      <table class="compact" cellspacing="20px">
+                         <tr>
+                         <td>Code Set&nbsp;</td>
+                         <td>
+                            <table>
+                            <tr><td><b>O</b> (letter 'O')</td><td>Mixed <i>[DEFAULT]</i></td></tr>
+                            <tr><td><b>A</b></td><td>"A" Set</td></tr>
+                            <tr><td><b>B</b></td><td>"B" Set</td></tr>
+                            <tr><td><b>C</b></td><td>"C" Set</td></tr>
+                            </table>
+                         </td>
+                         </tr>
+                      </table>
+                    </dd>
+                 </dl>
+                 </dd>
+                 <dt>B64</dt>
+                 <dd>
+                 This optional parameter indicates if the response must be
+                 encoded in Base64 (RFC 1521).
+                 <br/><i>Optional, default to <b>0</b> (no response encoding)</i>
+                 <br/>&nbsp;
+                 <br/>One of:
+                 <table class="compact">
+                    <tr><td><b>0</b>(zero)</td>
+                    <td>No response encoding <i>[DEFAULT]</i></td></tr>
+                    <tr><td><b>1</b></td>
+                    <td>Response encoded in Base64</td></tr>
+                 </table>
+                 <div style="font-size:8pt;font-style:oblique;">
+                   <u>Note:</u>
+                   this parameter is intended for refreshing HTML images
+                   using a "data" URI protocol as in:
+                   <div style="font-style:normal">
+                   document.getElementById('barImage').src = (
+                      "data:image/bmp;base64," + this.responseText
+                   );
+                   </div>
+                 </div>
+                 </dd>
+              </dl>
+            </dd>
+            <dt>
+              <script>makeHideExpButton("Server Response", "encResponseDD");</script>
+            </dt>
+            <dd id="encResponseDD" style="display:inline">
+              <dl>
+                 <dt>Status Code</dt>
+                 <dd>
+                 <table class="compact">
+                 <tr><td class=right>200</td><td>OK</td><td>The barcode image has been sucessfully generated.</td></tr>
+                 <tr><td class=right>400</td><td>Bad request</td><td>The barcode image cannot be generated.</td></tr>
+                 </table>
+                 </dd>
+
+                 <dt>Response Headers</dt>
+                 <dd>
+                 <table class="compact">
+                 <tr><td>field name</td><td><b>Jaxo-Infos</b></td></tr>
+                 <tr><td>field&nbsp;contents</td>
+                 <td>
+                 contains human-readable characteristics of the generated
+                 barcode, if the status code is 200 (OK);&nbsp;
+                 otherwise (status code 400), it gives a brief description
+                 why the barcode image failed to generate.</td>
+                 </tr>
+                 </table>
+                 </dd>
+
+                 <dt>Response Body</dt>
+                 <dd>
+                 Image of the barcode in BMP file format.&nbsp;
+                 </dd>
+              </dl>
+            </dd>
+            <dt>
+              <script>makeHideExpButton("Example", "encExampleDD");</script>
+            </dt>
+            <dd id="encExampleDD" style="display:inline">
+            <br/><u>From the browser's address bar:</u>
+            <br/><a href="http://jaxo-genetick.appspot.com/encode?KEY=Hello%20World!">
+            http://jaxo-genetick.appspot.com/encode?KEY=Hello World!
+            </a>
+            <br/>&nbsp;
+            <br/><u>Within a HTTP Session</u>
+            <pre style="font-weight:bold";>
+GET /encode?KEY=Hello%20World%21&TYP=1&SIZ=M&MOD=0%3B0%3B
+Host: jaxo-genetick.appspot.com
+            </pre>
+            produces a medium-sized, square Datamatrix barcode,
+            encoding the string "Hello World!"
+            in "Datamatrix ASCII" encoding mode.
+            <p>
+            The response status code is 200 (OK) and the "Jaxo-Infos"
+            response header contains:
+            <div style="border:1px solid #000; font-size:9pt">
+               Datamatrix #3, 16 x 16 and 1 region(s), encoding 12 bytes
+               in ASCII mode. It contains 24 code words, of which 12 is data,
+               0 are pad(s), and 12 are for error correction. FEC is 25%
+            </div>
+            </p>
+            </dd>
+         </dl>
+      </td></tr><tr><td colspan=2><hr/></td></tr>
+      <tr><td class="what" nowrap>
+         <script>makeHideExpButton("GET&nbsp;decodeURL", "decodeUrlDL");</script>
+      </td><td>
+         Decodes the contents of a barcode image, given the URL of this image.
+         <dl id="decodeUrlDL" style="display:inline">
+            <dt>
+              <script>makeHideExpButton("Query Parameters", "decUrlQueryDD");</script>
+            </dt>
+            <dd id="decUrlQueryDD" style="display:inline">
+              <dl>
+                 <dt>URL</dt>
+                 <dd>
+                 URL of the image to be decoded
+                 <br/><i>Required</i>
+                 </dd>
+                 <dt>TYP</dt>
+                 <dd>
+                 Barcode symbology(ies) to decode.&nbsp;
+                 <br/><i>Optional, default to <b>0</b> (Any decodable symbology)</i>
+                 <br/>&nbsp;
+                 <br/>A comma-delimited list of symbologies the barcode
+                 image can belong to:
+                 <table class="compact">
+                   <TR><TD class="right"> 0</TD><TD>(Any decodable symbology)</TD></TR>
+                   <TR><TD class="right"> 1</TD><TD>Datamatrix</TD></TR>
+                   <TR><TD class="right"> 2</TD><TD>QrCode</TD></TR>
+                   <TR><TD class="right"> 3</TD><TD>PDF 417</TD></TR>
+                   <TR><TD class="right"> 5</TD><TD>EAN 13</TD></TR>
+                   <TR><TD class="right"> 6</TD><TD>EAN 8</TD></TR>
+                 </table>
+                 </dd>
+              </dl>
+            </dd>
+            <dt>
+              <script>makeHideExpButton("Server Response", "decUrlResponseDD");</script>
+            </dt>
+            <dd id="decUrlResponseDD" style="display:inline">
+               <dl>
+                 <dt>Status Code</dt>
+                 <dd>
+                 <table class="compact">
+                 <tr><td class=right>200</td><td>OK</td><td>The barcode image has been sucessfully decoded.</td></tr>
+                 <tr><td class=right>400</td><td>Bad request</td><td>The barcode image cannot be decoded.</td></tr>
+                 </table>
+                 </dd>
+
+                 <dt>Response Headers</dt>
+                 <dd>
+                 <table class="compact">
+                 <tr><td><u>Field&nbsp;name</u></td><td><u>Contents</u></td></tr>
+                 <tr><td nowrap>Jaxo-Infos</td>
+                 <td>
+                 contains human-readable characteristics of the decoded
+                 barcode, if the status code is 200 (OK);&nbsp;
+                 otherwise (status code 400), it might give a brief description
+                 why the barcode image failed to decode.
+                 </td></tr>
+                 <tr><td nowrap>Jaxo-Symbo</td>
+                 <td>the name of the symbology the barcode belongs to.</td>
+                 </tr>
+                 </table>
+                 </dd>
+
+                 <dt>Response Body</dt>
+                 <dd>
+                 Decoded value (text) of the barcode contents.
+                 </dd>
+               </dl>
+            </dd>
+            <dt>
+              <script>makeHideExpButton("Example", "decUrlExampleDD");</script>
+            </dt>
+            <dd id="decUrlExampleDD" style="display:inline">
+            <br/><u>From the browser's address bar:</u>
+            <br/><a href="http://jaxo-genetick.appspot.com/decodeUrl?URL=http://www.jaxo-systems.com/loremipsum_dm.jpg">
+            http://jaxo-genetick.appspot.com/decodeUrl?URL=http://www.jaxo-systems.com/loremipsum_dm.jpg
+            </a>
+            <br/>&nbsp;
+            <br/><u>Within a HTTP Session</u>
+<pre style="font-weight:bold";>
+GET /decodeUrl?URL=http%3A//www.jaxo-systems.com/datamatrix.webp&TYP=1%2C2%2C3 HTTP/1.1
+Host: jaxo-genetick.appspot.com
+</pre>
+            decodes the transfered data,
+            which is the contents found at
+            <span style="font-family:mono;font-size:smaller">
+            <u>http://www.jaxo-systems.com/datamatrix.webp</u></span>.
+            <br/>It can be any of the following symbologies:
+            1&nbsp;(Datamatrix), 2&nbsp;(QR&nbsp;code), 3&nbsp;(PDF&nbsp;417)
+
+            <p>
+            The response status code is 200 (OK)
+            <BR/>
+            the "Jaxo-Infos" response header contains:
+            <div style="border:1px solid #000; font-size:9pt">
+               Datamatrix #3, 16 x 16 and 1 region(s), encoding 16 bytes.&nbsp;
+               It contains 24 code words, of which 12 are for error correction.&nbsp;
+               FEC is 25%.
+            </div>
+            <BR/>
+            the "Jaxo-Symbo" response header contains:
+            <div style="border:1px solid #000; font-size:9pt">
+               DataMatrix
+            </div>
+            </p>
+            </dd>
+         </dl>
+      </td></tr><tr><td colspan=2><hr/></td></tr>
+      <tr><td class="what" nowrap>
+         <script>makeHideExpButton("POST&nbsp;decodeFile", "decodeFileDL");</script>
+      </td><td>
+         Decodes the contents of a barcode image,
+         passing the image data in the posted value.
+         <dl id="decodeFileDL" style="display:inline">
+            <dt>
+              <script>makeHideExpButton("Posted Data", "decFilePostDD");</script>
+            </dt>
+            <dd id="decFilePostDD" style="display:inline">
+              <dl>
+                 <dt>file</dt>
+                 <dd>
+                 Data to be decoded
+                 <br/>Required
+                 </dd>
+
+                 <dt>TYP</dt>
+                 <dd>
+                 Barcode symbology(ies) to decode.&nbsp;
+                 <br/><i>Optional, default to <b>0</b> (Any decodable symbology)</i>
+                 <br/>&nbsp;
+                 <br/>A comma-delimited list of symbologies the barcode
+                 image can belong to:
+                 <table class="compact">
+                   <TR><TD class="right"> 0</TD><TD>(Any decodable symbology)</TD></TR>
+                   <TR><TD class="right"> 1</TD><TD>Datamatrix</TD></TR>
+                   <TR><TD class="right"> 2</TD><TD>QrCode</TD></TR>
+                   <TR><TD class="right"> 3</TD><TD>PDF 417</TD></TR>
+                   <TR><TD class="right"> 5</TD><TD>EAN 13</TD></TR>
+                   <TR><TD class="right"> 6</TD><TD>EAN 8</TD></TR>
+                 </table>
+                 </dd>
+              </dl>
+            </dd>
+            <dt>
+              <script>makeHideExpButton("Server Response", "decFileResponseDD");</script>
+            </dt>
+            <dd id="decFileResponseDD" style="display:inline">
+               <dl>
+                 <dt>Status Code</dt>
+                 <dd>
+                 <table class="compact">
+                 <tr><td class=right>200</td><td>OK</td><td>The barcode image has been sucessfully decoded.</td></tr>
+                 <tr><td class=right>400</td><td>Bad request</td><td>The barcode image cannot be decoded.</td></tr>
+                 </table>
+                 </dd>
+
+                 <dt>Response Headers</dt>
+                 <dd>
+                 <table class="compact">
+                 <tr><td><u>Field&nbsp;name</u></td><td><u>Contents</u></td></tr>
+                 <tr><td nowrap>Jaxo-Infos</td>
+                 <td>
+                 contains human-readable characteristics of the decoded
+                 barcode, if the status code is 200 (OK);&nbsp;
+                 otherwise (status code 400), it might give a brief description
+                 why the barcode image failed to decode.
+                 </td></tr>
+                 <tr><td nowrap>Jaxo-Symbo</td>
+                 <td>the name of the symbology the barcode belongs to.</td>
+                 </tr>
+                 </table>
+                 </dd>
+
+                 <dt>Response Body</dt>
+                 <dd>
+                 Decoded value (text) of the barcode contents.
+                 </dd>
+               </dl>
+            </dd>
+            <dt>
+              <script>makeHideExpButton("Example", "decFileExampleDD");</script>
+            </dt>
+            <dd id="decFileExampleDD" style="display:inline">
+            <br/><u>Within a HTTP Session</u>
+<pre style="font-weight:bold";>
+POST /decodeFile HTTP/1.1
+Host: jaxo-genetick.appspot.com
+Connection: keep-alive
+Content-Length: 14354
+Content-Type:multipart/form-data; boundary=----MVUIT3sYjJMRBtd
+------MVUIT3sYjJMRBtd
+Content-Disposition: form-data; name="file"; filename="pdf417.webp"
+Content-Type: image/webp
+
+</pre>(image data)<pre style="font-weight:bold";>
+------MVUIT3sYjJMRBtd
+Content-Disposition: form-data; name="TYP"
+
+1,3,6
+------MVUIT3sYjJMRBtd--
+</pre>
+            decodes the transfered data,
+            which is the contents of the "pdf417.webp" image file.
+            <br/>It can be any of the following symbologies:
+            1&nbsp;(Datamatrix), 3&nbsp;(PDF&nbsp;417), 6&nbsp;(EAN&nbsp;8)
+
+            <p>
+            The response status code is 200 (OK)
+            <BR/>
+            the "Jaxo-Infos" response header contains:
+            <div style="border:1px solid #000; font-size:9pt">
+               PDF417, mode "byte" and a FEC level of 3.  103 bytes,
+               encoded in 3 columns of data over 40 rows.<br/>
+               PDF417 is represented by ISO/IEC standard 15438.
+            </div>
+            <BR/>
+            the "Jaxo-Symbo" response header contains:
+            <div style="border:1px solid #000; font-size:9pt">
+               PDF417
+            </div>
+            </p>
+            </dd>
+         </dl>
+      </td></tr><tr><td colspan=2><hr/></td></tr>
+    </table>
+  </body>
+</html>

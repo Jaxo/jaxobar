@@ -1,0 +1,76 @@
+Useful links
+^^^^^^^^^^^^
+    https://appengine.google.com
+    http://localhost:8888/_ah/admin/inboundmail
+
+Additional JAR files
+^^^^^^^^^^^^^^^^^^^^
+This project requires:
+    baas.jar
+    commons-io-1.3.2/commons-io-1.3.2.jar
+    commons-fileupload-1.2.2/lib/commons-fileupload-1.2.2.jar
+
+baas.jar
+^^^^^^^^
+baas.jar = extbarcode + image + Bar.java
+
+"~/com/jaxo/midp/extbarcode" is an attempt to encapsulate more
+barcode-related methods on the "jar side" (i.e.: the obfuscator-able side)
+It integrates part of the code found in "~/jaxoapps/atelier".
+It can be seen as an extension/revamp of our "midp/jaxo.jar'.
+
+"~/com/jaxo/image" gets the image data out of png, vp8, tiff...
+
+"~/com/jaxo/googapp/baas/Bar.java" bundles exported methods
+"Bar.java" resides under jaxoapps/src/com/jaxo/googapp/baas, but
+is excluded from this "src folder" during the build of the Google App.
+
+Its sole use is when building baas.jar. e.g.:
+  ant build
+  copy ~/dist/baas/baas.jar ~/jaxoapps/baas/war/WEB-INF/lib/
+
+Future (long term) goal:
+-> replace (more or less) jaxo.jar by extbarcode.jar
+-> make jaxoapps/atelier uses this jar
+
+commons-xxxx.jar
+^^^^^^^^^^^^^^^^
+These jars allow reading a multipart/data FORM
+see
+http://shogi-software.blogspot.com/2009/04/
+   google-app-engine-and-file-upload.html
+
+- Download:
+http://archive.apache.org/dist/commons/
+   fileupload/binaries/commons-fileupload-1.2.2-bin.tar
+http://archive.apache.org/dist/commons/
+   io/binaries/commons-io-1.3.2-bin.tar.gz
+- gunzip, tar xvf, copy
+    commons-io-1.3.2/commons-io-1.3.2.jar
+  and
+    commons-fileupload-1.2.2/lib/commons-fileupload-1.2.2.jar
+  to
+    ~/jaxoapps/baas/war/WEB-INF/lib/
+- add WEB-INF/lib/commons-io-1.3.2.jar and commons-fileupload-1.2.2.jar
+  to the Eclipse's build path
+
+
+------------------------------------------------- OBSOLETE - Do NOT read ----
+reading Images + Buffered
+^^^^^^^^^^^^^^^^^^^^^^^^^
+[the following is obsolete, and kept only for reference purposes:
+The latest version got rid of ImageBuffer (awt).
+It was making a huge mess, and that was only to access pixels of Images.
+The solution was to construct a WebP/VP8 decoder on the server side]
+
+- in ~/l:
+  javac -Xlint:deprecation -encoding ISO8859_1 -cp /home/pgr -d bin ImageIOT3.java
+- in ~/l/bin:
+  jar cf awtimage.jar *
+- copy awtimage.jar to ~/jaxoapps/baas/war/WEB-INF/lib/
+- add WEB_-INF/lib/awtimage.jar to the Eclipse's build path
+
+WebP/VP8 and PNG decoder (image.jar)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- in ~/com/jaxo/image do "ant build"
+- copy ~/dist/image/image.jar ~/jaxoapps/baas/war/WEB-INF/lib/image.jar
