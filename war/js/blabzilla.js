@@ -59,6 +59,7 @@ function encodeIfNeeded() {
          options
       );
       request.send();
+/*
       document.getElementById('barData').innerHTML = data;
       document.getElementById('barType').innerHTML = selectType.options[
          selectType.selectedIndex
@@ -66,5 +67,6 @@ function encodeIfNeeded() {
       document.getElementById('barSize').innerHTML = selectSize.options[
          selectSize.selectedIndex
       ].text;
+*/
    }
 }
