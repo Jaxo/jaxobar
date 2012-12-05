@@ -135,17 +135,19 @@ function setInstallButton(buttonId) {
    }
 }
 
-function activate(elt, doing) {
-   var siblings = elt.parentNode.childNodes;
-   for (var i=0; i < siblings.length; ++i) {
-      var sib = siblings[i];
-      if (sib.nodeType == 1) {
-   //    alert(sib + " " + sib.nodeType);
-         if (siblings[i] == elt) {
-            sib.setAttribute('class','activated');
-         }else {
-            sib.removeAttribute('class', '');
+function activatePage(sourceElt, target) {
+   if (sourceElt != null) {
+      var siblings = sourceElt.parentNode.childNodes;
+      for (var i=0; i < siblings.length; ++i) {
+         var sib = siblings[i];
+         if (sib.nodeType == 1) {
+            if (siblings[i] == sourceElt) {
+               sib.setAttribute('class','activated');
+            }else {
+               sib.removeAttribute('class', '');
+            }
          }
       }
    }
+   window.location='#'+target;
 }

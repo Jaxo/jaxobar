@@ -19,11 +19,13 @@
      </TR></TABLE>
      <H1>BlabZilla</H1>
    </HEADER>
+   <!--
    <DIV class="body" style="z-index:-1">
-      <IMG alt="Bar Image" id="barImage" src="images/unknown.png"/>
    </DIV>
-   <DIV class="body" style="opacity:0.9">
+   -->
+   <DIV class="body" id="p1">
       <DIV class="textEntry">
+         <IMG style="position:absolute;z-index:-1" alt="Bar Image" id="barImage" src="images/unknown.png"/>
          <FORM name = "encodeForm">
          <INPUT type="hidden" name="TYP" value="1"/>
          <INPUT type="hidden" name="SIZ" value="M"/>
@@ -36,13 +38,14 @@
          </FORM>
       </DIV>
    </DIV>
-   <!--
-   <DIV id="body">
-      <BUTTON>Press me...</BUTTON><A href="foo">Lolo</A>
+   <DIV class="body" id="p2">
+      <BUTTON onclick="alert('You pressed me, bastard');">Press me...</BUTTON>
+      <A class="buttonLike" href="foo">Error 404</A>
    </DIV>
-   -->
+   <DIV class="body" id="p3">
+      <SPAN style="float:right;text-align:right">Hello!</SPAN>
+   </DIV>
    <!--
-   <BUTTON>Press me...</BUTTON>
    <DIV id="glasspane">
      <DIV id="title">Glass Pane Title</DIV>
      <DIV id="msg">Message in the glass pane (for notifications, etc)</DIV>
@@ -54,14 +57,15 @@
    -->
    <FOOTER>
       <TABLE><TR>
-      <TD onclick="activate(this, 'something');">Write</TD>
-      <TD onclick="activate(this, 'something');">Read</TD>
-      <TD onclick="activate(this, 'something');"><IMG src="style/images/menu.png"></TD>
+      <TD id="fdflt" onclick="activatePage(this, 'p1');">Write</TD>
+      <TD onclick="activatePage(this, 'p2');">Read</TD>
+      <TD onclick="activatePage(this, 'p3');"><IMG src="style/images/menu.png"></TD>
       </TR></TABLE>
    </FOOTER>
    <SCRIPT>
    setInterval("encodeIfNeeded()", 60);
    setInstallButton("btnInstall");
+   document.getElementById('fdflt').click();
    </SCRIPT>
 </BODY>
 </HTML>
