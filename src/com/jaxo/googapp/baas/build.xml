@@ -1,4 +1,4 @@
-<!-- $Id: build.xml,v 1.3 2012-04-13 08:24:10 pgr Exp $ -->
+<!-- $Id: build.xml,v 1.4 2012-12-12 09:06:35 pgr Exp $ -->
 
 <project name="BaaS" default="dist" basedir=".">
    <description>Build Jaxo External JAR</description>
@@ -82,6 +82,7 @@
                    midp/barcode/DataMatrixMatrix.java
                    midp/barcode/DataMatrixPattern.java
                    midp/barcode/Decoder.java
+                   midp/barcode/Decoder1D.java
                    midp/barcode/Decoder2D.java
                    midp/barcode/EAN13Decoder.java
                    midp/barcode/EAN13Matrix.java

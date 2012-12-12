@@ -42,9 +42,9 @@ function encodeIfNeeded() {
          if (this.readyState == 4) {    // DONE is 4
             // document.getElementById('barInfos').innerHTML = this.getResponseHeader("Jaxo-Infos");
             if (this.status != 200) {
-               document.getElementById('barImage').src = "images/unknown.png";
+               document.getElementById('barImageOut').src = "images/unknown.png";
             }else {
-               document.getElementById('barImage').src = (
+               document.getElementById('barImageOut').src = (
                   "data:image/bmp;base64," + this.responseText
                );
             }
@@ -68,5 +68,67 @@ function encodeIfNeeded() {
          selectSize.selectedIndex
       ].text;
 */
+   }
+}
+
+function pickAndDecodeImage()
+{
+   var a = new MozActivity({ name: "pick", data: {type: "image/jpeg"}});
+   a.onsuccess = function(e) {
+     var request = new XMLHttpRequest();
+     request.open(
+        "POST",
+        "decodeImage" +
+        "?TYP=" + document.decodeForm.TYP.value +
+        "&PPC=" + document.decodeForm.PPC.value,
+        true
+     );
+     request.setRequestHeader("Content-Type", 'image/jpeg');
+     request.onreadystatechange = onImageDecoded;
+     request.send(a.result.blob);
+     var url = URL.createObjectURL(a.result.blob);
+     var img = document.getElementById('barImageIn');
+     img.src = url;
+     img.onload = function() { URL.revokeObjectURL(url); };
+   };
+   a.onerror = function() { alert('Failure picking photo'); };
+}
+
+function onImageDecoded() {
+   switch (this.readyState) {
+// case 1: // OPENED
+//    document.getElementById("loading").style.visibility='visible';
+//    document.getElementById('imgSource').innerHTML = "";
+//    document.getElementById('imgInfos').innerHTML = "";
+//    document.getElementById('imgContents').innerHTML = "";
+//    document.getElementById('imgBarType').innerHTML = "";
+//    break;
+   case 4: // DONE
+//    document.getElementById("loading").style.visibility='hidden';
+//    document.getElementById('imgSource').innerHTML = this.source;
+//    document.getElementById('imgInfos').innerHTML = this.getResponseHeader("Jaxo-Infos");
+      if (this.status == 200) {
+         document.getElementById('imgContents').innerHTML = this.responseText;
+//       document.getElementById('imgBarType').innerHTML = this.getResponseHeader("Jaxo-Symbo");
+//       // show PostProcess result, if any
+//       var upcImg = this.getResponseHeader("Jaxo-UpcImg");
+//       if (upcImg != null) {
+//          var descr;
+//          var upcDescr = this.getResponseHeader("Jaxo-UpcDescr");
+//          if (upcDescr == null) {
+//             descr = "";
+//          }else {
+//             descr = "description=" + escape(upcDescr) + "&";
+//          }
+//          document.getElementById('imgToPin').src = upcImg;
+//          document.getElementById('pinterestAnchor').href=(
+//             "http://pinterest.com/pin/create/button/?" + descr +
+//             "url=www.jaxo-systems.com/pinterest" +
+//             "&media=" + upcImg
+//          );
+//          document.getElementById('pinned').style.visibility='visible';
+//       }
+      }
+      break;
    }
 }

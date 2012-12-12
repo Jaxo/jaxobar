@@ -25,7 +25,7 @@
    -->
    <DIV class="body" id="p1">
       <DIV class="textEntry">
-         <IMG style="position:absolute;z-index:-1" alt="Bar Image" id="barImage" src="images/unknown.png"/>
+         <IMG style="position:absolute;z-index:-1" alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
          <FORM name = "encodeForm">
          <INPUT type="hidden" name="TYP" value="1"/>
          <INPUT type="hidden" name="SIZ" value="M"/>
@@ -38,12 +38,20 @@
          </FORM>
       </DIV>
    </DIV>
-   <DIV class="body" id="p2">
+   <DIV class="body" id="p2-voided">
       <BUTTON onclick="alert('You pressed me, bastard');">Press me...</BUTTON>
       <A class="buttonLike" href="foo">Error 404</A>
    </DIV>
    <DIV class="body" id="p3">
       <SPAN style="float:right;text-align:right">Hello!</SPAN>
+   </DIV>
+   <DIV class="body" id="p2">
+      <FORM name = "decodeForm">
+      <INPUT type="hidden" name="TYP" value="1"/>  <!-- 1,2,3 (DM,Qr,PDF) or 0 (all) -->
+      <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
+      </FORM>
+      <SPAN id="imgContents"/></SPAN>
+      <IMG id="barImageIn" src = "images/unknown.png" style="height:60%"/>
    </DIV>
    <!--
    <DIV id="glasspane">
@@ -58,7 +66,7 @@
    <FOOTER>
       <TABLE><TR>
       <TD id="fdflt" onclick="activatePage(this, 'p1');">Write</TD>
-      <TD onclick="activatePage(this, 'p2');">Read</TD>
+      <TD onclick="activatePage(this, 'p2'); pickAndDecodeImage();">Read</TD>
       <TD onclick="activatePage(this, 'p3');"><IMG src="style/images/menu.png"></TD>
       </TR></TABLE>
    </FOOTER>

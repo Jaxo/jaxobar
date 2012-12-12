@@ -1,5 +1,5 @@
 /*
-* $Id: Bar.java,v 1.4 2012-04-13 08:24:10 pgr Exp $
+* $Id: Bar.java,v 1.5 2012-12-12 09:06:34 pgr Exp $
 *
 * (C) Copyright 2012 Jaxo Systems.  All rights reserved.
 * This work contains confidential trade secrets of Jaxo Systems.
@@ -23,7 +23,7 @@ import com.jaxo.midp.io.BitStream;
 *//**
 *
 * @author  Pierre G. Richard
-* @version $Id: Bar.java,v 1.4 2012-04-13 08:24:10 pgr Exp $
+* @version $Id: Bar.java,v 1.5 2012-12-12 09:06:34 pgr Exp $
 */
 public class Bar
 {
@@ -139,7 +139,7 @@ public class Bar
    *//**
    *//*
    +-------------------------------------------------------------------------*/
-   static class LuminousImage implements BarImage
+   static class LuminousImage extends BarImage
    {
       private int m_width;
       private int m_height;

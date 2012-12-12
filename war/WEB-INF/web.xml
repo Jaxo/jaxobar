@@ -37,6 +37,15 @@
       <url-pattern>/decodeUrl</url-pattern>
    </servlet-mapping>
 
+   <servlet>
+      <servlet-name>DecodeImage</servlet-name>
+      <servlet-class>com.jaxo.googapp.baas.HttpDecodeImageServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>DecodeImage</servlet-name>
+      <url-pattern>/decodeImage</url-pattern>
+   </servlet-mapping>
+
    <!--
       "Catch all mail" servlet.
       No way to do differently: bug in GAE wrt url-pattern syntax.
