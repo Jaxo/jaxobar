@@ -11,47 +11,72 @@
 
 <BODY>
    <HEADER>
-     <DIV id="btnMain"><IMG style="background-image:url(style/images/back.png)"/></DIV>
+     <DIV id="btnMain" onclick="toggleSidebarView();"><IMG id="btnMainImage" style="background-image:url(style/images/menu.png)"/></DIV>
      <TABLE><TR>
-        <TD id="menu"><IMG src="style/images/menu.png"/></TD>
         <TD id="btnInstall">Install</TD>
         <TD id="btnDecode">Reveal</TD>
      </TR></TABLE>
      <H1>BlabZilla</H1>
    </HEADER>
-   <!--
-   <DIV class="body" style="z-index:-1">
-   </DIV>
-   -->
-   <DIV class="body" id="p1">
-      <DIV class="textEntry">
+   <DIV id="main">
+      <DIV id="p1" class="body">
          <IMG style="position:absolute;z-index:-1" alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
-         <FORM name = "encodeForm">
-         <INPUT type="hidden" name="TYP" value="1"/>
-         <INPUT type="hidden" name="SIZ" value="M"/>
-         <TEXTAREA
-            id="textContents"
-            name = "KEY"
-            placeholder="Enter your blab&hellip;"
-         ></TEXTAREA>
-         <!-- DIV id="charCounter">140</DIV -->
+         <FORM name = "encodeForm" style="height:100%">
+         <!-- FORM name = "encodeForm" -->
+            <INPUT type="hidden" name="TYP" value="1"/>
+            <INPUT type="hidden" name="SIZ" value="M"/>
+            <TEXTAREA
+               id="textContents"
+               name = "KEY"
+               placeholder="Enter your blab&hellip;"
+            ></TEXTAREA>
+            <!-- DIV id="charCounter">140</DIV -->
          </FORM>
       </DIV>
+      <DIV class="body" id="p2">
+         <FORM name = "decodeForm">
+         <INPUT type="hidden" name="TYP" value="1"/>  <!-- 1,2,3 (DM,Qr,PDF) or 0 (all) -->
+         <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
+         </FORM>
+         <SPAN id="imgContents"/></SPAN>
+         <IMG id="barImageIn" src = "images/unknown.png" style="height:60%"/>
+      </DIV>
+      <DIV class="body" id="p3">
+         <SPAN style="float:right;text-align:right;font-size:5rem">Sent!</SPAN>
+      </DIV>
    </DIV>
-   <DIV class="body" id="p2-voided">
-      <BUTTON onclick="alert('You pressed me, bastard');">Press me...</BUTTON>
-      <A class="buttonLike" href="foo">Error 404</A>
-   </DIV>
-   <DIV class="body" id="p3">
-      <SPAN style="float:right;text-align:right">Hello!</SPAN>
-   </DIV>
-   <DIV class="body" id="p2">
-      <FORM name = "decodeForm">
-      <INPUT type="hidden" name="TYP" value="1"/>  <!-- 1,2,3 (DM,Qr,PDF) or 0 (all) -->
-      <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
-      </FORM>
-      <SPAN id="imgContents"/></SPAN>
-      <IMG id="barImageIn" src = "images/unknown.png" style="height:60%"/>
+   <DIV id="sidebar" class="body">
+      <UL onclick="sidebarItemClicked(event);">
+      <LI>preferred vegetables<SPAN class='iconfont plus'></SPAN>
+         <UL>
+            <LI>carrots<SPAN class='iconfont check'></SPAN></LI>
+            <LI>artichokes<SPAN class='iconfont check'></SPAN></LI>
+            <LI>turnips<SPAN class='iconfont check'></SPAN></LI>
+            <LI>daisies (really?)<SPAN class='iconfont check'></SPAN></LI>
+         </UL>
+      </LI>
+      <LI>add more salt<SPAN class='iconfont check'></SPAN></LI>
+      <LI>Menu Item #3<SPAN class='iconfont plus'></SPAN>
+         <UL>
+            <LI>submenu 3.1<SPAN class='iconfont check'></SPAN></LI>
+            <LI>submenu 3.2<SPAN class='iconfont plus'></SPAN>
+               <UL>
+                 <LI>sub-submenu 3.2.1<SPAN class='iconfont check'></SPAN></LI>
+                 <LI>sub-submenu 3.2.2<SPAN class='iconfont check'></SPAN></LI>
+               </UL>
+            </LI>
+            <LI>submenu 3.3<SPAN class='iconfont check'></SPAN></LI>
+            <LI>submenu 3.4<SPAN class='iconfont check'></SPAN></LI>
+            <LI>submenu 3.5<SPAN class='iconfont check'></SPAN></LI>
+            <LI>submenu 3.6<SPAN class='iconfont check'></SPAN></LI>
+         </UL>
+      </LI>
+      <LI>Menu Item #4<SPAN class='iconfont idea'></SPAN></LI>
+      <LI>Menu Item #5</LI>
+      <LI>Menu Item #6</LI>
+      <LI>Menu Item #7</LI>
+      <LI>Menu Item #8</LI>
+      </UL>
    </DIV>
    <!--
    <DIV id="glasspane">
@@ -67,7 +92,7 @@
       <TABLE><TR>
       <TD id="fdflt" onclick="activatePage(this, 'p1');">Write</TD>
       <TD onclick="activatePage(this, 'p2'); pickAndDecodeImage();">Read</TD>
-      <TD onclick="activatePage(this, 'p3');"><IMG src="style/images/menu.png"></TD>
+      <TD onclick="activatePage(this, 'p3');"><IMG src="style/images/send.png"></TD>
       </TR></TABLE>
    </FOOTER>
    <SCRIPT>
