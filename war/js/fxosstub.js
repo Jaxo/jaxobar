@@ -135,24 +135,6 @@ function setInstallButton(buttonId) {
    }
 }
 
-function activatePage(sourceElt, target) {
-   if (sourceElt != null) {
-      var siblings = sourceElt.parentNode.childNodes;
-      for (var i=0; i < siblings.length; ++i) {
-         var sib = siblings[i];
-         if (sib.nodeType == 1) {
-            if (siblings[i] == sourceElt) {
-               sib.setAttribute('class','activated');
-            }else {
-               sib.removeAttribute('class', '');
-            }
-         }
-      }
-   }
-   window.location='#'+target;
-}
-
-
 function toggleSidebarView() {
    var btnMainStyle = document.getElementById('btnMainImage').style;
    var bodyStyle = document.getElementById('main').style;
@@ -172,33 +154,67 @@ function toggleSidebarView() {
    }
 }
 
-function sidebarItemClicked(event) {
-   var targetElt = event.target;
-   var symbol="";
-   if (targetElt.nodeName == "SPAN") {  // really: <SPAN class="iconfont xxx">
-      targetElt = targetElt.parentNode;
+function getAttribute(node, attrName) {  // helper
+   var attrs = node.attributes;
+   if ((attrs != null) && (attrs[attrName] != null)) {
+      return attrs[attrName].value;
+   }else {
+      return null;
    }
-   for (var i=0; i < targetElt.children.length; i++) {
-      var childElt = targetElt.children[i];
-      if (childElt.nodeType == 1) {  // ELEMENT_NODE
-         if (childElt.className.slice(0, 9)  == "iconfont ") {
-            symbol = childElt.className.slice(9);
-            switch (symbol) {
-            case "plus": symbol = "minus"; break;
-            case "minus": symbol = "plus"; break;
-            case "check": symbol = "uncheck"; break;
-            case "uncheck": symbol = "check"; break;
+}
+
+function menuListClicked(event) {
+   var liElt = event.target;        // the item that was clicked
+   /*
+   | TEMPORARY fix?
+   | I am interested in list items, direct children of UL's, or TR's),
+   | The list items descendants (IMG, SPAN, etc...) are phony.
+   | I should probably add "role=listitem" for all such items.
+   */
+   while ((liElt.nodeName != "TD") && (liElt.nodeName != "LI")) {
+      if ((liElt = liElt.parentNode) == null) {
+         // event.stopPropagation();
+         return;
+      }
+   }
+   if (liElt.getAttribute("role") == "listbox") {
+      var ulChildElt = liElt.getElementsByTagName("UL")[0];
+      if (ulChildElt != null) {     // defense!
+         if (liElt.getAttribute("aria-expanded") == "true") {
+            liElt.removeAttribute("aria-expanded");
+            ulChildElt.style.display = "none";
+         }else {
+            liElt.setAttribute("aria-expanded", "true");
+            ulChildElt.style.display = "block";
+         }
+      }
+   }else {
+      var role = getAttribute(liElt.parentNode, "role");
+      if (liElt.getAttribute("aria-selected") == "true") {
+         if (role != "radiogroup") {
+            // selecting a selected item in a radiogroup does nothing..
+            // however for lambda lists, it deselects the item
+            liElt.removeAttribute("aria-selected");
+         }
+      }else {
+         if (role == "radiogroup") {
+            // selecting a new item in a radiogroup deselects its siblings
+            var siblings = liElt.parentNode.childNodes;
+            for (var i=0; i < siblings.length; ++i) {
+               var sib = siblings[i];
+               if (getAttribute(sib, "aria-selected") == "true") {
+                  ownedId = getAttribute(sib, "aria-owns");
+                  if (ownedId != null) {
+                     document.getElementById(ownedId).setAttribute("aria-expanded", "false");
+                  }
+                  sib.attributes.removeNamedItem("aria-selected");
+               }
             }
-            targetElt.children[i].className = "iconfont " + symbol;
-         }else if (childElt.nodeName == "UL"){
-            switch (symbol) {
-            case "plus":
-               childElt.style.display = "none";
-               break;
-            case "minus":
-               childElt.style.display = "block";
-               break;
-            }
+         }
+         liElt.setAttribute("aria-selected", "true");
+         ownedId = getAttribute(liElt, "aria-owns");
+         if (ownedId != null) {
+            document.getElementById(ownedId).setAttribute("aria-expanded", "true");
          }
       }
    }

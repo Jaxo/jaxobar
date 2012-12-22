@@ -46,33 +46,50 @@
       </DIV>
    </DIV>
    <DIV id="sidebar" class="body">
-      <UL onclick="sidebarItemClicked(event);">
-      <LI>preferred vegetables<SPAN class='iconfont plus'></SPAN>
-         <UL>
-            <LI>carrots<SPAN class='iconfont check'></SPAN></LI>
-            <LI>artichokes<SPAN class='iconfont check'></SPAN></LI>
-            <LI>turnips<SPAN class='iconfont check'></SPAN></LI>
-            <LI>daisies (really?)<SPAN class='iconfont check'></SPAN></LI>
+      <UL class="menuList" onclick="menuListClicked(event);">
+      <LI role="listbox">Encode in...
+         <UL role="radiogroup">
+            <LI>DataMatrix</LI>
+            <LI aria-selected="true">QrCode</LI>
+            <LI>PDF 417</LI>
+            <LI>Aztec</LI>
+            <LI>EAN 13</LI>
+            <LI>EAN 8</LI>
+            <LI>Code 11</LI>
+            <LI>Code 25</LI>
+            <LI>Code 25 Interleaved</LI>
+            <LI>Code 39</LI>
+            <LI>Code 39 Extended</LI>
+            <LI>Code 93</LI>
+            <LI>Code 93 Extended</LI>
+            <LI>Code 128</LI>
+            <LI>UCC 128</LI>
+            <LI>UPC-A</LI>
+            <LI>UPC-E</LI>
+            <LI>Codabar</LI>
+            <LI>PostNet</LI>
+            <LI>Micro QrCode</LI>
          </UL>
       </LI>
-      <LI>add more salt<SPAN class='iconfont check'></SPAN></LI>
-      <LI>Menu Item #3<SPAN class='iconfont plus'></SPAN>
+      <LI aria-selected="true">add more salt</LI>
+      <LI>add more pepper</LI>
+      <LI role="listbox">Menu Item #3
          <UL>
-            <LI>submenu 3.1<SPAN class='iconfont check'></SPAN></LI>
-            <LI>submenu 3.2<SPAN class='iconfont plus'></SPAN>
+            <LI>submenu 3.1</LI>
+            <LI role="listbox">submenu 3.2
                <UL>
-                 <LI>sub-submenu 3.2.1<SPAN class='iconfont check'></SPAN></LI>
-                 <LI>sub-submenu 3.2.2<SPAN class='iconfont check'></SPAN></LI>
+                 <LI>sub-submenu 3.2.1</LI>
+                 <LI>sub-submenu 3.2.2</LI>
                </UL>
             </LI>
-            <LI>submenu 3.3<SPAN class='iconfont check'></SPAN></LI>
-            <LI>submenu 3.4<SPAN class='iconfont check'></SPAN></LI>
-            <LI>submenu 3.5<SPAN class='iconfont check'></SPAN></LI>
-            <LI>submenu 3.6<SPAN class='iconfont check'></SPAN></LI>
+            <LI>submenu 3.3</LI>
+            <LI>submenu 3.4</LI>
+            <LI>submenu 3.5</LI>
+            <LI>submenu 3.6</LI>
          </UL>
       </LI>
-      <LI>Menu Item #4<SPAN class='iconfont idea'></SPAN></LI>
-      <LI>Menu Item #5</LI>
+      <LI>Menu Item #4</LI>
+      <LI aria-selected="true">Menu Item #5</LI>
       <LI>Menu Item #6</LI>
       <LI>Menu Item #7</LI>
       <LI>Menu Item #8</LI>
@@ -89,10 +106,10 @@
    </DIV>
    -->
    <FOOTER>
-      <TABLE><TR>
-      <TD id="fdflt" onclick="activatePage(this, 'p1');">Write</TD>
-      <TD onclick="activatePage(this, 'p2'); pickAndDecodeImage();">Read</TD>
-      <TD onclick="activatePage(this, 'p3');"><IMG src="style/images/send.png"></TD>
+      <TABLE><TR role="radiogroup" onclick="menuListClicked(event);">
+      <TD aria-owns="p1" id="fdflt">Write</TD>
+      <TD aria-owns="p2" onclick="pickAndDecodeImage();">Read</TD>
+      <TD aria-owns="p3"><IMG src="style/images/send.png"></TD>
       </TR></TABLE>
    </FOOTER>
    <SCRIPT>
