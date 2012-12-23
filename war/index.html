@@ -14,32 +14,30 @@
      <DIV id="btnMain" onclick="toggleSidebarView();"><IMG id="btnMainImage" style="background-image:url(style/images/menu.png)"/></DIV>
      <TABLE><TR>
         <TD id="btnInstall">Install</TD>
-        <TD id="btnDecode">Reveal</TD>
+        <TD id="btnSecond" onclick="revealOrNot()">Reveal</TD>
      </TR></TABLE>
      <H1>BlabZilla</H1>
    </HEADER>
    <DIV id="main">
       <DIV id="p1" class="body">
-         <IMG style="position:absolute;z-index:-1" alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
+         <TABLE class="imgbox" id='imgBoxOut'><TR><TD>
+            <IMG alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
+         </TR></TD></TABLE>
          <FORM name = "encodeForm" style="height:100%">
-         <!-- FORM name = "encodeForm" -->
             <INPUT type="hidden" name="TYP" value="1"/>
             <INPUT type="hidden" name="SIZ" value="M"/>
-            <TEXTAREA
-               id="textContents"
-               name = "KEY"
-               placeholder="Enter your blab&hellip;"
-            ></TEXTAREA>
-            <!-- DIV id="charCounter">140</DIV -->
+            <TEXTAREA name="KEY" placeholder="Enter your blab&hellip;"></TEXTAREA>
          </FORM>
       </DIV>
       <DIV class="body" id="p2">
+         <TABLE class="imgbox" id='imgBoxIn'><TR><TD>
+            <IMG alt="Bar Image" id="barImageIn" src="images/unknown.png"/>
+         </TR></TD></TABLE>
          <FORM name = "decodeForm">
-         <INPUT type="hidden" name="TYP" value="1"/>  <!-- 1,2,3 (DM,Qr,PDF) or 0 (all) -->
-         <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
+            <INPUT type="hidden" name="TYP" value="1"/>  <!-- 1,2,3 (DM,Qr,PDF) or 0 (all) -->
+            <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
          </FORM>
-         <SPAN id="imgContents"/></SPAN>
-         <IMG id="barImageIn" src = "images/unknown.png" style="height:60%"/>
+         <TEXTAREA id="imgContents"></TEXTAREA>
       </DIV>
       <DIV class="body" id="p3">
          <SPAN style="float:right;text-align:right;font-size:5rem">Sent!</SPAN>
@@ -47,52 +45,40 @@
    </DIV>
    <DIV id="sidebar" class="body">
       <UL class="menuList" onclick="menuListClicked(event);">
-      <LI role="listbox">Encode in...
-         <UL role="radiogroup">
-            <LI>DataMatrix</LI>
-            <LI aria-selected="true">QrCode</LI>
-            <LI>PDF 417</LI>
-            <LI>Aztec</LI>
-            <LI>EAN 13</LI>
-            <LI>EAN 8</LI>
-            <LI>Code 11</LI>
-            <LI>Code 25</LI>
-            <LI>Code 25 Interleaved</LI>
-            <LI>Code 39</LI>
-            <LI>Code 39 Extended</LI>
-            <LI>Code 93</LI>
-            <LI>Code 93 Extended</LI>
-            <LI>Code 128</LI>
-            <LI>UCC 128</LI>
-            <LI>UPC-A</LI>
-            <LI>UPC-E</LI>
-            <LI>Codabar</LI>
-            <LI>PostNet</LI>
-            <LI>Micro QrCode</LI>
-         </UL>
-      </LI>
-      <LI aria-selected="true">add more salt</LI>
-      <LI>add more pepper</LI>
-      <LI role="listbox">Menu Item #3
-         <UL>
-            <LI>submenu 3.1</LI>
-            <LI role="listbox">submenu 3.2
-               <UL>
-                 <LI>sub-submenu 3.2.1</LI>
-                 <LI>sub-submenu 3.2.2</LI>
-               </UL>
-            </LI>
-            <LI>submenu 3.3</LI>
-            <LI>submenu 3.4</LI>
-            <LI>submenu 3.5</LI>
-            <LI>submenu 3.6</LI>
-         </UL>
-      </LI>
-      <LI>Menu Item #4</LI>
-      <LI aria-selected="true">Menu Item #5</LI>
-      <LI>Menu Item #6</LI>
-      <LI>Menu Item #7</LI>
-      <LI>Menu Item #8</LI>
+        <LI role="listbox">Encode in &hellip;
+           <UL role="radiogroup">
+              <LI>DataMatrix</LI>
+              <LI aria-selected="true">QrCode</LI>
+              <LI>PDF 417</LI>
+              <LI>Aztec</LI>
+              <LI>EAN 13</LI>
+              <LI>EAN 8</LI>
+              <LI>Code 11</LI>
+              <LI>Code 25</LI>
+              <LI>Code 25 Interleaved</LI>
+              <LI>Code 39</LI>
+              <LI>Code 39 Extended</LI>
+              <LI>Code 93</LI>
+              <LI>Code 93 Extended</LI>
+              <LI>Code 128</LI>
+              <LI>UCC 128</LI>
+              <LI>UPC-A</LI>
+              <LI>UPC-E</LI>
+              <LI>Codabar</LI>
+              <LI>PostNet</LI>
+              <LI>Micro QrCode</LI>
+           </UL>
+        </LI>
+        <LI role="listbox">Decode from &hellip;
+           <UL>
+              <LI aria-selected="true">DataMatrix</LI>
+              <LI aria-selected="true">QrCode</LI>
+              <LI>PDF 417</LI>
+              <LI>EAN 13</LI>
+              <LI>EAN 8</LI>
+              <LI>Code 39</LI>
+           </UL>
+        </LI>
       </UL>
    </DIV>
    <!--
@@ -107,15 +93,11 @@
    -->
    <FOOTER>
       <TABLE><TR role="radiogroup" onclick="menuListClicked(event);">
-      <TD aria-owns="p1" id="fdflt">Write</TD>
-      <TD aria-owns="p2" onclick="pickAndDecodeImage();">Read</TD>
+      <TD aria-owns="p1" id="fdflt">Encode</TD>
+      <TD aria-owns="p2" onclick="pickAndDecodeImage();">Decode</TD>
       <TD aria-owns="p3"><IMG src="style/images/send.png"></TD>
       </TR></TABLE>
    </FOOTER>
-   <SCRIPT>
-   setInterval("encodeIfNeeded()", 60);
-   setInstallButton("btnInstall");
-   document.getElementById('fdflt').click();
-   </SCRIPT>
+   <SCRIPT>init();</SCRIPT>
 </BODY>
 </HTML>

@@ -1,7 +1,28 @@
+var isPortraitMode = true;  // vs landscape
 var actualBarcodeData = null;
 var actualBarcodeType = null;
 var actualBarcodeOptions = "";
 var actualBarcodeSize = "";
+
+function init() {
+   setInterval("encodeIfNeeded()", 60);
+   setInstallButton("btnInstall");
+   document.getElementById('fdflt').click();
+   fitImages();
+   window.addEventListener("resize", fitImages, false);
+}
+
+function fitImages() {
+   // workaround, until "object-fit:contain;" gets implemented
+   var elt = document.getElementById('main');
+   var style = "width:100%;height:auto;";
+   if ((elt.offsetHeight > elt.offsetWidth) != isPortraitMode) {
+      var style = isPortraitMode? "height:100%;width:auto;":"height:auto;width:100%;"
+      document.getElementById('barImageIn').setAttribute('style', style);
+      document.getElementById('barImageOut').setAttribute('style', style);
+      isPortraitMode = !isPortraitMode;
+   }
+}
 
 function encodeIfNeeded() {
    var data = document.encodeForm.KEY.value;
@@ -130,5 +151,16 @@ function onImageDecoded() {
 //       }
       }
       break;
+   }
+}
+
+function revealOrNot() {
+   var style = document.getElementById('imgBoxOut').style;
+   if (style.zIndex == -1) {   // Edit -> Reveal
+      document.getElementById("btnSecond").innerHTML = "Edit";
+      style.zIndex = 2;
+   }else {                     // Reveal -> Edit
+      document.getElementById("btnSecond").innerHTML = "Reveal";
+      style.zIndex = -1;
    }
 }
