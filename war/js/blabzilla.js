@@ -1,4 +1,5 @@
-var isPortraitMode = true;  // vs landscape
+var encodeInfos = "";
+var decodeInfos = "";
 var actualBarcodeData = null;
 var actualBarcodeType = null;
 var actualBarcodeOptions = "";
@@ -8,20 +9,45 @@ function init() {
    setInterval("encodeIfNeeded()", 60);
    setInstallButton("btnInstall");
    document.getElementById('fdflt').click();
-   fitImages();
+   fitImage(document.getElementById('barImageOut'));
    window.addEventListener("resize", fitImages, false);
+   document.getElementById("p1").addEventListener(
+      'transitionend',
+      function(event) {
+         p1Expanded(event.target.attributes["aria-expanded"].value == "true");
+//       alert(
+//          "Finished transition! " + event.target.id +
+//          " " + event.target.attributes["aria-expanded"].value +
+//          " " + document.getElementById("p1").style.zIndex +
+//          " " + event.propertyName
+//       );
+      },
+      false
+   );
 }
 
-function fitImages() {
-   // workaround, until "object-fit:contain;" gets implemented
-   var elt = document.getElementById('main');
-   var style = "width:100%;height:auto;";
-   if ((elt.offsetHeight > elt.offsetWidth) != isPortraitMode) {
-      var style = isPortraitMode? "height:100%;width:auto;":"height:auto;width:100%;"
-      document.getElementById('barImageIn').setAttribute('style', style);
-      document.getElementById('barImageOut').setAttribute('style', style);
-      isPortraitMode = !isPortraitMode;
+function p1Expanded(isExpanded) {
+   var style = document.getElementById("btnSecond").style;
+   if (isExpanded) {
+      style.display ="";
+   }else {
+      style.display = "none";
    }
+}
+
+function fitImages(img) {
+   // workaround, until "object-fit:contain;" gets implemented
+   fitImage(document.getElementById('barImageIn'));
+   fitImage(document.getElementById('barImageOut'));
+}
+function fitImage(img) {
+   var elt = document.getElementById("p1");
+   if ((elt.offsetHeight * img.offsetWidth)<(img.offsetHeight * elt.offsetWidth)) {
+      s = "height:100%";
+   }else {
+      s = "width:100%";
+   }
+   img.setAttribute("style", s);
 }
 
 function encodeIfNeeded() {
@@ -61,7 +87,7 @@ function encodeIfNeeded() {
          //   document.getElementById('headers').innerHTML = this.getAllResponseHeaders();
          // }
          if (this.readyState == 4) {    // DONE is 4
-            // document.getElementById('barInfos').innerHTML = this.getResponseHeader("Jaxo-Infos");
+            encodeInfos = this.getResponseHeader("Jaxo-Infos");
             if (this.status != 200) {
                document.getElementById('barImageOut').src = "images/unknown.png";
             }else {
@@ -94,7 +120,13 @@ function encodeIfNeeded() {
 
 function pickAndDecodeImage()
 {
-   var a = new MozActivity({ name: "pick", data: {type: "image/jpeg"}});
+   try {
+      var a = new MozActivity({ name: "pick", data: {type: "image/jpeg"}});
+   }catch (err) {
+      decodeInfos = "Pick Intent Failure";
+      document.getElementById('imgContents').innerHTML = "** Cannot Pick **";
+      return;
+   }
    a.onsuccess = function(e) {
      var request = new XMLHttpRequest();
      request.open(
@@ -112,22 +144,22 @@ function pickAndDecodeImage()
      img.src = url;
      img.onload = function() { URL.revokeObjectURL(url); };
    };
-   a.onerror = function() { alert('Failure picking photo'); };
+   a.onerror = function() { alert('Failure at picking an image'); };
 }
 
 function onImageDecoded() {
    switch (this.readyState) {
-// case 1: // OPENED
+   case 1: // OPENED
 //    document.getElementById("loading").style.visibility='visible';
 //    document.getElementById('imgSource').innerHTML = "";
-//    document.getElementById('imgInfos').innerHTML = "";
+      decodeInfos = "";
 //    document.getElementById('imgContents').innerHTML = "";
 //    document.getElementById('imgBarType').innerHTML = "";
 //    break;
    case 4: // DONE
 //    document.getElementById("loading").style.visibility='hidden';
 //    document.getElementById('imgSource').innerHTML = this.source;
-//    document.getElementById('imgInfos').innerHTML = this.getResponseHeader("Jaxo-Infos");
+      decodeInfos = this.getResponseHeader("Jaxo-Infos");
       if (this.status == 200) {
          document.getElementById('imgContents').innerHTML = this.responseText;
 //       document.getElementById('imgBarType').innerHTML = this.getResponseHeader("Jaxo-Symbo");
@@ -155,12 +187,21 @@ function onImageDecoded() {
 }
 
 function revealOrNot() {
-   var style = document.getElementById('imgBoxOut').style;
-   if (style.zIndex == -1) {   // Edit -> Reveal
+   var style = document.getElementById('boxImageOut').style;
+   if (style.zIndex == 2) {    // Reveal -> Edit
+      document.getElementById("btnSecond").innerHTML = "Reveal";
+      style.zIndex = 0;
+   }else {                     // Edit -> Reveal
       document.getElementById("btnSecond").innerHTML = "Edit";
       style.zIndex = 2;
-   }else {                     // Reveal -> Edit
-      document.getElementById("btnSecond").innerHTML = "Reveal";
-      style.zIndex = -1;
    }
 }
+
+function showInfos() {
+   if (document.getElementById('p1').getAttribute("aria-expanded") == "true") {
+      alert(encodeInfos);
+   }else {
+      alert(decodeInfos);
+   }
+}
+

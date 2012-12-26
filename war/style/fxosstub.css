@@ -110,7 +110,7 @@ header td:active {
   margin-left: 1rem;
   margin-right: 1rem;
   opacity: 0;
-  transition: linear 0.2s;
+  transition: opacity linear 0.2s;
   z-index: -1;
 }
 
@@ -381,16 +381,22 @@ li[aria-selected=true], li[role=listbox] {
   padding: 0.5rem 1rem;
   /* border: 1px solid #D1D1D1; */
   border: none;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   font-family: "Open Sans",Sans-serif;
   font-size: 1.6rem;
 }
 
+.body textarea[disabled] {
+   color: #016696;
+}
+
 .imgbox {
   background-color:#fff;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: block;
   position:absolute;
-  z-index:-1;
   overflow: hidden;
   border: 1px solid #D1D1D1;
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -398,19 +404,15 @@ li[aria-selected=true], li[role=listbox] {
   height: 100%;
   width: 100%;
 }
-.imgbox tr td {
-   position: absolute;
-   top: 0;
-   bottom: 0;
-   left: 0;
-   right: 0;
-}
-.imgbox tr td img {
-   width: 100%;
-   /* height:100%;                 */
-   /* object-fit:contain;          */
-   /* -moz-object-fit:contain;     */
-   /* -ms-object-fit:contain;      */
-   /* -o-object-fit:contain;       */
-   /* -webkit-object-fit:contain;  */
-}
+
+/* Alas, FF 17 does not implement it yet...   */
+/* So, I did a JS work-around: fitImages()    */
+/* .imgbox tr td img {                        */
+/*    width: 100%;                            */
+/*    height:100%;                            */
+/*    object-fit:contain;                     */
+/*    -moz-object-fit:contain;                */
+/*    -ms-object-fit:contain;                 */
+/*    -o-object-fit:contain;                  */
+/*    -webkit-object-fit:contain;             */
+/* }                                          */

@@ -9,46 +9,47 @@
 <TITLE>BlabZilla</title>
 </HEAD>
 
-<BODY>
+<BODY onload="init();">
    <HEADER>
      <DIV id="btnMain" onclick="toggleSidebarView();"><IMG id="btnMainImage" style="background-image:url(style/images/menu.png)"/></DIV>
      <TABLE><TR>
         <TD id="btnInstall">Install</TD>
-        <TD id="btnSecond" onclick="revealOrNot()">Reveal</TD>
+        <TD id="btnThird" onclick="showInfos();"><IMG src="style/images/info.png"></TD>
+        <TD id="btnSecond" onclick="revealOrNot();">Reveal</TD>
      </TR></TABLE>
      <H1>BlabZilla</H1>
    </HEADER>
    <DIV id="main">
       <DIV id="p1" class="body">
-         <TABLE class="imgbox" id='imgBoxOut'><TR><TD>
+         <DIV class="imgbox" id="boxImageOut">
             <IMG alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
-         </TR></TD></TABLE>
-         <FORM name = "encodeForm" style="height:100%">
+         </DIV>
+         <FORM name = "encodeForm" style="height:100%;z-index:1;">
             <INPUT type="hidden" name="TYP" value="1"/>
             <INPUT type="hidden" name="SIZ" value="M"/>
             <TEXTAREA name="KEY" placeholder="Enter your blab&hellip;"></TEXTAREA>
          </FORM>
       </DIV>
       <DIV class="body" id="p2">
-         <TABLE class="imgbox" id='imgBoxIn'><TR><TD>
-            <IMG alt="Bar Image" id="barImageIn" src="images/unknown.png"/>
-         </TR></TD></TABLE>
+         <DIV class="imgbox" style="z-index:-1">
+            <IMG
+               alt="Bar Image" id="barImageIn" src="images/unknown.png"
+               onload="fitImage(this);"
+            />
+         </DIV>
          <FORM name = "decodeForm">
             <INPUT type="hidden" name="TYP" value="1"/>  <!-- 1,2,3 (DM,Qr,PDF) or 0 (all) -->
             <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
          </FORM>
-         <TEXTAREA id="imgContents"></TEXTAREA>
-      </DIV>
-      <DIV class="body" id="p3">
-         <SPAN style="float:right;text-align:right;font-size:5rem">Sent!</SPAN>
+         <TEXTAREA id="imgContents" disabled="disabled"></TEXTAREA>
       </DIV>
    </DIV>
    <DIV id="sidebar" class="body">
       <UL class="menuList" onclick="menuListClicked(event);">
         <LI role="listbox">Encode in &hellip;
            <UL role="radiogroup">
-              <LI>DataMatrix</LI>
-              <LI aria-selected="true">QrCode</LI>
+              <LI aria-selected="true">DataMatrix</LI>
+              <LI>QrCode</LI>
               <LI>PDF 417</LI>
               <LI>Aztec</LI>
               <LI>EAN 13</LI>
@@ -95,9 +96,7 @@
       <TABLE><TR role="radiogroup" onclick="menuListClicked(event);">
       <TD aria-owns="p1" id="fdflt">Encode</TD>
       <TD aria-owns="p2" onclick="pickAndDecodeImage();">Decode</TD>
-      <TD aria-owns="p3"><IMG src="style/images/send.png"></TD>
       </TR></TABLE>
    </FOOTER>
-   <SCRIPT>init();</SCRIPT>
 </BODY>
 </HTML>
