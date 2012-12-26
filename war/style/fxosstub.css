@@ -1,10 +1,11 @@
 html, body {
   font-size: 10px;
   width: 100%;
+  /* height: 100%;  bouh */
   padding: 0;
   margin: 0;
   font-family: "Open Sans", sans-serif;
-  background: #54646e;
+  background: #8491a2; /* #54646e; */
   overflow: hidden;
 }
 
@@ -158,23 +159,23 @@ header td:active {
 
 #progresspane {
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 1px;
+  height: 1px;
   left: 50%;
   top: 50%;
   z-index: 5;
-  visibility: visible;
+  visibility: hidden;
 }
 
-#progresspane #progress {
+#progress {
   background: url("images/progress.png") no-repeat scroll left top transparent;
-  height: 40px;
-  width: 40px;
-  /* animation: 1s steps(23, end) 0s normal none infinite moveSpinner; */
+  height: 66px;
+  width: 66px;
+  /* animation: 1s steps(12, end) 0s normal none infinite moveSpinner; */
   animation-name: moveSpinner;
   animation-duration: 1s;
   animation-iteration-count: infinite;
-  animation-timing-function: steps(23, end);
+  animation-timing-function: steps(12, end);
   animation-delay: 0s;
   -webkit-animation-name: moveSpinner;
   -webkit-animation-duration: 1s;
@@ -182,18 +183,18 @@ header td:active {
   -webkit-animation-timing-function: steps(23, end);
   -webkit-animation-delay: 0s;
   position: relative;
-  left: -20px;
-  top: -20px;
+  left: -33px;
+  top: -33px;
   border: medium none;
 }
 
 @keyframes moveSpinner {
   from { background-position: 0 top; }
-  to { background-position: -920px top; }
+  to { background-position: -792px top; }
 }
 @-webkit-keyframes moveSpinner { /* Safari and Chrome */
   from { background-position: 0 top; }
-  to { background-position: -920px top; }
+  to { background-position: -792px top; }
 }
 /* #progresspane progress::-moz-progress-bar {      */  /* firefox */
 /*   background: none;                              */

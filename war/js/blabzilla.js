@@ -117,47 +117,95 @@ function encodeIfNeeded() {
 */
    }
 }
+/*
+function uploadFiles(url, files) {
+  var formData = new FormData();
+  for (var i = 0, file; file = files[i]; ++i) {
+    formData.append(file.name, file);
+  }
+  var request = new XMLHttpRequest();
+  request.open('POST', url, true);
+  request.onload = function(e) { ... };
+  request.send(formData);  // multipart/form-data
+}
+
+document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+  uploadFiles('/server', this.files);
+}, false);
+*/
+
+function uploadFile() {
+   var formElt = document.getElementById('upldForm');
+   var elt = formElt.firstChild;
+   elt.onchange= function() {
+      if (typeof window.FileReader !== 'function') {
+         alert("The file API isn't supported on this browser yet.");
+      }else if (!this.files) {
+         alert(
+           "Your browser doesn't seem to support" +
+           " the `files` property of file inputs."
+         );
+      }else if (!this.files[0]) {
+         alert("No file selected");
+      }else {
+         var file = this.files[0];
+         var formData = new FormData(formElt);
+         formData.append("MAX_FILE_SIZE", "1000000");
+         formData.append("TYP", collectDecodeTypes());
+         formData.append("PPC", getPostProcess());
+         var request = new XMLHttpRequest();
+         request.onreadystatechange = onImageDecoded;
+         request.open("POST", "decodeFile", true);
+         request.send(formData);
+         var reader = new FileReader();
+         reader.onload = function (event) {
+            document.getElementById("barImageIn").src = event.target.result;
+         };
+         reader.readAsDataURL(file);
+      }
+   }
+   elt.click();
+}
 
 function pickAndDecodeImage()
 {
    try {
       var a = new MozActivity({ name: "pick", data: {type: "image/jpeg"}});
+      a.onsuccess = function(e) {
+        var request = new XMLHttpRequest();
+        request.open(
+           "POST",
+           "decodeImage" +
+           "?TYP=" + collectDecodeTypes() +
+           "&PPC=" + getPostProcess(),
+           true
+        );
+        request.setRequestHeader("Content-Type", 'image/jpeg');
+        request.onreadystatechange = onImageDecoded;
+        request.send(a.result.blob);
+        var url = URL.createObjectURL(a.result.blob);
+        var img = document.getElementById('barImageIn');
+        img.src = url;
+        img.onload = function() { URL.revokeObjectURL(url); };
+      };
+      a.onerror = function() { alert('Failure at picking an image'); };
    }catch (err) {
-      decodeInfos = "Pick Intent Failure";
-      document.getElementById('imgContents').innerHTML = "** Cannot Pick **";
+      uploadFile();
       return;
    }
-   a.onsuccess = function(e) {
-     var request = new XMLHttpRequest();
-     request.open(
-        "POST",
-        "decodeImage" +
-        "?TYP=" + document.decodeForm.TYP.value +
-        "&PPC=" + document.decodeForm.PPC.value,
-        true
-     );
-     request.setRequestHeader("Content-Type", 'image/jpeg');
-     request.onreadystatechange = onImageDecoded;
-     request.send(a.result.blob);
-     var url = URL.createObjectURL(a.result.blob);
-     var img = document.getElementById('barImageIn');
-     img.src = url;
-     img.onload = function() { URL.revokeObjectURL(url); };
-   };
-   a.onerror = function() { alert('Failure at picking an image'); };
 }
 
 function onImageDecoded() {
    switch (this.readyState) {
    case 1: // OPENED
-//    document.getElementById("loading").style.visibility='visible';
+      document.getElementById("progresspane").style.visibility='visible';
 //    document.getElementById('imgSource').innerHTML = "";
       decodeInfos = "";
-//    document.getElementById('imgContents').innerHTML = "";
+      document.getElementById('imgContents').innerHTML = "";
 //    document.getElementById('imgBarType').innerHTML = "";
-//    break;
+      break;
    case 4: // DONE
-//    document.getElementById("loading").style.visibility='hidden';
+      document.getElementById("progresspane").style.visibility='hidden';
 //    document.getElementById('imgSource').innerHTML = this.source;
       decodeInfos = this.getResponseHeader("Jaxo-Infos");
       if (this.status == 200) {
@@ -181,9 +229,33 @@ function onImageDecoded() {
 //          );
 //          document.getElementById('pinned').style.visibility='visible';
 //       }
+      }else {
+         alert(
+            "Error " + this.status + " " + this.statusText +
+            "\n" + decodeInfos
+         );
       }
       break;
    }
+}
+
+function collectDecodeTypes() {
+   var children = document.getElementById("decodeTypeList").children;
+   var types = "";
+   for (var i=0; i < children.length; ++i) {
+      var child = children[i];
+      if (child.getAttribute("aria-selected") == "true") {
+         if (types.length > 0) types += ",";
+         types += child.getAttribute("aria-label");
+      }
+   }
+   if (types.lenth == 0) types = "0";
+   return types;
+}
+
+function getPostProcess() {
+   // <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
+   return "P0";
 }
 
 function revealOrNot() {

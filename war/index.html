@@ -37,17 +37,13 @@
                onload="fitImage(this);"
             />
          </DIV>
-         <FORM name = "decodeForm">
-            <INPUT type="hidden" name="TYP" value="1"/>  <!-- 1,2,3 (DM,Qr,PDF) or 0 (all) -->
-            <INPUT type="hidden" name="PPC" value="P0"/> <!-- Postprocess: none -->
-         </FORM>
          <TEXTAREA id="imgContents" disabled="disabled"></TEXTAREA>
       </DIV>
    </DIV>
    <DIV id="sidebar" class="body">
       <UL class="menuList" onclick="menuListClicked(event);">
         <LI role="listbox">Encode in &hellip;
-           <UL role="radiogroup">
+           <UL role="radiogroup" id="encodeType">
               <LI aria-selected="true">DataMatrix</LI>
               <LI>QrCode</LI>
               <LI>PDF 417</LI>
@@ -71,13 +67,13 @@
            </UL>
         </LI>
         <LI role="listbox">Decode from &hellip;
-           <UL>
-              <LI aria-selected="true">DataMatrix</LI>
-              <LI aria-selected="true">QrCode</LI>
-              <LI>PDF 417</LI>
-              <LI>EAN 13</LI>
-              <LI>EAN 8</LI>
-              <LI>Code 39</LI>
+           <UL id="decodeTypeList">
+              <LI aria-label="1" aria-selected="true">DataMatrix</LI>
+              <LI aria-label="2" aria-selected="true">QrCode</LI>
+              <LI aria-label="3">PDF 417</LI>
+              <LI aria-label="5">EAN 13</LI>
+              <LI aria-label="6">EAN 8</LI>
+              <LI aria-label="10">Code 39</LI>
            </UL>
         </LI>
       </UL>
@@ -87,11 +83,17 @@
      <DIV id="title">Glass Pane Title</DIV>
      <DIV id="msg">Message in the glass pane (for notifications, etc)</DIV>
    </DIV>
-   <DIV id="progresspane">
-     <DIV id=progress></DIV>
-     [!-- <PROGRESS></PROGRESS> --]
-   </DIV>
    -->
+   <DIV id="progresspane"><DIV id=progress></DIV></DIV>
+
+   <!-- Fallback if "no "Pick" MozActivity -->
+   <FORM
+      id='upldForm' action='#' enctype="multipart/form-data"
+      style="position:absolute;top:-20px"
+   ><INPUT style='opacity:0' type='file' name='upldFile'/>
+   </FORM>
+   <!-- -->
+
    <FOOTER>
       <TABLE><TR role="radiogroup" onclick="menuListClicked(event);">
       <TD aria-owns="p1" id="fdflt">Encode</TD>
