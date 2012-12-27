@@ -38,8 +38,10 @@
    </DIV>
    <DIV id="sidebar" class="body">
       <UL class="menuList" onclick="menuListClicked(event);">
-        <LI role="listbox">Encode in &hellip;
-           <UL role="radiogroup" id="encodeTypeList">
+        <LI role="listbox">
+           Encode in: <i id="encName">Datamatrix</i>
+           <UL role="radiogroup" id="encodeTypeList"
+              onclick="setEncName(this, event);">
               <LI aria-label="1" aria-selected="true">DataMatrix</LI>
               <LI aria-label="2">QrCode</LI>
               <LI aria-label="3">PDF 417</LI>
@@ -91,10 +93,12 @@
    <!-- -->
 
    <FOOTER>
-      <TABLE><TR role="radiogroup" onclick="menuListClicked(event);">
-      <TD aria-owns="p1" id="fdflt">Encode</TD>
-      <TD aria-owns="p2" onclick="pickAndDecodeImage();">Decode</TD>
-      </TR></TABLE>
+      <TABLE onclick="expandSidebarView(-1);">
+        <TR role="radiogroup" onclick="menuListClicked(event);">
+          <TD aria-owns="p1" id="fdflt">Encode</TD>
+          <TD aria-owns="p2" onclick="pickAndDecodeImage();">Decode</TD>
+        </TR>
+      </TABLE>
    </FOOTER>
 </BODY>
 </HTML>

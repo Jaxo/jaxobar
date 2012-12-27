@@ -232,6 +232,11 @@ function getEncodeType() {
    return "1";
 }
 
+function setEncName(elt, event) {
+   document.getElementById('encName').innerHTML = event.target.innerHTML;
+   elt.parentNode.click();
+}
+
 function collectDecodeTypes() {
    var children = document.getElementById("decodeTypeList").children;
    var types = "";
