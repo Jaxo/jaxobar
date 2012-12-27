@@ -51,25 +51,23 @@ function fitImage(img) {
 }
 
 function encodeIfNeeded() {
-   var data = document.encodeForm.KEY.value;
-   var selectSize = document.encodeForm.SIZ;
-   var size = selectSize.value;
-   var selectType = document.encodeForm.TYP;
-   var type = selectType.value;
-   var mods = eval("document.encodeForm.MOD_" + type);
+   var data = document.getElementById("barDataIn").value;
+   var size = "M";
+   var type = getEncodeType();
    var options = "";
-   if (typeof mods !== "undefined") {
-      var mod = "";
-      if (mods.nodeName == "SELECT") {
-         mod +=  mods.options[mods.selectedIndex].value + ";";
-      }else {
-         for (var i=0; i < mods.length; ++i) {
-            v = mods[i];
-            mod +=  v.options[v.selectedIndex].value + ";";
-         }
-      }
-      options = "&MOD=" + escape(mod);
-   }
+// var mods = eval("document.encodeForm.MOD_" + type);
+// if (typeof mods !== "undefined") {
+//    var mod = "";
+//    if (mods.nodeName == "SELECT") {
+//       mod +=  mods.options[mods.selectedIndex].value + ";";
+//    }else {
+//       for (var i=0; i < mods.length; ++i) {
+//          v = mods[i];
+//          mod +=  v.options[v.selectedIndex].value + ";";
+//       }
+//    }
+//    options = "&MOD=" + escape(mod);
+// }
    if (
       (data != actualBarcodeData) ||
       (type != actualBarcodeType) ||
@@ -117,22 +115,6 @@ function encodeIfNeeded() {
 */
    }
 }
-/*
-function uploadFiles(url, files) {
-  var formData = new FormData();
-  for (var i = 0, file; file = files[i]; ++i) {
-    formData.append(file.name, file);
-  }
-  var request = new XMLHttpRequest();
-  request.open('POST', url, true);
-  request.onload = function(e) { ... };
-  request.send(formData);  // multipart/form-data
-}
-
-document.querySelector('input[type="file"]').addEventListener('change', function(e) {
-  uploadFiles('/server', this.files);
-}, false);
-*/
 
 function uploadFile() {
    var formElt = document.getElementById('upldForm');
@@ -201,7 +183,7 @@ function onImageDecoded() {
       document.getElementById("progresspane").style.visibility='visible';
 //    document.getElementById('imgSource').innerHTML = "";
       decodeInfos = "";
-      document.getElementById('imgContents').innerHTML = "";
+      document.getElementById('barDataOut').innerHTML = "";
 //    document.getElementById('imgBarType').innerHTML = "";
       break;
    case 4: // DONE
@@ -209,7 +191,7 @@ function onImageDecoded() {
 //    document.getElementById('imgSource').innerHTML = this.source;
       decodeInfos = this.getResponseHeader("Jaxo-Infos");
       if (this.status == 200) {
-         document.getElementById('imgContents').innerHTML = this.responseText;
+         document.getElementById('barDataOut').innerHTML = this.responseText;
 //       document.getElementById('imgBarType').innerHTML = this.getResponseHeader("Jaxo-Symbo");
 //       // show PostProcess result, if any
 //       var upcImg = this.getResponseHeader("Jaxo-UpcImg");
@@ -237,6 +219,17 @@ function onImageDecoded() {
       }
       break;
    }
+}
+
+function getEncodeType() {
+   var children = document.getElementById("encodeTypeList").children;
+   for (var i=0; i < children.length; ++i) {
+      var child = children[i];
+      if (child.getAttribute("aria-selected") == "true") {
+         return child.getAttribute("aria-label");
+      }
+   }
+   return "1";
 }
 
 function collectDecodeTypes() {

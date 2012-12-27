@@ -24,11 +24,7 @@
          <DIV class="imgbox" id="boxImageOut">
             <IMG alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
          </DIV>
-         <FORM name = "encodeForm" style="height:100%;z-index:1;">
-            <INPUT type="hidden" name="TYP" value="1"/>
-            <INPUT type="hidden" name="SIZ" value="M"/>
-            <TEXTAREA name="KEY" placeholder="Enter your blab&hellip;"></TEXTAREA>
-         </FORM>
+         <TEXTAREA id="barDataIn" placeholder="Enter your blab&hellip;"></TEXTAREA>
       </DIV>
       <DIV class="body" id="p2">
          <DIV class="imgbox" style="z-index:-1">
@@ -37,33 +33,33 @@
                onload="fitImage(this);"
             />
          </DIV>
-         <TEXTAREA id="imgContents" disabled="disabled"></TEXTAREA>
+         <TEXTAREA id="barDataOut" disabled="disabled"></TEXTAREA>
       </DIV>
    </DIV>
    <DIV id="sidebar" class="body">
       <UL class="menuList" onclick="menuListClicked(event);">
         <LI role="listbox">Encode in &hellip;
-           <UL role="radiogroup" id="encodeType">
-              <LI aria-selected="true">DataMatrix</LI>
-              <LI>QrCode</LI>
-              <LI>PDF 417</LI>
-              <LI>Aztec</LI>
-              <LI>EAN 13</LI>
-              <LI>EAN 8</LI>
-              <LI>Code 11</LI>
-              <LI>Code 25</LI>
-              <LI>Code 25 Interleaved</LI>
-              <LI>Code 39</LI>
-              <LI>Code 39 Extended</LI>
-              <LI>Code 93</LI>
-              <LI>Code 93 Extended</LI>
-              <LI>Code 128</LI>
-              <LI>UCC 128</LI>
-              <LI>UPC-A</LI>
-              <LI>UPC-E</LI>
-              <LI>Codabar</LI>
-              <LI>PostNet</LI>
-              <LI>Micro QrCode</LI>
+           <UL role="radiogroup" id="encodeTypeList">
+              <LI aria-label="1" aria-selected="true">DataMatrix</LI>
+              <LI aria-label="2">QrCode</LI>
+              <LI aria-label="3">PDF 417</LI>
+              <LI aria-label="4">Aztec</LI>
+              <LI aria-label="5">EAN 13</LI>
+              <LI aria-label="6">EAN 8</LI>
+              <LI aria-label="7">Code 11</LI>
+              <LI aria-label="8">Code 25</LI>
+              <LI aria-label="9">Code 25 Interleaved</LI>
+              <LI aria-label="10">Code 39</LI>
+              <LI aria-label="11">Code 39 Extended</LI>
+              <LI aria-label="12">Code 93</LI>
+              <LI aria-label="13">Code 93 Extended</LI>
+              <LI aria-label="14">Code 128</LI>
+              <LI aria-label="15">UCC 128</LI>
+              <LI aria-label="16">UPC-A</LI>
+              <LI aria-label="17">UPC-E</LI>
+              <LI aria-label="18">Codabar</LI>
+              <LI aria-label="19">PostNet</LI>
+              <LI aria-label="20">Micro QrCode</LI>
            </UL>
         </LI>
         <LI role="listbox">Decode from &hellip;

@@ -5,7 +5,8 @@ html, body {
   padding: 0;
   margin: 0;
   font-family: "Open Sans", sans-serif;
-  background: #8491a2; /* #54646e; */
+  background-image: url(../images/bgpat.png); /* #8491a2; (* #54646e; */
+  /* background: #8491a2; (* #54646e; */
   overflow: hidden;
 }
 
