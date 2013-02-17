@@ -140,8 +140,8 @@ class Utils
       default:  size = 4; break;
       }
       Bar bar = new Bar(type, data, attributes);
-      response.setImage(bar.getImageBytes(size, isBase64), isBase64);
       response.setInfos(bar.infos());
+      response.setImage(bar.getImageBytes(size, isBase64), isBase64);
    }
 
    /*----------------------------------------------------------------getValue-+

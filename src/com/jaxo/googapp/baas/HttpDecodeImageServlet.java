@@ -51,17 +51,8 @@ public class HttpDecodeImageServlet extends HttpServlet
 //*/  Logger logger = Logger.getLogger(
 //*/     "com.jaxo.googapp.baas.HttpDecodeImageServlet"
 //*/  );
-      // Cross Origin Resource Sharing
-      if (request.getHeader("origin") != null) {
-         resp.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
-//    }else {
-//       throw new Exception("Invalid CORS header (no origin)");
-      }
-      // need cookies for session id's:
-      resp.setHeader("Access-Control-Allow-Credentials", "true");
-      resp.setHeader("Access-Control-Expose-Headers", "Jaxo-Infos");
-
       HttpResponseHolder response = new HttpResponseHolder(resp);
+      response.enableCors(request.getHeader("origin"));
       try {
          String types = "0";
          String postProcesses = "P0";

@@ -28,7 +28,17 @@ class HttpResponseHolder implements ResponseHolder
       m_response = response;
       response.setContentType("text/plain");
    }
-
+   // Cross Origin Resource Sharing
+   public void enableCors(String origin) {
+      if (origin == null) {
+         origin = "*";
+         // throw new Exception("Invalid CORS header (no origin)");
+      }
+      m_response.setHeader("Access-Control-Allow-Origin", origin);
+      // need cookies for session id's:
+      m_response.setHeader("Access-Control-Allow-Credentials", "true");
+      // m_response.setHeader("Access-Control-Expose-Headers", "Jaxo-Infos");
+   }
    public void setInfos(String infos) {
       m_response.setHeader("Jaxo-Infos", infos);
    }

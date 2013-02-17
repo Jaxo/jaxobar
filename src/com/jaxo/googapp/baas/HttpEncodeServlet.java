@@ -56,19 +56,10 @@ public class HttpEncodeServlet extends HttpServlet
       //*/   "com.jaxo.googapp.baas.HttpEncodeServlet"
       //*/ );
       Map table = request.getParameterMap();
-      ResponseHolder response = new HttpResponseHolder(resp);
+      HttpResponseHolder response = new HttpResponseHolder(resp);
       byte[] data = Utils.getBytes(table, "KEY");
 
-      // Cross Origin Resource Sharing
-      if (request.getHeader("origin") != null) {
-         resp.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
-//    }else {
-//       throw new Exception("Invalid CORS header (no origin)");
-      }
-      // need cookies for session id's:
-      resp.setHeader("Access-Control-Allow-Credentials", "true");
-      // resp.setHeader("Access-Control-Expose-Headers", "Jaxo-Infos");
-
+      response.enableCors(request.getHeader("origin"));
       if (data.length == 0) {
          response.setInfos("[no data to encode]");
          response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
