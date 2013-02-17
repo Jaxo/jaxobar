@@ -1,8 +1,7 @@
 {
   "name": "Jaxobar",
-  "version": "9.0",
+  "version": "9.0h",
   "description": "Encode and decode barcodes",
-  "launch_path": "/index.html",
   "developer": {
     "name": "Jaxo, Inc.",
     "url": "http://jaxo.com"
@@ -15,11 +14,8 @@
     "128": "/applogos/logo128.png"
   },
   "installs_allowed_from": ["*"],
-
-  "type": "privileged",
   "permissions": {
     "systemXHR": { "description": "Access Jaxo's app server" },
     "storage": { "description": "Use local storage for preferences" }
   }
-
 }

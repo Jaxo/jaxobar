@@ -1,3 +1,9 @@
+var isPackaged = true;
+var server_url = "http://blabzilla.appspot.com";
+// -- only for our internal testing --
+// var server_url = "http://5.blabzilla.appspot.com";
+// var server_url = "http://localhost:8888";
+
 var encodeInfos = "";
 var decodeInfos = "";
 var actualBarcodeData = null;
@@ -5,12 +11,35 @@ var actualBarcodeType = null;
 var actualBarcodeOptions = "";
 var actualBarcodeSize = "";
 
-function init() {
+window.onload = function() {
+   var loc = window.location;
+   if (loc.protocol !== "app:") {
+      isPackaged = false;
+      var host = loc.host;
+      if (host.indexOf("appspot") >= 0) {     // appspot default, or versioned
+         server_url = "http://" + host;
+      }else {                                 // "http://localhost:8888", or
+         server_url = "http://localhost:8888" // "http://ottokar/jaxogram/index.html"
+      }
+   }
+   //OT-LH*/ isPackaged = true;  // testing on ottokar/localhost
+   if (server_url !== "http://blabzilla.appspot.com") {
+      alert("Warning: test version\nServer at\n" + server_url);
+   }
+   createDispatcher();
    setInterval("encodeIfNeeded()", 60);
    setInstallButton("btnInstall");
-   document.getElementById('fdflt').click();
+   document.getElementById('footEncode').click();
    fitImage(document.getElementById('barImageOut'));
    window.addEventListener("resize", fitImages, false);
+   dispatcher.on(
+      "install_changed",
+      function action(state, version) {
+         if ((state === "installed") && version) {
+            document.querySelector("header h1 small").textContent = version;
+         }
+      }
+   );
    document.getElementById("p1").addEventListener(
       'transitionend',
       function(event) {
@@ -24,14 +53,40 @@ function init() {
       },
       false
    );
+   // Listeners
+   document.getElementById("btnMain").onclick = toggleSidebarView;
+   document.getElementById("btnInfos").onclick=showInfos;
+   document.getElementById("btnReveal").onclick=revealOrNot;
+   document.getElementById("sidebarMenu").onclick = menuListClicked;
+   document.getElementById("footMenuList").onclick = menuListClicked;
+   document.getElementById("encodeTypeList").onclick=setEncName;
+// document.getElementById("jgUsersAid").onclick = listAlbums;
+// document.getElementById("changeLanguage").onclick = changeLanguage;
+   document.getElementById("footerTable").onclick = function() { expandSidebarView(-1); };
+   document.getElementById("footDecode").onclick = pickAndUpload;
+// document.getElementById("pickAndUpload").onclick = pickAndUpload;
+// document.getElementById("whoAmI").onclick = whoAmI;
+
+   var eltMain = document.getElementById("main");
+   new GestureDetector(eltMain).startDetecting();
+   eltMain.addEventListener("swipe", swipeHandler);
 }
 
 function p1Expanded(isExpanded) {
-   var style = document.getElementById("btnSecond").style;
+   var style = document.getElementById("btnReveal").style;
    if (isExpanded) {
       style.display ="";
    }else {
       style.display = "none";
+   }
+}
+
+function swipeHandler(e) {
+   var direction = e.detail.direction;
+   if (direction === 'right') {
+      expandSidebarView(1);
+   }else if (direction === 'left') {
+      expandSidebarView(-1);
    }
 }
 
@@ -48,6 +103,17 @@ function fitImage(img) {
       s = "width:100%";
    }
    img.setAttribute("style", s);
+}
+
+function makeCorsRequest(method, query) {
+   var xhr = new XMLHttpRequest({mozSystem: true});
+   if (xhr.withCredentials === undefined) {
+      alert("Sorry: your browser doesn't handle cross-site requests");
+      return;
+   }
+   xhr.withCredentials = true;
+   xhr.open(method, server_url + query, true);
+   return xhr;
 }
 
 function encodeIfNeeded() {
@@ -78,9 +144,15 @@ function encodeIfNeeded() {
       actualBarcodeType = type;
       actualBarcodeSize = size;
       actualBarcodeOptions = options;
-      // see: http://www.w3.org/TR/XMLHttpRequest/
-      request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
+
+      var xhr = makeCorsRequest(
+         "GET",
+         "/encode?KEY=" + escape(data) +
+         "&TYP=" + escape(type) +
+         "&SIZ=" + escape(size) +
+         "&B64=1" + options
+      );
+      xhr.onreadystatechange = function() {
          // if (this.readyState == 2) { // HEADERS_RECEIVED is 2
          //   document.getElementById('headers').innerHTML = this.getAllResponseHeaders();
          // }
@@ -95,15 +167,7 @@ function encodeIfNeeded() {
             }
          }
       }
-      request.open(
-         "GET",
-         "encode?KEY=" + escape(data) +
-         "&TYP=" + escape(type) +
-         "&SIZ=" + escape(size) +
-         "&B64=1" +
-         options
-      );
-      request.send();
+      xhr.send();
 /*
       document.getElementById('barData').innerHTML = data;
       document.getElementById('barType').innerHTML = selectType.options[
@@ -116,29 +180,54 @@ function encodeIfNeeded() {
    }
 }
 
+function pickAndUpload(event)
+{
+   try {
+      uploadPick();
+   }catch (err) {
+      uploadFile();
+   }
+}
+
+function uploadPick() {
+   var a = new MozActivity({ name: "pick", data: {type: "image/jpeg"}});
+   a.onsuccess = function(e) {
+      var xhr = makeCorsRequest("POST", "/decodeImage?TYP="+collectDecodeTypes()+"&PPC=" + getPostProcess());
+      xhr.setRequestHeader("Content-Type", 'image/jpeg');
+      xhr.onreadystatechange = whenRequestStateChanged;
+      xhr.send(a.result.blob);
+      try {
+         var url = URL.createObjectURL(a.result.blob);
+         var img = document.getElementById('barImageIn');
+         img.src = url;
+         img.onload = function() { URL.revokeObjectURL(url); };
+      }catch (error) {
+         alert("Local error: " + error);
+      }
+   };
+   a.onerror = function() { alert('Failure at picking an image'); };
+}
+
 function uploadFile() {
-   var formElt = document.getElementById('upldForm');
-   var elt = formElt.firstChild;
-   elt.onchange= function() {
+   var elt = document.getElementById('upldFile');
+   elt.onchange = function() {
       if (typeof window.FileReader !== 'function') {
          alert("The file API isn't supported on this browser yet.");
       }else if (!this.files) {
-         alert(
-           "Your browser doesn't seem to support" +
-           " the `files` property of file inputs."
-         );
+         alert("Your browser doesn't seem to support the `files` property of file inputs.");
       }else if (!this.files[0]) {
          alert("No file selected");
       }else {
          var file = this.files[0];
-         var formData = new FormData(formElt);
+         var formData = new FormData();
          formData.append("MAX_FILE_SIZE", "1000000");
          formData.append("TYP", collectDecodeTypes());
          formData.append("PPC", getPostProcess());
-         var request = new XMLHttpRequest();
-         request.onreadystatechange = onImageDecoded;
-         request.open("POST", "decodeFile", true);
-         request.send(formData);
+
+         formData.append("upldFile", file);
+         var xhr = makeCorsRequest("POST", "/decodeFile");
+         xhr.onreadystatechange = whenRequestStateChanged;
+         xhr.send(formData);
          var reader = new FileReader();
          reader.onload = function (event) {
             document.getElementById("barImageIn").src = event.target.result;
@@ -149,35 +238,7 @@ function uploadFile() {
    elt.click();
 }
 
-function pickAndDecodeImage()
-{
-   try {
-      var a = new MozActivity({ name: "pick", data: {type: "image/jpeg"}});
-      a.onsuccess = function(e) {
-        var request = new XMLHttpRequest();
-        request.open(
-           "POST",
-           "decodeImage" +
-           "?TYP=" + collectDecodeTypes() +
-           "&PPC=" + getPostProcess(),
-           true
-        );
-        request.setRequestHeader("Content-Type", 'image/jpeg');
-        request.onreadystatechange = onImageDecoded;
-        request.send(a.result.blob);
-        var url = URL.createObjectURL(a.result.blob);
-        var img = document.getElementById('barImageIn');
-        img.src = url;
-        img.onload = function() { URL.revokeObjectURL(url); };
-      };
-      a.onerror = function() { alert('Failure at picking an image'); };
-   }catch (err) {
-      uploadFile();
-      return;
-   }
-}
-
-function onImageDecoded() {
+function whenRequestStateChanged() {
    switch (this.readyState) {
    case 1: // OPENED
       document.getElementById("progresspane").style.visibility='visible';
@@ -232,9 +293,9 @@ function getEncodeType() {
    return "1";
 }
 
-function setEncName(elt, event) {
+function setEncName(event) {
    document.getElementById('encName').innerHTML = event.target.innerHTML;
-   elt.parentNode.click();
+   this.parentNode.click();
 }
 
 function collectDecodeTypes() {
@@ -259,19 +320,24 @@ function getPostProcess() {
 function revealOrNot() {
    var style = document.getElementById('boxImageOut').style;
    if (style.zIndex == 2) {    // Reveal -> Edit
-      document.getElementById("btnSecond").innerHTML = "Reveal";
+      document.getElementById("btnReveal").innerHTML = "Reveal";
       style.zIndex = 0;
    }else {                     // Edit -> Reveal
-      document.getElementById("btnSecond").innerHTML = "Edit";
+      document.getElementById("btnReveal").innerHTML = "Edit";
       style.zIndex = 2;
    }
 }
 
 function showInfos() {
-   if (document.getElementById('p1').getAttribute("aria-expanded") == "true") {
+   var isEncode = (
+      document.getElementById('p1').getAttribute("aria-expanded") === "true"
+   );
+   if (isEncode && (encodeInfos) && (encodeInfos !== "")) {
       alert(encodeInfos);
-   }else {
+   }else if (!isEncode && (decodeInfos) && (decodeInfos !== "")) {
       alert(decodeInfos);
+   }else {
+      alert("No infos available");
    }
 }
 

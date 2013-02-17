@@ -1,30 +1,32 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<META charset="utf-8">
-<META name="viewport" content="width=device-width">
-<LINK rel="stylesheet" type="text/css" href="style/fxosstub.css"/>
-<SCRIPT type="text/javascript" src="js/fxosstub.js"></SCRIPT>
-<SCRIPT type="text/javascript" src="js/blabzilla.js"></SCRIPT>
-<TITLE>BlabZilla</title>
+   <META charset="utf-8">
+   <META name="viewport" content="width=device-width">
+   <LINK rel="stylesheet" type="text/css" href="style/fxosstub.css"/>
+   <LINK rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+   <SCRIPT type="text/javascript" src="js/fxosstub.js"></SCRIPT>
+   <SCRIPT type="text/javascript" src="js/gestureDetector.js"></SCRIPT>
+   <SCRIPT type="text/javascript" src="js/dispatcher.js"></SCRIPT>
+   <SCRIPT type="text/javascript" src="js/blabzilla.js"></SCRIPT>
+<TITLE>Jaxobar</title>
 </HEAD>
-
-<BODY onload="init();">
+<BODY>
    <HEADER>
-     <DIV id="btnMain" onclick="toggleSidebarView();"><IMG id="btnMainImage" style="background-image:url(style/images/menu.png)"/></DIV>
+     <DIV id="btnMain"><IMG id="btnMainImage" style="background-image:url(style/images/menu.png)"/></DIV>
      <TABLE><TR>
         <TD id="btnInstall">Install</TD>
-        <TD id="btnThird" onclick="showInfos();"><IMG src="style/images/info.png"></TD>
-        <TD id="btnSecond" onclick="revealOrNot();">Reveal</TD>
+        <TD id="btnInfos"><IMG src="style/images/info.png"></TD>
+        <TD id="btnReveal">Reveal</TD>
      </TR></TABLE>
-     <H1>BlabZilla</H1>
+     <H1>Jaxobar <SMALL>web</SMALL></H1>
    </HEADER>
    <DIV id="main">
       <DIV id="p1" class="body">
          <DIV class="imgbox" id="boxImageOut">
             <IMG alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
          </DIV>
-         <TEXTAREA id="barDataIn" placeholder="Enter your blab&hellip;"></TEXTAREA>
+         <TEXTAREA id="barDataIn" placeholder="Enter your text&hellip;"></TEXTAREA>
       </DIV>
       <DIV class="body" id="p2">
          <DIV class="imgbox" style="z-index:-1">
@@ -37,11 +39,10 @@
       </DIV>
    </DIV>
    <DIV id="sidebar" class="body">
-      <UL class="menuList" onclick="menuListClicked(event);">
+      <UL id="sidebarMenu" class="menuList">
         <LI role="listbox">
            Encode in: <i id="encName">Datamatrix</i>
-           <UL role="radiogroup" id="encodeTypeList"
-              onclick="setEncName(this, event);">
+           <UL role="radiogroup" id="encodeTypeList">
               <LI aria-label="1" aria-selected="true">DataMatrix</LI>
               <LI aria-label="2">QrCode</LI>
               <LI aria-label="3">PDF 417</LI>
@@ -76,27 +77,16 @@
         </LI>
       </UL>
    </DIV>
-   <!--
-   <DIV id="glasspane">
-     <DIV id="title">Glass Pane Title</DIV>
-     <DIV id="msg">Message in the glass pane (for notifications, etc)</DIV>
-   </DIV>
-   -->
    <DIV id="progresspane"><DIV id=progress></DIV></DIV>
 
    <!-- Fallback if "no "Pick" MozActivity -->
-   <FORM
-      id='upldForm' action='#' enctype="multipart/form-data"
-      style="position:absolute;top:-20px"
-   ><INPUT style='opacity:0' type='file' name='upldFile'/>
-   </FORM>
-   <!-- -->
+   <INPUT type='file' id='upldFile'/>
 
    <FOOTER>
-      <TABLE onclick="expandSidebarView(-1);">
-        <TR role="radiogroup" onclick="menuListClicked(event);">
-          <TD aria-owns="p1" id="fdflt">Encode</TD>
-          <TD aria-owns="p2" onclick="pickAndDecodeImage();">Decode</TD>
+      <TABLE id="footerTable">
+        <TR id="footMenuList" role="radiogroup">
+          <TD aria-owns="p1" id="footEncode">Encode</TD>
+          <TD aria-owns="p2" id="footDecode">Decode</TD>
         </TR>
       </TABLE>
    </FOOTER>

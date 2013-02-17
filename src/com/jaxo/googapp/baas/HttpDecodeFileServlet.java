@@ -60,6 +60,16 @@ public class HttpDecodeFileServlet extends HttpServlet
       ServletFileUpload upload = new ServletFileUpload();
       upload.setSizeMax(120000);
 
+      // Cross Origin Resource Sharing
+      if (request.getHeader("origin") != null) {
+         resp.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+//    }else {
+//       throw new Exception("Invalid CORS header (no origin)");
+      }
+      // need cookies for session id's:
+      resp.setHeader("Access-Control-Allow-Credentials", "true");
+      resp.setHeader("Access-Control-Expose-Headers", "Jaxo-Infos");
+
       RasterImage image = null;
       HttpResponseHolder response = new HttpResponseHolder(resp);
       try {
