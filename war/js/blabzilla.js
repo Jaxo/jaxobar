@@ -27,7 +27,6 @@ window.onload = function() {
       alert("Warning: test version\nServer at\n" + server_url);
    }
    createDispatcher();
-   setInterval("encodeIfNeeded()", 60);
    setInstallButton("btnInstall");
    document.getElementById('footEncode').click();
    fitImage(document.getElementById('barImageOut'));
@@ -60,20 +59,31 @@ window.onload = function() {
    document.getElementById("sidebarMenu").onclick = menuListClicked;
    document.getElementById("footMenuList").onclick = menuListClicked;
    document.getElementById("encodeTypeList").onclick=setEncName;
-// document.getElementById("jgUsersAid").onclick = listAlbums;
-// document.getElementById("changeLanguage").onclick = changeLanguage;
+   document.getElementById("decodeTypeList").onclick=setDecName;
+   document.getElementById("changeLanguage").onclick = changeLanguage;
    document.getElementById("footerTable").onclick = function() { expandSidebarView(-1); };
    document.getElementById("footDecode").onclick = pickAndUpload;
-// document.getElementById("pickAndUpload").onclick = pickAndUpload;
-// document.getElementById("whoAmI").onclick = whoAmI;
+
+   setEncName(null);  // set the encoder as shown by its aria-selected value
+   setDecName(null);  // set decoders as shown by their aria-selected values
+
+   var dfltLocale = navigator.language || navigator.userLanguage;
+   translateBody(dfltLocale);
+   document.getElementById('usedLang').textContent = i18n(dfltLocale);
+   document.getElementById(dfltLocale).setAttribute("aria-selected", "true");
 
    var eltMain = document.getElementById("main");
    new GestureDetector(eltMain).startDetecting();
    eltMain.addEventListener("swipe", swipeHandler);
+
+   setInterval("encodeIfNeeded()", 60);
 }
 
 function p1Expanded(isExpanded) {
-   var style = document.getElementById("btnReveal").style;
+   var style = (
+      document.getElementById("btnEdit") ||
+      document.getElementById("btnReveal")
+   ).style;
    if (isExpanded) {
       style.display ="";
    }else {
@@ -88,6 +98,12 @@ function swipeHandler(e) {
    }else if (direction === 'left') {
       expandSidebarView(-1);
    }
+}
+
+function changeLanguage(event) {
+   var clicked = event.target;
+   translateBody(clicked.id);
+   document.getElementById('usedLang').textContent = clicked.textContent;
 }
 
 function fitImages(img) {
@@ -205,18 +221,18 @@ function uploadPick() {
          alert("Local error: " + error);
       }
    };
-   a.onerror = function() { alert('Failure at picking an image'); };
+   a.onerror = function() { alert(i18n('pickImageError')); };
 }
 
 function uploadFile() {
    var elt = document.getElementById('upldFile');
    elt.onchange = function() {
       if (typeof window.FileReader !== 'function') {
-         alert("The file API isn't supported on this browser yet.");
+         alert(i18n("noFileApi"));
       }else if (!this.files) {
-         alert("Your browser doesn't seem to support the `files` property of file inputs.");
+         alert(i18n("noFileApiProp"));
       }else if (!this.files[0]) {
-         alert("No file selected");
+         alert(i18n("noFileSelected"));
       }else {
          var file = this.files[0];
          var formData = new FormData();
@@ -294,8 +310,44 @@ function getEncodeType() {
 }
 
 function setEncName(event) {
-   document.getElementById('encName').innerHTML = event.target.innerHTML;
-   this.parentNode.click();
+   var encName = null;
+   if (event == null) { // if we were called to just refresh the list
+      var children = document.getElementById("encodeTypeList").children;
+      for (var i=0; i < children.length; ++i) {
+         if (children[i].getAttribute("aria-selected") == "true") {
+            encName = children[i].innerHTML;
+            break;
+         }
+      }
+   }else {
+      encName = event.target.innerHTML;
+      this.parentNode.click();  // close the dropdown list
+   }
+   document.getElementById('usedEncodeIn').innerHTML = encName;
+}
+
+function setDecName(event) {
+   var children = document.getElementById("decodeTypeList").children;
+   var names = "";
+   for (var i=0; i < children.length; ++i) {
+      var child = children[i];
+      /*
+      | Due to event bubbling, current child select/deselect occurs later.
+      | if this child is selected, and it is not the event target  OR
+      | if this child is not selected, and it is the event target
+      | event is null if we were called to just refresh the list
+      */
+      if (
+         (child.getAttribute("aria-selected") == "true") ==
+         ((!event) || (child != event.target))
+      ) {
+         if (names.length > 0) names += ",";
+         names += child.textContent;
+      }
+   }
+   if (names === "") names = i18n('unspecified');
+   document.getElementById('usedDecodeFrom').innerHTML = names;
+   // this.parentNode.click();  // close the dropdown list
 }
 
 function collectDecodeTypes() {
@@ -319,11 +371,14 @@ function getPostProcess() {
 
 function revealOrNot() {
    var style = document.getElementById('boxImageOut').style;
-   if (style.zIndex == 2) {    // Reveal -> Edit
-      document.getElementById("btnReveal").innerHTML = "Reveal";
+   var elt = document.getElementById("btnReveal") || document.getElementById("btnEdit");
+   if (style.zIndex == 2) {    // Edit -> Reveal
+      elt.id = "btnEdit";
+      elt.textContent = i18n("btnReveal");
       style.zIndex = 0;
-   }else {                     // Edit -> Reveal
-      document.getElementById("btnReveal").innerHTML = "Edit";
+   }else {                     // Reveal -> Edit
+      elt.id = "btnReveal";
+      elt.textContent = i18n("btnEdit");
       style.zIndex = 2;
    }
 }
@@ -337,7 +392,7 @@ function showInfos() {
    }else if (!isEncode && (decodeInfos) && (decodeInfos !== "")) {
       alert(decodeInfos);
    }else {
-      alert("No infos available");
+      alert(i18n("noInfos"));
    }
 }
 

@@ -8,6 +8,7 @@
    <SCRIPT type="text/javascript" src="js/fxosstub.js"></SCRIPT>
    <SCRIPT type="text/javascript" src="js/gestureDetector.js"></SCRIPT>
    <SCRIPT type="text/javascript" src="js/dispatcher.js"></SCRIPT>
+   <SCRIPT type="text/javascript" src="js/i18n.js"></SCRIPT>
    <SCRIPT type="text/javascript" src="js/blabzilla.js"></SCRIPT>
 <TITLE>Jaxobar</title>
 </HEAD>
@@ -15,9 +16,9 @@
    <HEADER>
      <DIV id="btnMain"><IMG id="btnMainImage" style="background-image:url(style/images/menu.png)"/></DIV>
      <TABLE><TR>
-        <TD id="btnInstall">Install</TD>
+        <TD id="btnInstall" class="i18n"></TD>
         <TD id="btnInfos"><IMG src="style/images/info.png"></TD>
-        <TD id="btnReveal">Reveal</TD>
+        <TD id="btnReveal" class="i18n"></TD>
      </TR></TABLE>
      <H1>Jaxobar <SMALL>web</SMALL></H1>
    </HEADER>
@@ -26,7 +27,7 @@
          <DIV class="imgbox" id="boxImageOut">
             <IMG alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
          </DIV>
-         <TEXTAREA id="barDataIn" placeholder="Enter your text&hellip;"></TEXTAREA>
+         <TEXTAREA id="barDataIn" class="i18n i18nPH"></TEXTAREA>
       </DIV>
       <DIV class="body" id="p2">
          <DIV class="imgbox" style="z-index:-1">
@@ -41,7 +42,7 @@
    <DIV id="sidebar" class="body">
       <UL id="sidebarMenu" class="menuList">
         <LI role="listbox">
-           Encode in: <i id="encName">Datamatrix</i>
+           <SMALL class="i18n" id="encodeIn"></SMALL><BR/><i id="usedEncodeIn"></i>
            <UL role="radiogroup" id="encodeTypeList">
               <LI aria-label="1" aria-selected="true">DataMatrix</LI>
               <LI aria-label="2">QrCode</LI>
@@ -65,7 +66,8 @@
               <LI aria-label="20">Micro QrCode</LI>
            </UL>
         </LI>
-        <LI role="listbox">Decode from &hellip;
+        <LI role="listbox">
+           <SMALL class="i18n" id="decodeFrom"></SMALL><BR/><i id="usedDecodeFrom"></i>
            <UL id="decodeTypeList">
               <LI aria-label="1" aria-selected="true">DataMatrix</LI>
               <LI aria-label="2" aria-selected="true">QrCode</LI>
@@ -73,6 +75,15 @@
               <LI aria-label="5">EAN 13</LI>
               <LI aria-label="6">EAN 8</LI>
               <LI aria-label="10">Code 39</LI>
+           </UL>
+        </LI>
+        <LI role="listbox">
+           <SMALL class="i18n" id="language"></SMALL><BR/><i id="usedLang"></i>
+           <UL role="radiogroup" id="changeLanguage">
+              <LI class="i18n" id="en-US"></LI>
+              <LI class="i18n" id="es-ES"></LI>
+              <LI class="i18n" id="pt-BR"></LI>
+              <LI class="i18n" id="fr-FR"></LI>
            </UL>
         </LI>
       </UL>
@@ -85,8 +96,8 @@
    <FOOTER>
       <TABLE id="footerTable">
         <TR id="footMenuList" role="radiogroup">
-          <TD aria-owns="p1" id="footEncode">Encode</TD>
-          <TD aria-owns="p2" id="footDecode">Decode</TD>
+          <TD aria-owns="p1" id="footEncode" class='i18n'></TD>
+          <TD aria-owns="p2" id="footDecode" class='i18n'></TD>
         </TR>
       </TABLE>
    </FOOTER>
