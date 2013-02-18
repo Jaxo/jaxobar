@@ -57,6 +57,11 @@ var localeValues = {
           "enero", "febrero", "marzo", "abril", "mayo", "junio",
           "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
       ]
+   }, p0_top: {
+      'en-US':"Encode and decode most usual barcodes",
+      'fr-FR':"Encodez et décodez la plupart des codes à barres",
+      'pt-BR':"Codificar e decodificar códigos de barras mais comuns",
+      'es-ES':"Codificar y decodificar códigos de barras más usuales"
    }, btnReveal: {
       'en-US':"Reveal",
       'fr-FR':"Dévoiler",

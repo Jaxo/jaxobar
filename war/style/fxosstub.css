@@ -437,6 +437,33 @@ li[aria-selected=true], li[role=listbox] {
 /*    -webkit-object-fit:contain;             */
 /* }
                                         */
+/* ------ Page 0 ------*/
+#p0 {
+   text-shadow:#aaa 0px 1px 0, #000 0 -1px 0;
+}
+#p0_top {
+   position: absolute;
+   width: 100%;
+   right:0;top:2rem;
+   text-align: center;
+   font-size: 2rem;
+   color: white;
+}
+#p0_bot {
+    position: absolute;
+    width: 12rem;
+    height: 8rem;
+    right: 1rem;
+    bottom: 0rem;
+}
+#p0_copy {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
 #upldFile {
    display: none;
 }
