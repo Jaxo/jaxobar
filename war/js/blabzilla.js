@@ -1,8 +1,7 @@
-var isPackaged = true;
-var server_url = "http://blabzilla.appspot.com";
+// var server_url = "http://blabzilla.appspot.com";  FIXME
 // -- only for our internal testing --
 // var server_url = "http://5.blabzilla.appspot.com";
-// var server_url = "http://localhost:8888";
+var server_url = "http://localhost:8888";
 
 var encodeInfos = "";
 var decodeInfos = "";
@@ -14,7 +13,6 @@ var actualBarcodeSize = "";
 window.onload = function() {
    var loc = window.location;
    if (loc.protocol !== "app:") {
-      isPackaged = false;
       var host = loc.host;
       if (host.indexOf("appspot") >= 0) {     // appspot default, or versioned
          server_url = "http://" + host;
@@ -22,9 +20,8 @@ window.onload = function() {
          server_url = "http://localhost:8888" // "http://ottokar/jaxogram/index.html"
       }
    }
-   //OT-LH*/ isPackaged = true;  // testing on ottokar/localhost
    if (server_url !== "http://blabzilla.appspot.com") {
-      alert("Warning: test version\nServer at\n" + server_url);
+      simpleMsg("warning", i18n("testMode", server_url));
    }
    createDispatcher();
    setInstallButton("btnInstall");
@@ -43,7 +40,8 @@ window.onload = function() {
       'transitionend',
       function(event) {
          p1Expanded(event.target.attributes["aria-expanded"].value == "true");
-//       alert(
+//       simpleMsg(
+//          "error",
 //          "Finished transition! " + event.target.id +
 //          " " + event.target.attributes["aria-expanded"].value +
 //          " " + document.getElementById("p1").style.zIndex +
@@ -56,7 +54,7 @@ window.onload = function() {
    document.getElementById("btnMain").onclick = toggleSidebarView;
    document.getElementById("btnInfos").onclick=showInfos;
    document.getElementById("btnReveal").onclick=revealOrNot;
-   document.getElementById("sidebarMenu").onclick = menuListClicked;
+   document.querySelector(".menuList").onclick = menuListClicked;
    document.getElementById("footMenuList").onclick = menuListClicked;
    document.getElementById("encodeTypeList").onclick=setEncName;
    document.getElementById("decodeTypeList").onclick=setDecName;
@@ -72,7 +70,7 @@ window.onload = function() {
    document.getElementById('usedLang').textContent = i18n(dfltLocale);
    document.getElementById(dfltLocale).setAttribute("aria-selected", "true");
 
-   var eltMain = document.getElementById("main");
+   var eltMain = document.getElementById("corepane");
    new GestureDetector(eltMain).startDetecting();
    eltMain.addEventListener("swipe", swipeHandler);
 
@@ -124,7 +122,7 @@ function fitImage(img) {
 function makeCorsRequest(method, query) {
    var xhr = new XMLHttpRequest({mozSystem: true});
    if (xhr.withCredentials === undefined) {
-      alert("Sorry: your browser doesn't handle cross-site requests");
+      simpleMsg("error", "Sorry: can't do cross-site requests");
       return;
    }
    xhr.withCredentials = true;
@@ -218,21 +216,21 @@ function uploadPick() {
          img.src = url;
          img.onload = function() { URL.revokeObjectURL(url); };
       }catch (error) {
-         alert("Local error: " + error);
+         simpleMsg("error", "Local error: " + error);
       }
    };
-   a.onerror = function() { alert(i18n('pickImageError')); };
+   a.onerror = function() { simpleMsg("error", i18n('pickImageError')); };
 }
 
 function uploadFile() {
    var elt = document.getElementById('upldFile');
    elt.onchange = function() {
       if (typeof window.FileReader !== 'function') {
-         alert(i18n("noFileApi"));
+         simpleMsg("error", i18n("noFileApi"));
       }else if (!this.files) {
-         alert(i18n("noFileApiProp"));
+         simpleMsg("error", i18n("noFileApiProp"));
       }else if (!this.files[0]) {
-         alert(i18n("noFileSelected"));
+         simpleMsg("error", i18n("noFileSelected"));
       }else {
          var file = this.files[0];
          var formData = new FormData();
@@ -289,7 +287,8 @@ function whenRequestStateChanged() {
 //          document.getElementById('pinned').style.visibility='visible';
 //       }
       }else {
-         alert(
+         simpleMsg(
+            "error",
             "Error " + this.status + " " + this.statusText +
             "\n" + decodeInfos
          );
@@ -388,11 +387,11 @@ function showInfos() {
       document.getElementById('p1').getAttribute("aria-expanded") === "true"
    );
    if (isEncode && (encodeInfos) && (encodeInfos !== "")) {
-      alert(encodeInfos);
+      simpleMsg("info", encodeInfos);
    }else if (!isEncode && (decodeInfos) && (decodeInfos !== "")) {
-      alert(decodeInfos);
+      simpleMsg("info", decodeInfos);
    }else {
-      alert(i18n("noInfos"));
+      simpleMsg("info", i18n("noInfos"));
    }
 }
 
