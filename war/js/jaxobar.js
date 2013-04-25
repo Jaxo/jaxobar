@@ -1,7 +1,7 @@
-// var server_url = "http://jaxobar.appspot.com";  FIXME
+var server_url = "http://jaxobar.appspot.com";       // FIXME
 // -- only for our internal testing --
-// var server_url = "http://3.jaxobar.appspot.com";
-var server_url = "http://localhost:8888";
+var server_url = "http://4.jaxobar.appspot.com";  // FIXME
+// var server_url = "http://localhost:8888";
 
 var encodeInfos = "";
 var decodeInfos = "";
