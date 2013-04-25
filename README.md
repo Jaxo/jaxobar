@@ -1,5 +1,5 @@
-BlabZilla
-=========
+Jaxobar
+=======
 
 This repository is primarily a working space for our first steps in the Firefox OS world.
 The exercise consists in developping a complete application running on Firefox phones.

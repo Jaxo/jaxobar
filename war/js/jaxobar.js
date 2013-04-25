@@ -1,6 +1,6 @@
-// var server_url = "http://blabzilla.appspot.com";  FIXME
+// var server_url = "http://jaxobar.appspot.com";  FIXME
 // -- only for our internal testing --
-// var server_url = "http://5.blabzilla.appspot.com";
+// var server_url = "http://3.jaxobar.appspot.com";
 var server_url = "http://localhost:8888";
 
 var encodeInfos = "";
@@ -17,10 +17,10 @@ window.onload = function() {
       if (host.indexOf("appspot") >= 0) {     // appspot default, or versioned
          server_url = "http://" + host;
       }else {                                 // "http://localhost:8888", or
-         server_url = "http://localhost:8888" // "http://ottokar/jaxogram/index.html"
+         server_url = "http://localhost:8888" // "http://ottokar/jaxobar/index.html"
       }
    }
-   if (server_url !== "http://blabzilla.appspot.com") {
+   if (server_url !== "http://jaxobar.appspot.com") {
       simpleMsg("warning", i18n("testMode", server_url));
    }
    createDispatcher();
