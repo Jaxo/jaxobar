@@ -263,8 +263,11 @@ function whenRequestStateChanged() {
       document.getElementById("progresspane").style.visibility='hidden';
 //    document.getElementById('imgSource').innerHTML = this.source;
       decodeInfos = this.getResponseHeader("Jaxo-Infos");
-      if (this.status == 200) {
-         document.getElementById('barDataOut').innerHTML = this.responseText;
+      if (this.status == 200) {  // FIXME 0 or 200!
+         urlize(
+            this.responseText,
+            document.getElementById('barDataOut')
+         );
 //       document.getElementById('imgBarType').innerHTML = this.getResponseHeader("Jaxo-Symbo");
 //       // show PostProcess result, if any
 //       var upcImg = this.getResponseHeader("Jaxo-UpcImg");

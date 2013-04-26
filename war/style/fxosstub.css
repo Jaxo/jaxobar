@@ -479,7 +479,7 @@ li[aria-selected=true], li[role=listbox] {
 }
 
 /*-- Styles specific to jaxobar --*/
-.body textarea {
+.body textarea, #barDataOut {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   overflow: hidden;
@@ -494,7 +494,7 @@ li[aria-selected=true], li[role=listbox] {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   font-family: "Open Sans",Sans-serif;
-  font-size: 1.6rem;
+  font-size: 2rem;
 }
 
 .body textarea[disabled] {
