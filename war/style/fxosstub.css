@@ -557,3 +557,10 @@ li[aria-selected=true], li[role=listbox] {
 #upldFile {
    display: none;
 }
+
+#barDataOut span {
+   line-height:2;
+   text-decoration: underline;
+   white-space: nowrap;
+   background-color: rgba(255, 255, 128, 0.25);
+}

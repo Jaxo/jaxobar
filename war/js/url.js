@@ -35,10 +35,10 @@ function urlize(input, elt) {
       if (start < res.index) {
          elt.appendChild(document.createTextNode(input.substring(start, res.index)));
       }
-      var anchorElt = document.createElement("A");
-      anchorElt.setAttribute("href", res[0]);
-      anchorElt.setAttribute("target", "_blank");
-      anchorElt.textContent = res[0];
+      var anchorElt = document.createElement("SPAN");
+      anchorElt.appendChild(document.createTextNode(res[0]));
+      anchorElt.href = res[0];
+      anchorElt.onclick = function() { window.open(this.href, "JaxoBarLink"); }
       elt.appendChild(anchorElt);
       start = urlRegexp.lastIndex;
    }
