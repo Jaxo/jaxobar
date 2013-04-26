@@ -1,4 +1,4 @@
-var server_url = "http://jaxobar.appspot.com";       // FIXME
+// var server_url = "http://jaxobar.appspot.com";       // FIXME
 // -- only for our internal testing --
 var server_url = "http://4.jaxobar.appspot.com";  // FIXME
 // var server_url = "http://localhost:8888";
@@ -25,7 +25,6 @@ window.onload = function() {
    }
    createDispatcher();
    setInstallButton("btnInstall");
-   document.getElementById('footEncode').click();
    fitImage(document.getElementById('barImageOut'));
    window.addEventListener("resize", fitImages, false);
    dispatcher.on(
@@ -59,7 +58,9 @@ window.onload = function() {
    document.getElementById("encodeTypeList").onclick=setEncName;
    document.getElementById("decodeTypeList").onclick=setDecName;
    document.getElementById("changeLanguage").onclick = changeLanguage;
-   document.getElementById("footerTable").onclick = function() { expandSidebarView(-1); };
+   document.getElementById("footerTable").onclick = function() {
+      expandSidebarView(-1);
+   };
    document.getElementById("footDecode").onclick = pickAndUpload;
 
    setEncName(null);  // set the encoder as shown by its aria-selected value
@@ -78,10 +79,7 @@ window.onload = function() {
 }
 
 function p1Expanded(isExpanded) {
-   var style = (
-      document.getElementById("btnEdit") ||
-      document.getElementById("btnReveal")
-   ).style;
+   var style = document.getElementById("btnReveal").style;
    if (isExpanded) {
       style.display ="";
    }else {
@@ -370,15 +368,13 @@ function getPostProcess() {
 
 function revealOrNot() {
    var style = document.getElementById('boxImageOut').style;
-   var elt = document.getElementById("btnReveal") || document.getElementById("btnEdit");
+   var elt = document.getElementById("btnReveal");
    if (style.zIndex == 2) {    // Edit -> Reveal
-      elt.id = "btnEdit";
-      elt.textContent = i18n("btnReveal");
       style.zIndex = 0;
+      elt.children[0].src = "style/images/see.png"
    }else {                     // Reveal -> Edit
-      elt.id = "btnReveal";
-      elt.textContent = i18n("btnEdit");
       style.zIndex = 2;
+      elt.children[0].src = "style/images/edit.png"
    }
 }
 
