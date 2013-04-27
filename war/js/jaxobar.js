@@ -110,11 +110,12 @@ function fitImages(img) {
 function fitImage(img) {
    var elt = document.getElementById("p1");
    if ((elt.offsetHeight * img.offsetWidth)<(img.offsetHeight * elt.offsetWidth)) {
-      s = "height:100%";
+      img.style.width = "";
+      img.style.height = "100%";
    }else {
-      s = "width:100%";
+      img.style.width = "100%";
+      img.style.height = "";
    }
-   img.setAttribute("style", s);
 }
 
 function makeCorsRequest(method, query) {
@@ -170,12 +171,12 @@ function encodeIfNeeded() {
          // }
          if (this.readyState == 4) {    // DONE is 4
             encodeInfos = this.getResponseHeader("Jaxo-Infos");
-            if (this.status != 200) {
-               document.getElementById('barImageOut').src = "images/unknown.png";
-            }else {
+            if ((this.status === 200) || (this.status === 0)) {
                document.getElementById('barImageOut').src = (
                   "data:image/bmp;base64," + this.responseText
                );
+            }else {
+               document.getElementById('barImageOut').src = "images/unknown.png";
             }
          }
       }
@@ -263,7 +264,7 @@ function whenRequestStateChanged() {
       document.getElementById("progresspane").style.visibility='hidden';
 //    document.getElementById('imgSource').innerHTML = this.source;
       decodeInfos = this.getResponseHeader("Jaxo-Infos");
-      if (this.status == 200) {  // FIXME 0 or 200!
+      if ((this.status === 200) || (this.status === 0)) {
          urlize(
             this.responseText,
             document.getElementById('barDataOut')
