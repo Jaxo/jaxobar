@@ -157,52 +157,50 @@ var localeValues = {
       'en-US':"Encode and decode most usual barcodes",
       'fr-FR':"Encodez et décodez la plupart des codes à barres",
       'pt-BR':"Codificar e decodificar códigos de barras mais comuns",
-      'es-ES':"Codificar y decodificar códigos de barras más usuales"
-   }, btnReveal: {
-      'en-US':"Reveal",
-      'fr-FR':"Dévoiler",
-      'pt-BR':"Revelar",
-      'es-ES':"Revelar"
-   }, btnEdit: {
-      'en-US':"Edit",
-      'fr-FR':"Editer",
-      'pt-BR':"Editar",
-      'es-ES':"Editar"
+      'es-ES':"Codificar y decodificar códigos de barras más usuales",
+      'pl-PL':"Kodowania i dekodowania najbardziej typowe kody kreskowe"
    }, barDataIn: {
       'en-US':"Enter your text…",
       'fr-FR':"Entrez votre texte…",
       'pt-BR':"Digite seu texto…",
-      'es-ES':"Introduzca el texto…"
+      'es-ES':"Introduzca el texto…",
+      'pl-PL':"Wprowadź tekst"
    }, decodeFrom: {
       'en-US':"Decode from:",
       'fr-FR':"Décoder : ",
       'pt-BR':"Decodificar:",
-      'es-ES':"Descodificar:"
+      'es-ES':"Descodificar:",
+      'pl-PL':"Rozszyfrować"
    }, encodeIn: {
       'en-US':"Encode in:",
       'fr-FR':"Encodage : ",
       'pt-BR':"Codificar em:",
-      'es-ES':"Codificar en:"
+      'es-ES':"Codificar en:",
+      'pl-PL':"Kodowanie:"
    }, footEncode: {
       'en-US':"Encode",
       'fr-FR':"Encoder",
       'pt-BR':"Codificar",
-      'es-ES':"Codificar"
+      'es-ES':"Codificar",
+      'pl-PL':"Kodowanie"
    }, footDecode: {
       'en-US':"Decode",
       'fr-FR':"Décoder",
       'pt-BR':"Decodificar",
-      'es-ES':"Descodificar"
+      'es-ES':"Descodificar",
+      'pl-PL':"Rozszyfrować"
    }, unspecified: {
       'en-US':"[unspecified]",
       'fr-FR':"[non spécifié]",
       'pt-BR':"[indeterminado]",
-      'es-ES':"[sin especificar]"
+      'es-ES':"[sin especificar]",
+      'pl-PL':"[nieokreślona]"
    }, noInfos: {
       'en-US':"[no infos available]",
       'fr-FR':"[aucune information disponible]",
       'pt-BR':"[não há informações disponíveis]",
-      'es-ES':"[no hay información disponible]"
+      'es-ES':"[no hay información disponible]",
+      'pl-PL':"[brak informacji dostępne]"
    }
 }
 /*----------------- end of strings requiring translation --------------------*/
