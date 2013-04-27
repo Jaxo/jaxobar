@@ -20,7 +20,7 @@
      <TABLE><TR>
         <TD id="btnInstall" class="i18n"></TD>
         <TD id="btnInfos"><IMG src="style/images/info.png"></TD>
-        <TD id="btnReveal"><IMG src="style/images/see.png"></TD>
+        <TD id="btnReveal" style="display:none"><IMG src="style/images/see.png"></TD>
      </TR></TABLE>
      <H1>Jaxobar <SMALL>web</SMALL></H1>
    </HEADER>
@@ -40,10 +40,7 @@
       </DIV>
       <DIV class="body" id="p2">
          <DIV class="imgbox" style="z-index:-1">
-            <IMG
-               alt="Bar Image" id="barImageIn" src="images/unknown.png"
-               onload="fitImage(this);"
-            />
+            <IMG alt="Bar Image" id="barImageIn" src="images/unknown.png"/>
          </DIV>
          <DIV id="barDataOut" class="txtbox"></DIV>
       </DIV>

@@ -500,7 +500,7 @@ li[aria-selected=true], li[role=listbox] {
 .imgbox {
   display: block;
   position: absolute;
-  background-color:#fff;
+  background-color:#ffffff;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   overflow: hidden;

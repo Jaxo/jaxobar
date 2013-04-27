@@ -25,7 +25,10 @@ window.onload = function() {
    }
    createDispatcher();
    setInstallButton("btnInstall");
-   fitImage(document.getElementById('barImageOut'));
+   fitImage(document.getElementById("barImageOut"));
+   document.getElementById("barImageIn").onload = function() {
+      fitImage(this);
+   };
    window.addEventListener("resize", fitImages, false);
    dispatcher.on(
       "install_changed",
@@ -75,7 +78,7 @@ window.onload = function() {
    new GestureDetector(eltMain).startDetecting();
    eltMain.addEventListener("swipe", swipeHandler);
 
-   setInterval("encodeIfNeeded()", 60);
+   setInterval(encodeIfNeeded, 150);
 }
 
 function p1Expanded(isExpanded) {
