@@ -6,10 +6,9 @@ var server_url = "http://4.jaxobar.appspot.com";  // FIXME
 var encodeInfos = "";
 var decodeInfos = "";
 var actualBarcodeData = null;
-var actualBarcodeType = null;
+var actualBarcodeType = "1";
 var actualBarcodeOptions = "";
 var actualBarcodeSize = "";
-var encodeTimer = null;
 
 window.onload = function() {
    var loc = window.location;
@@ -27,8 +26,8 @@ window.onload = function() {
    createDispatcher();
    setInstallButton("btnInstall");
    fitImage(document.getElementById("barImageOut"));
-   document.getElementById("barImageIn").onload = fitImage;
-   document.getElementById("barImageOut").onload = fitImage;
+   document.getElementById("barImageIn").onload = function() { fitImage(this); }
+   document.getElementById("barImageOut").onload = function() { fitImage(this); }
    window.addEventListener("resize", fitImages, false);
    dispatcher.on(
       "install_changed",
@@ -52,17 +51,14 @@ window.onload = function() {
       expandSidebarView(-1);
    };
    document.getElementById("footDecode").onclick = function() {
-      if (encodeTimer) {
-         clearTimeout(encodeTimer);
-         encodeTimer = null;
-      }
       document.getElementById("btnReveal").style.display = "none";
       pickAndUpload();
    }
    document.getElementById("footEncode").onclick = function() {
-      encodeTimer = setTimeout(encodeIfNeeded, 150);
+      encode();
       document.getElementById("btnReveal").style.display = "";
    }
+   document.getElementById("barDataIn").addEventListener('input', encodeIfNeeded);
 
    setEncName(null);  // set the encoder as shown by its aria-selected value
    setDecName(null);  // set decoders as shown by their aria-selected values
@@ -122,7 +118,6 @@ function makeCorsRequest(method, query) {
 function encodeIfNeeded() {
    var data = document.getElementById("barDataIn").value;
    var size = "M";
-   var type = getEncodeType();
    var options = "";
 // var mods = eval("document.encodeForm.MOD_" + type);
 // if (typeof mods !== "undefined") {
@@ -139,28 +134,32 @@ function encodeIfNeeded() {
 // }
    if (
       (data != actualBarcodeData) ||
-      (type != actualBarcodeType) ||
       (size != actualBarcodeSize) ||
       (options != actualBarcodeOptions)
    ) {
       actualBarcodeData = data;
-      actualBarcodeType = type;
       actualBarcodeSize = size;
       actualBarcodeOptions = options;
+      encode();
+   }
+}
 
+function encode() {
+   if (!actualBarcodeData || (actualBarcodeData === "")) {
+      document.getElementById('barImageOut').src = "";
+   }else {
       var xhr = makeCorsRequest(
          "GET",
-         "/encode?KEY=" + escape(data) +
-         "&TYP=" + escape(type) +
-         "&SIZ=" + escape(size) +
-         "&B64=1" + options
+         "/encode?KEY=" + escape(actualBarcodeData) +
+         "&TYP=" + escape(actualBarcodeType) +
+         "&SIZ=" + escape(actualBarcodeSize) +
+         "&B64=1" + actualBarcodeOptions
       );
       xhr.onreadystatechange = function() {
          // if (this.readyState == 2) { // HEADERS_RECEIVED is 2
          //   document.getElementById('headers').innerHTML = this.getAllResponseHeaders();
          // }
          if (this.readyState == 4) {    // DONE is 4
-            encodeTimer = setTimeout(encodeIfNeeded, 150);
             encodeInfos = this.getResponseHeader("Jaxo-Infos");
             if ((this.status === 200) || (this.status === 0)) {
                document.getElementById('barImageOut').src = (
@@ -172,17 +171,13 @@ function encodeIfNeeded() {
          }
       }
       xhr.send();
-/*
-      document.getElementById('barData').innerHTML = data;
-      document.getElementById('barType').innerHTML = selectType.options[
-         selectType.selectedIndex
-      ].text;
-      document.getElementById('barSize').innerHTML = selectSize.options[
-         selectSize.selectedIndex
-      ].text;
-*/
-   }else {
-      encodeTimer = setTimeout(encodeIfNeeded, 150);  // try again later...
+//    document.getElementById('barData').innerHTML = actualBarcodeData;
+//    document.getElementById('barType').innerHTML = selectType.options[
+//       selectType.selectedIndex
+//    ].text;
+//    document.getElementById('barSize').innerHTML = selectSize.options[
+//       selectSize.selectedIndex
+//    ].text;
    }
 }
 
@@ -258,10 +253,11 @@ function whenRequestStateChanged() {
 //    document.getElementById('imgSource').innerHTML = this.source;
       decodeInfos = this.getResponseHeader("Jaxo-Infos");
       if ((this.status === 200) || (this.status === 0)) {
-         urlize(
-            this.responseText,
-            document.getElementById('barDataOut')
-         );
+         var dataElt = document.getElementById("barDataOut");
+         while (dataElt.hasChildNodes()) {
+            dataElt.removeChild(dataElt.lastChild);
+         }
+         urlize(this.responseText, dataElt);
 //       document.getElementById('imgBarType').innerHTML = this.getResponseHeader("Jaxo-Symbo");
 //       // show PostProcess result, if any
 //       var upcImg = this.getResponseHeader("Jaxo-UpcImg");
@@ -292,32 +288,23 @@ function whenRequestStateChanged() {
    }
 }
 
-function getEncodeType() {
-   var children = document.getElementById("encodeTypeList").children;
-   for (var i=0; i < children.length; ++i) {
-      var child = children[i];
-      if (child.getAttribute("aria-selected") == "true") {
-         return child.getAttribute("aria-label");
-      }
-   }
-   return "1";
-}
-
 function setEncName(event) {
-   var encName = null;
+   var encItem;
    if (event == null) { // if we were called to just refresh the list
       var children = document.getElementById("encodeTypeList").children;
       for (var i=0; i < children.length; ++i) {
          if (children[i].getAttribute("aria-selected") == "true") {
-            encName = children[i].innerHTML;
+            encItem = children[i];
             break;
          }
       }
    }else {
-      encName = event.target.innerHTML;
+      encItem = event.target;
       this.parentNode.click();  // close the dropdown list
    }
-   document.getElementById('usedEncodeIn').innerHTML = encName;
+   document.getElementById('usedEncodeIn').innerHTML = encItem.innerHTML;
+   actualBarcodeType = encItem.getAttribute("aria-label");
+   encode();
 }
 
 function setDecName(event) {
