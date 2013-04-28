@@ -141,8 +141,6 @@ header td:active {
   bottom: 0.6rem;
   margin-left: 0.6rem;
   margin-right: 0.6rem;
-  opacity: 0;
-  transition: opacity 0.2s;
   z-index: -1;
   background-color: #3e4449;
   border-left: 1px solid #B0B0B0;
@@ -153,7 +151,6 @@ header td:active {
 }
 
 .body[aria-expanded=true] {
-   opacity: 1;
    z-index: 1;
 }
 
@@ -482,6 +479,7 @@ li[aria-selected=true], li[role=listbox] {
 .txtbox {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  box-shadow: inset 0 0 2px black;
   overflow: hidden;
   display: block;
   position: relative;

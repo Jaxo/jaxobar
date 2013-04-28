@@ -9,6 +9,7 @@ var actualBarcodeData = null;
 var actualBarcodeType = null;
 var actualBarcodeOptions = "";
 var actualBarcodeSize = "";
+var encodeTimer = null;
 
 window.onload = function() {
    var loc = window.location;
@@ -26,9 +27,8 @@ window.onload = function() {
    createDispatcher();
    setInstallButton("btnInstall");
    fitImage(document.getElementById("barImageOut"));
-   document.getElementById("barImageIn").onload = function() {
-      fitImage(this);
-   };
+   document.getElementById("barImageIn").onload = fitImage;
+   document.getElementById("barImageOut").onload = fitImage;
    window.addEventListener("resize", fitImages, false);
    dispatcher.on(
       "install_changed",
@@ -38,20 +38,7 @@ window.onload = function() {
          }
       }
    );
-   document.getElementById("p1").addEventListener(
-      'transitionend',
-      function(event) {
-         p1Expanded(event.target.attributes["aria-expanded"].value == "true");
-//       simpleMsg(
-//          "error",
-//          "Finished transition! " + event.target.id +
-//          " " + event.target.attributes["aria-expanded"].value +
-//          " " + document.getElementById("p1").style.zIndex +
-//          " " + event.propertyName
-//       );
-      },
-      false
-   );
+
    // Listeners
    document.getElementById("btnMain").onclick = toggleSidebarView;
    document.getElementById("btnInfos").onclick=showInfos;
@@ -64,7 +51,18 @@ window.onload = function() {
    document.getElementById("footerTable").onclick = function() {
       expandSidebarView(-1);
    };
-   document.getElementById("footDecode").onclick = pickAndUpload;
+   document.getElementById("footDecode").onclick = function() {
+      if (encodeTimer) {
+         clearTimeout(encodeTimer);
+         encodeTimer = null;
+      }
+      document.getElementById("btnReveal").style.display = "none";
+      pickAndUpload();
+   }
+   document.getElementById("footEncode").onclick = function() {
+      encodeTimer = setTimeout(encodeIfNeeded, 150);
+      document.getElementById("btnReveal").style.display = "";
+   }
 
    setEncName(null);  // set the encoder as shown by its aria-selected value
    setDecName(null);  // set decoders as shown by their aria-selected values
@@ -77,17 +75,6 @@ window.onload = function() {
    var eltMain = document.getElementById("corepane");
    new GestureDetector(eltMain).startDetecting();
    eltMain.addEventListener("swipe", swipeHandler);
-
-   setInterval(encodeIfNeeded, 150);
-}
-
-function p1Expanded(isExpanded) {
-   var style = document.getElementById("btnReveal").style;
-   if (isExpanded) {
-      style.display ="";
-   }else {
-      style.display = "none";
-   }
 }
 
 function swipeHandler(e) {
@@ -173,13 +160,14 @@ function encodeIfNeeded() {
          //   document.getElementById('headers').innerHTML = this.getAllResponseHeaders();
          // }
          if (this.readyState == 4) {    // DONE is 4
+            encodeTimer = setTimeout(encodeIfNeeded, 150);
             encodeInfos = this.getResponseHeader("Jaxo-Infos");
             if ((this.status === 200) || (this.status === 0)) {
                document.getElementById('barImageOut').src = (
                   "data:image/bmp;base64," + this.responseText
                );
             }else {
-               document.getElementById('barImageOut').src = "images/unknown.png";
+               document.getElementById('barImageOut').src = "";
             }
          }
       }
@@ -193,6 +181,8 @@ function encodeIfNeeded() {
          selectSize.selectedIndex
       ].text;
 */
+   }else {
+      encodeTimer = setTimeout(encodeIfNeeded, 150);  // try again later...
    }
 }
 

@@ -32,18 +32,18 @@
            <SPAN id="p0_copy">&copy; Jaxo, Inc. 2013</SPAN>
         </DIV>
      </DIV>
-      <DIV id="p1" class="body">
-         <DIV class="imgbox" id="boxImageOut">
-            <IMG alt="Bar Image" id="barImageOut" src="images/unknown.png"/>
-         </DIV>
-         <TEXTAREA id="barDataIn" class="i18n i18nPH txtbox"></TEXTAREA>
-      </DIV>
-      <DIV class="body" id="p2">
-         <DIV class="imgbox" style="z-index:-1">
-            <IMG alt="Bar Image" id="barImageIn" src="images/unknown.png"/>
-         </DIV>
-         <DIV id="barDataOut" class="txtbox"></DIV>
-      </DIV>
+     <DIV id="p1" class="body">
+        <DIV class="imgbox" id="boxImageOut">
+           <IMG alt="Bar Image" id="barImageOut"/>
+        </DIV>
+        <TEXTAREA id="barDataIn" class="i18n i18nPH txtbox"></TEXTAREA>
+     </DIV>
+     <DIV class="body" id="p2">
+        <DIV class="imgbox">
+           <IMG alt="Bar Image" id="barImageIn"/>
+        </DIV>
+        <DIV id="barDataOut" class="txtbox"></DIV>
+     </DIV>
    </DIV>
    <DIV id="menupane" class="drawer">
       <UL class="menuList">
@@ -116,6 +116,7 @@
    <FOOTER>
       <TABLE id="footerTable">
         <TR id="footMenuList" role="radiogroup">
+          <TD style="display:none" aria-selected="true" aria-owns="p0"></TD>
           <TD aria-owns="p1" id="footEncode" class='i18n'></TD>
           <TD aria-owns="p2" id="footDecode" class='i18n'></TD>
         </TR>
