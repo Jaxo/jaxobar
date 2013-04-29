@@ -60,7 +60,7 @@ function hyperize(input, elt) {
             "\"}}"
          );
          text = text.substring(4);
-         img = "mailB.png";
+         img = "sms.png";
          anchorElt.onclick = hyperactivate;
       }else if (text.startsWith("tel:")) {
          href = (
