@@ -1,6 +1,6 @@
 {
   "name": "Jaxobar",
-  "version": "4.0",
+  "version": "4.1",
   "description": "Encode and decode barcodes",
   "launch_path": "/index.html",
   "developer": {

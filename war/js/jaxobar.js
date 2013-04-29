@@ -257,7 +257,7 @@ function whenRequestStateChanged() {
          while (dataElt.hasChildNodes()) {
             dataElt.removeChild(dataElt.lastChild);
          }
-         urlize(this.responseText, dataElt);
+         hyperize(this.responseText, dataElt);
 //       document.getElementById('imgBarType').innerHTML = this.getResponseHeader("Jaxo-Symbo");
 //       // show PostProcess result, if any
 //       var upcImg = this.getResponseHeader("Jaxo-UpcImg");

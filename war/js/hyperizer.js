@@ -27,7 +27,21 @@ function extractUrls(text) {
    return urls;
 }
 
-function urlize(input, elt) {
+function hypernavigate() {
+   window.open(this.href, "JaxoBarLink");
+}
+
+function hyperactivate() {
+   if (typeof MozActivity !== "undefined") {
+      var a = new MozActivity(JSON.parse(this.href));
+      a.onsuccess = function(e) {}
+      a.onerror = function() {
+         simpleMsg("error", i18n('pickImageError'));
+      };
+   }
+}
+
+function hyperize(input, elt) {
    var res;
    var start = 0;
    urlRegexp.lastIndex = 0;
@@ -35,10 +49,51 @@ function urlize(input, elt) {
       if (start < res.index) {
          elt.appendChild(document.createTextNode(input.substring(start, res.index)));
       }
+      var href = "";
+      var text = res[0];
+      var img;
       var anchorElt = document.createElement("SPAN");
-      anchorElt.appendChild(document.createTextNode(res[0]));
-      anchorElt.href = res[0];
-      anchorElt.onclick = function() { window.open(this.href, "JaxoBarLink"); }
+      if (text.startsWith("sms:")) {
+         href = (
+            "{\"name\":\"new\",\"data\":{\"type\":\"websms/sms\",\"number\":\"" +
+            text.substring(4) +
+            "\"}}"
+         );
+         text = text.substring(4);
+         img = "mailB.png";
+         anchorElt.onclick = hyperactivate;
+      }else if (text.startsWith("tel:")) {
+         href = (
+            "{\"name\":\"dial\",\"data\":{\"number\":\"" +
+            text.substring(4) +
+            "\"}}"
+         );
+         text = text.substring(4);
+         img = "dial.png";
+         anchorElt.onclick = hyperactivate;
+      }else {
+         if (text.startsWith("mailto:")) {
+            href = text;
+            text = text.substring(7);
+            img = "mailB.png";
+         }else {
+            if (text.startsWith("www")) {
+               href = "http://" + text;
+            }else if (text.startsWith("http://")) {
+               href = text;
+               text = text.substring(7);
+            }else {
+               href = text;
+            }
+            img = "earth.png";
+         }
+         anchorElt.onclick = hypernavigate;
+      }
+      var imgElt = document.createElement("IMG");
+      imgElt.src = "style/images/" + img;
+      anchorElt.appendChild(imgElt);
+      anchorElt.appendChild(document.createTextNode(text));
+      anchorElt.href = href;
       elt.appendChild(anchorElt);
       start = urlRegexp.lastIndex;
    }
